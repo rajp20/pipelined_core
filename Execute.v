@@ -1,13 +1,14 @@
 module Execute(
 	input clk,
-	input[4:0] control,
-	input[15:0] sourceREG,
-	input[15:0] destREG,
-	input[15:0] npc,
-	output reg[15:0] destOUT,
-	output reg[15:0] result,
-	output reg[15:0] target,
-	output reg[4:0] control
+	input [4:0] control,
+	input [15:0] source_reg,
+	input [15:0] dest_reg,
+	input [15:0] npc,
+	output reg [15:0] dest_out_reg,
+	output reg [15:0] result,
+	output reg [15:0] target,
+	output reg [4:0] control,
+	output reg WRITE_ENABLE //Not sure if we want this to be a reg or output reg
 );
 
 parameter ADD     = 5'b00000;
@@ -30,10 +31,60 @@ parameter MOV     = 5'b10000;
 
 assign target = npc + control;
 
+reg [4:0] immediate; //Not sure if we need different immediate sizes or not.
+
 always@(posedge clk)
 begin
 	case(control):
-		
+		ADD: begin
+			result = source_reg + dest_reg;
+			WRITE_ENABLE = 1;
+		end
+		SUB: begin
+			result = source_reg - dest_reg;
+			WRITE_ENABLE = 1;
+		end
+		ADDI: begin
+			result = source_reg + immediate;
+			WRITE_ENABLE = 1;
+		end
+		SHLLI: begin
+			result = source_reg << immediate;
+			WRITE_ENABLE = 1;
+		end
+		SHRLI:
+			result = source_reg >> immediate;
+			WRITE_ENABLE = 1;
+		end
+		JUMP: begin
+			npc = immediate;
+		end
+		JUMPLI: begin
+			//flag
+		end
+		JUMPL: begin
+			//flag
+		edn
+		JUMPG: begin
+			//flag
+		end
+		JUMPE: begin
+			// flag
+		end
+		JUMPNE: begin
+			//flag
+		end
+		CMP: begin
+
+		end
+		RET: begin
+
+		end
+		MOV: begin
+			result = dest_reg;
+			// write_index = dest_reg_index; //not sure if what we want to actually set here
+			WRITE_ENABLE = 1;
+		end
 	endcase
 end
 
