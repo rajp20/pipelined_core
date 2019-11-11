@@ -1,0 +1,7 @@
+module InstructionDecode(input             clk,
+			 input      [15:0] mem_to_core_data,
+			 output reg [23:0] core_to_mem_addr,
+			 output reg [15:0] core_to_mem_data,
+			 output reg 	   core_to_mem_write_enable);
+
+endmodule
