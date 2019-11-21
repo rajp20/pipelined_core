@@ -12,7 +12,7 @@ module Core(input             clk,
    reg  [4:0]   read_index_2;
    reg  [4:0]   write_index;
    reg  [15:0] 	write_data;
-   reg 		write_enable;
+   reg 		WRITE_ENABLE;
 
    // Registers for Branch Predictor
    reg [15:0] 	TARGET;
@@ -47,7 +47,7 @@ module Core(input             clk,
 			      .read_index_1 (read_index_1),
 			      .read_index_2 (read_index_2),
 			      .write_index  (write_index),
-			      .write_enable (write_enable),
+			      .WRITE_ENABLE (WRITE_ENABLE),
 			      .write_data   (write_data));
 
    InstructionFetch _InstructionFetch(.clk           (clk),
