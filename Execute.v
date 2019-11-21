@@ -12,8 +12,8 @@ module Execute(
 	input [15:0] reg1_data,
 	input [15:0] reg2_data,
 	input [15:0] npc,
-	input [5:0] dest_index_in,
-	output reg [5:0] dest_out_index,
+	input [4:0] dest_index_in,
+	output reg [4:0] dest_out_index,
 	output reg [15:0] result,
 	output [15:0] result_forward,
 	output reg [15:0] target,
@@ -148,10 +148,10 @@ begin
 			end
 		end
 		LOAD: begin
-			result = dest_out_index;
+			result = {{11{0}}, dest_out_index}; //Make top 11 bits 0 and fill bottom 5 bits with destination index to fit width correctly
 		end
 		LOADI: begin
-			result = {{9{0}}, immediate};
+			result = {{9{0}}, immediate}; //Make top 9 bits 0 and fill bottom 7 bits with immediate index to fit width correctly
 			WRITE_ENABLE = 1;
 		end
 		STORE: begin
