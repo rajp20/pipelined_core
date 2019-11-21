@@ -45,10 +45,10 @@ assign control_out = control_in;
 //Assign destination index
 assign dest_out_index = dest_in_index;
 
-reg [6:0] immediate; //Not sure if we need different immediate sizes or not.
+//Register for immediate value
+reg [6:0] immediate;
 
 //Initialize status flags for JUMP and CMP instructions
-
 reg ZF; //Following MIPS ISA, ZF should update after every operation
 reg GF;
 reg LF;
@@ -73,6 +73,11 @@ end
 always@(*)
 begin
 
+	//Reset next status flags so that they are only changed on CMP and JUMP instructions
+	ZF_next = 1'b0;
+	GF_next = 1'b0;
+	LF_next = 1'b0;
+
 	/************** BEGIN ALU **************/
 	case(control_in):
 		NOP: begin
@@ -80,27 +85,27 @@ begin
 		end
 		SUB: begin
 			result = reg1_data - reg2_data;
-			ZF = (result == 16'b0) ? 1 : 0;
+			ZF_next = (result == 16'b0) ? 1 : 0;
 			WRITE_ENABLE = 1;
 		end
 		ADD: begin
 			result = reg1_data + reg2_data;
-			ZF = (result == 16'b0) ? 1 : 0;
+			ZF_next = (result == 16'b0) ? 1 : 0;
 			WRITE_ENABLE = 1;
 		end
 		ADDI: begin
 			result = reg1_data + immediate;
-			ZF = (result == 16'b0) ? 1 : 0;
+			ZF_next = (result == 16'b0) ? 1 : 0;
 			WRITE_ENABLE = 1;
 		end
 		SHLLI: begin
 			result = reg1_data << immediate;
-			ZF = (result == 16'b0) ? 1 : 0;
+			ZF_next = (result == 16'b0) ? 1 : 0;
 			WRITE_ENABLE = 1;
 		end
 		SHRLI:
 			result = reg1_data >> immediate;
-			ZF = (result == 16'b0) ? 1 : 0;
+			ZF_next = (result == 16'b0) ? 1 : 0;
 			WRITE_ENABLE = 1;
 		end
 		JUMP: begin
@@ -145,7 +150,6 @@ begin
 			result = dest_out_index;
 		end
 		LOADI: begin
-			//write_index = dest_reg_index;
 			result = immediate;
 			WRITE_ENABLE = 1;
 		end
