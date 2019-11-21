@@ -61,9 +61,15 @@ reg ZF_next;
 reg GF_next;
 reg LF_next;
 
-//write_index will probably be needed for brandons MEM module for writing to memory
+//Set all status flags to result of corresponding next status flag
+always@(posedge clk)
+begin
+	ZF <= ZF_next;
+	GF <= GF_next;
+	LF <= LF_next;
+end
 
-// This may not be what we want, might only want to update on npc change or control
+//Updates for specific opcodes
 always@(*)
 begin
 
