@@ -32,8 +32,6 @@ module Core(input             clk,
    reg [15:0] 	DATA_MA;
    reg [4:0] 	CTRL_MA;
 
-   initial      PC = 1'b0; 
-
    RegisterFile _RegisterFile(.clk          (clk),
 			      .read_data_1  (read_data_1),
 			      .read_data_2  (read_data_2),
@@ -51,7 +49,17 @@ module Core(input             clk,
 				      .NPC_IF        (NPC_IF),
 				      .INST_IF       (INST_IF));
 
-   InstructionDecode _InstructionDecode();
+   InstructionDecode _InstructionDecode(.clk          (clk),
+					.NPC_IF       (NPC_IF),
+					.INST_IF      (INST_IF),
+					.read_data_1  (read_data_1),
+					.read_data_2  (read_data_2),
+					.read_index_1 (read_index_1),
+					.read_index_2 (read_index_2),
+					.NPC_ID       (NPC_ID)
+					.REG1_ID      (REG1_ID)
+					.REG2_ID      (REG2_ID)
+					.CTRL_ID      (CTRL_ID));
 
    Execute _Execute();
 

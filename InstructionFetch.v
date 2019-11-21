@@ -8,20 +8,24 @@ module InstructionFetch(input 		  clk,
 
    reg [15:0] PC;
    reg [15:0] NPC;
+   reg [15:0] MUX_OUT;
 
    initial PC = 15'b0;
    initial NPC = 15'b0;   
    
    always@(*) begin
       to_mem_addr = PC;
+      MUX_OUT = NPC
       if (TARGET_EN)
+	MUX_OUT = TARGET;
 	
-      NPC = PC + 1b'1;
+      NPC = MUX_OUT + 1b'1;
    end
 
    always@(posedge clk) begin
       NPC_IF <= NPC;
       INST_IF <= from_mem_data;
+      PC <= MUX_OUT;
    end
    
 endmodule
