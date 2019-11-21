@@ -1,36 +1,45 @@
 module Core(input             clk,
-	    input      [15:0] from_mem_data,
+	    input [15:0]      from_mem_data,
 	    output reg [15:0] to_mem_addr,
 	    output reg [15:0] core_to_mem_data,
-	    output reg        core_to_mem_write_enable);
+	    output reg 	      core_to_mem_write_enable);
 
    // Wires for register file.
-   wire [23:0]  read_data_1;
-   wire [23:0]  read_data_2;
+   wire [15:0]  read_data_1;
+   wire [15:0]  read_data_2;
 
    reg  [4:0]   read_index_1;
    reg  [4:0]   read_index_2;
    reg  [4:0]   write_index;
-   reg  [23:0] 	write_data;
+   reg  [15:0] 	write_data;
    reg 		write_enable;
-   
-   reg [15:0] 	NPC_IF;
+
+   // Registers for Branch Predictor
    reg [15:0] 	TARGET;
    reg  	TARGET_EN;
+   reg          BRANCH_PRED;
+
+   // Registers for Fetch Stage
+   reg [15:0] 	NPC_IF; 
    reg [15:0] 	INST_IF;
 
+   // Registers for Decode Stage
    reg [15:0] 	NPC_ID;
-   reg [5:0] 	REG1_ID;
-   reg [5:0] 	REG2_ID;
-   reg [4:0] 	CTRL_ID;
+   reg [15:0] 	REG1_DATA_ID;
+   reg [15:0] 	REG2_DATA_ID;
+   reg [4:0] 	DEST_REG_INDEX_ID;
+   reg [6:0] 	IMMEDIATE_ID; 	
+   reg [3:0] 	CTRL_ID;
 
+   // Registers for Execution Stage
    reg [5:0] 	REG_EX;
    reg [15:0] 	RES_EX;
-   reg [4:0] 	CTRL_EX;
+   reg [3:0] 	CTRL_EX;
 
+   // Registers for Memory Access Stage.
    reg [15:0] 	RES_MA;
    reg [15:0] 	DATA_MA;
-   reg [4:0] 	CTRL_MA;
+   reg [3:0] 	CTRL_MA;
 
    RegisterFile _RegisterFile(.clk          (clk),
 			      .read_data_1  (read_data_1),
@@ -44,22 +53,26 @@ module Core(input             clk,
    InstructionFetch _InstructionFetch(.clk           (clk),
 				      .TARGET        (TARGET),
 				      .TARGET_EN     (TARGET_EN),
+				      .BRANCH_PRED   (BRANCH_PRED),
 				      .from_mem_data (from_mem_data),
 				      .to_mem_addr   (to_mem_addr),
 				      .NPC_IF        (NPC_IF),
 				      .INST_IF       (INST_IF));
 
-   InstructionDecode _InstructionDecode(.clk          (clk),
-					.NPC_IF       (NPC_IF),
-					.INST_IF      (INST_IF),
-					.read_data_1  (read_data_1),
-					.read_data_2  (read_data_2),
-					.read_index_1 (read_index_1),
-					.read_index_2 (read_index_2),
-					.NPC_ID       (NPC_ID)
-					.REG1_ID      (REG1_ID)
-					.REG2_ID      (REG2_ID)
-					.CTRL_ID      (CTRL_ID));
+   InstructionDecode _InstructionDecode(.clk               (clk),
+					.NPC_IF            (NPC_IF),
+					.INST_IF           (INST_IF),
+					.BRANCH_PRED       (BRANCH_PRED),
+					.read_data_1       (read_data_1),
+					.read_data_2       (read_data_2),
+					.read_index_1      (read_index_1),
+					.read_index_2      (read_index_2),
+					.NPC_ID            (NPC_ID),
+					.REG1_DATA_ID      (REG1_DATA_ID),
+					.REG2_DATA_ID      (REG2_DATA_ID),
+					.DEST_REG_INDEX_ID (DEST_REG_INDEX_ID),
+					.IMMEDIATE_ID      (IMMEDIATE_ID),
+					.CTRL_ID           (CTRL_ID));
 
    Execute _Execute();
 
