@@ -15,6 +15,7 @@ module Execute(
 	input [5:0] dest_index_in,
 	output reg [5:0] dest_out_index,
 	output reg [15:0] result,
+	output [15:0] result_forward,
 	output reg [15:0] target,
 	output reg [4:0] control_out,
 	output reg WRITE_ENABLE //Not sure if we want this to be a reg or output reg
