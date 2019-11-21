@@ -19,6 +19,9 @@ module Execute(
 	output reg [15:0] target,
 	output reg [4:0] control_out,
 	output reg WRITE_ENABLE //Not sure if we want this to be a reg or output reg
+	output reg ZF,
+	output reg GF,
+	output reg LF
 );
 
 // Parameters for each instruction that the processor can execute
@@ -50,9 +53,6 @@ assign dest_out_index = dest_in_index;
 reg [6:0] immediate;
 
 //Initialize status flags for JUMP and CMP instructions
-reg ZF; //Following MIPS ISA, ZF should update after every operation
-reg GF;
-reg LF;
 initial ZF = 0;
 initial GF = 0;
 initial LF = 0;
@@ -151,7 +151,7 @@ begin
 			result = dest_out_index;
 		end
 		LOADI: begin
-			result = immediate;
+			result = {{9{0}}, immediate};
 			WRITE_ENABLE = 1;
 		end
 		STORE: begin
