@@ -10,7 +10,7 @@ module RegisterFile(
 	input [4:0] read_index_2,
 	input [4:0] write_index,
 	input [23:0] write_data,
-	input write_enable,
+	input WRITE_ENABLE,
 	output reg [23:0] read_data_1,
 	output reg [23:0] read_data_2
     );
@@ -128,7 +128,7 @@ module RegisterFile(
 
 	always@(posedge clk)
 	begin
-	  if(write_enable)
+	  if(WRITE_ENABLE)
 	  begin
 		 case(write_index)
 			0 : r0 <= write_data[15:0];

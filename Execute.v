@@ -3,100 +3,162 @@
 //  a case statement to produce a result that will be fed back to DECODE stage and
 //  the MEM stage.
 //
-//  UPDATED: Nov. 10, 2019
+//  UPDATED: Nov. 21, 2019
 //  AUTHOR: Blaze Kotsenburg
 //////////////////////////////////////////////////////////////////////////////////
 module Execute(
 	input clk,
-	input [4:0] control,
-	input [15:0] source_reg,
-	input [15:0] dest_reg,
+	input [4:0] control_in,
+	input [15:0] reg1_data,
+	input [15:0] reg2_data,
 	input [15:0] npc,
-	output reg [15:0] dest_out_reg,
+	input [5:0] dest_index_in,
+	output reg [5:0] dest_out_index,
 	output reg [15:0] result,
+	output [15:0] result_forward,
 	output reg [15:0] target,
-	output reg [4:0] control,
+	output reg [4:0] control_out,
 	output reg WRITE_ENABLE //Not sure if we want this to be a reg or output reg
 );
 
 // Parameters for each instruction that the processor can execute
-parameter ADD    = 5'b00000;
-parameter SUB    = 5'b00001;
-parameter ADDI   = 5'b00010;
-parameter SHLLI  = 5'b00011;
-parameter SHRLI  = 5'b00100;
-parameter JUMP   = 5'b00101;
-parameter JUMPLI = 5'b00110;
-parameter JUMPL  = 5'b00111;
-parameter JUMPG  = 5'b01000;
-parameter JUMPE  = 5'b01001;
-parameter JUMPNE = 5'b01010;
-parameter CMP    = 5'b01011;
-parameter RET    = 5'b01100;
-parameter LOAD   = 5'b01101;
-parameter LOADI  = 5'b01110;
-parameter STORE  = 5'b01111;
-parameter MOV    = 5'b10000;
+parameter NOP    = 4'b0000;
+parameter SUB    = 4'b0001;
+parameter ADD    = 4'b0010;
+parameter ADDI   = 4'b0011;
+parameter SHLLI  = 4'b0100;
+parameter SHRLI  = 4'b0101;
+parameter JUMP   = 4'b0110;
+parameter JUMPL  = 4'b0111;
+parameter JUMPG  = 4'b1000;
+parameter JUMPE  = 4'b1001;
+parameter JUMPNE = 4'b1010;
+parameter CMP    = 4'b1011;
+parameter LOAD   = 4'b1100;
+parameter LOADI  = 4'b1101;
+parameter STORE  = 4'b1110;
+parameter MOV    = 4'b1111;
 
-// Target updates any time npc or control updates
-assign target = npc + control;
+//Target updates any time npc or control updates
+assign target = npc + control_in;
+//Assign the output control to the input control
+assign control_out = control_in;
+//Assign destination index
+assign dest_out_index = dest_in_index;
 
-reg [4:0] immediate; //Not sure if we need different immediate sizes or not.
+//Register for immediate value
+reg [6:0] immediate;
 
-// This may not be what we want, might only want to update on npc change or control
+//Initialize status flags for JUMP and CMP instructions
+reg ZF; //Following MIPS ISA, ZF should update after every operation
+reg GF;
+reg LF;
+initial ZF = 0;
+initial GF = 0;
+initial LF = 0;
+
+//Set up next status flags
+reg ZF_next;
+reg GF_next;
+reg LF_next;
+
+//Set all status flags to result of corresponding next status flag
 always@(posedge clk)
 begin
+	ZF <= ZF_next;
+	GF <= GF_next;
+	LF <= LF_next;
+end
+
+//Updates for specific opcodes
+always@(*)
+begin
+
+	//Reset next status flags so that they are only changed on CMP and JUMP instructions
+	ZF_next = 1'b0;
+	GF_next = 1'b0;
+	LF_next = 1'b0;
 
 	/************** BEGIN ALU **************/
-	case(control):
-		ADD: begin
-			result = source_reg + dest_reg;
-			WRITE_ENABLE = 1;
+	case(control_in):
+		NOP: begin
+
 		end
 		SUB: begin
-			result = source_reg - dest_reg;
+			result = reg1_data - reg2_data;
+			ZF_next = (result == 16'b0) ? 1 : 0;
+			WRITE_ENABLE = 1;
+		end
+		ADD: begin
+			result = reg1_data + reg2_data;
+			ZF_next = (result == 16'b0) ? 1 : 0;
 			WRITE_ENABLE = 1;
 		end
 		ADDI: begin
-			result = source_reg + immediate;
+			result = reg1_data + immediate;
+			ZF_next = (result == 16'b0) ? 1 : 0;
 			WRITE_ENABLE = 1;
 		end
 		SHLLI: begin
-			result = source_reg << immediate;
+			result = reg1_data << immediate;
+			ZF_next = (result == 16'b0) ? 1 : 0;
 			WRITE_ENABLE = 1;
 		end
 		SHRLI:
-			result = source_reg >> immediate;
+			result = reg1_data >> immediate;
+			ZF_next = (result == 16'b0) ? 1 : 0;
 			WRITE_ENABLE = 1;
 		end
 		JUMP: begin
-			npc = immediate;
-		end
-		JUMPLI: begin
-			//flag
+			target = npc + reg2_data;
 		end
 		JUMPL: begin
-			//flag
-		edn
+			if(LF) 
+			begin
+				target = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
+			end
+		end
 		JUMPG: begin
-			//flag
+			if(GF)
+			begin
+				target = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
+			end
 		end
 		JUMPE: begin
-			// flag
+			if(ZF)
+			begin
+				target = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
+			end
 		end
 		JUMPNE: begin
-			//flag
+			if(ZF == 0)
+			begin
+				target = (npc + 1'b1) + {{9{immediateL[6]}}, immediate};
+			end
 		end
 		CMP: begin
-
+			ZF_next = !(|(reg1_data - reg2_data)); //OR all the bits together and invert for ZF bit
+			if ($signed(reg1_data) < $signed(reg2_data))
+			begin
+				LF_next = 1'b1;
+			end
+			if ($signed(reg1_data) > $signed(reg2_data))
+			begin
+				GF_next = 1'b1;
+			end
 		end
-		RET: begin
-
+		LOAD: begin
+			result = dest_out_index;
+		end
+		LOADI: begin
+			result = immediate;
+			WRITE_ENABLE = 1;
+		end
+		STORE: begin
+			result = reg1_data;
 		end
 		MOV: begin
-			result = dest_reg;
-			dest_out_reg = dest_reg; //????
-			// write_index = dest_reg_index; //not sure if what we want to actually set here
+			result = reg2_data;
 			WRITE_ENABLE = 1;
 		end
 	endcase
