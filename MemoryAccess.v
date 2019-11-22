@@ -19,24 +19,24 @@ module MemoryAccess(input             clk,
    
    always@(*)
      begin
-	core_to_mem_write_enable = 0;
+	data_to_memory_write_en = 0;
 	if (control_ex == STORE)
 	  begin
-	     to_mem_addr = result_ex;
-	     core_to_mem_data = reg_data_ex;
-	     core_to_mem_write_enable = 1;
+	     address_to_memory = result_ex;
+	     data_to_memory = reg_data_ex;
+	     data_to_memory_write_en = 1;
 	  end
 	else if (control_ex == LOAD)
 	  begin
-	     to_mem_addr = result_ex;
+	     address_to_memory = result_ex;
 	  end
-     end
+     ends
    
    always@(posedge clk) 
      begin
 	control_ma <= control_ex;
 	result_ma <= result_ex;
-	data_ma <= from_mem_data;
+	data_ma <= data_from_memory;
 	dest_reg_index_ma <= dest_reg_index_ex;
 	dest_reg_write_en_ma <= dest_reg_write_en_ex;
      end
