@@ -19,7 +19,7 @@ module Execute(
 	output reg [15:0] result_out,
 	output reg [15:0] target,
 	output reg [4:0] control_out,
-	output reg DEST_REG_WRITE_ENABLE, //Not sure if we want this to be a reg or output reg
+	output reg DEST_REG_WRITE_EN, //Not sure if we want this to be a reg or output reg
 	output reg ZF,
 	output reg GF,
 	output reg LF
@@ -87,27 +87,27 @@ begin
 		SUB: begin
 			result = reg1_data - reg2_data;
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_ENABLE = 1;
+			DEST_REG_WRITE_EN = 1;
 		end
 		ADD: begin
 			result = reg1_data + reg2_data;
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_ENABLE = 1;
+			DEST_REG_WRITE_EN = 1;
 		end
 		ADDI: begin
 			result = reg1_data + immediate;
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_ENABLE = 1;
+			DEST_REG_WRITE_EN = 1;
 		end
 		SHLLI: begin
 			result = reg1_data << immediate;
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_ENABLE = 1;
+			DEST_REG_WRITE_EN = 1;
 		end
 		SHRLI:
 			result = reg1_data >> immediate;
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_ENABLE = 1;
+			DEST_REG_WRITE_EN = 1;
 		end
 		JUMP: begin
 			target_next = npc + reg2_data;
@@ -149,18 +149,18 @@ begin
 		end
 		LOAD: begin
 			result = {{11{0}}, dest_index_out}; //Make top 11 bits 0 and fill bottom 5 bits with destination index to fit width correctly
-			DEST_REG_WRITE_ENABLE = 1;
+			DEST_REG_WRITE_EN = 1;
 		end
 		LOADI: begin
 			result = {{9{0}}, immediate}; //Make top 9 bits 0 and fill bottom 7 bits with immediate index to fit width correctly
-			DEST_REG_WRITE_ENABLE = 1;
+			DEST_REG_WRITE_EN = 1;
 		end
 		STORE: begin
 			result = reg1_data;
 		end
 		MOV: begin
 			result = reg2_data;
-			DEST_REG_WRITE_ENABLE = 1;
+			DEST_REG_WRITE_EN = 1;
 		end
 	endcase
 	/************** END ALU **************/
