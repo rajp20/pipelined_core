@@ -2,7 +2,7 @@ module InstructionFetch(input 		  clk,
 			input [15:0] 	  TARGET,
 			input 		  TARGET_EN,
 			input 		  BRANCH_PRED, 
-			input [15:0] 	  from_mem_data,
+			input [15:0] 	  data_from_memory,
 			output reg [15:0] to_mem_addr,
 			output reg [15:0] NPC_IF,
 			output reg [15:0] INST_IF);
@@ -31,7 +31,7 @@ module InstructionFetch(input 		  clk,
 	NPC_IF <= NPC;
 	PC <= MUX_OUT;
 	if (BRANCH_PRED)
-	  INST_IF <= from_mem_data;
+	  INST_IF <= data_from_memory;
 	else
 	  INST_IF <= NOP;
      end

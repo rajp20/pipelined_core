@@ -1,8 +1,8 @@
 module Core(input              clk,
-            input       [15:0] from_mem_data,
-    	    output reg  [15:0] to_mem_addr,
-	        output reg  [15:0] core_to_mem_data,
-	        output reg         core_to_mem_write_enable);
+            input       [15:0] data_from_memory,
+            output reg  [15:0] to_mem_addr,
+            output reg  [15:0] core_to_mem_data,
+            output reg         core_to_mem_write_enable);
 
    // Wires for register file.
    wire [15:0]  read_data_1;
@@ -56,7 +56,7 @@ module Core(input              clk,
 				      .TARGET        (TARGET),
 				      .TARGET_EN     (TARGET_EN),
 				      .BRANCH_PRED   (BRANCH_PRED),
-				      .from_mem_data (from_mem_data),
+				      .data_from_memory (data_from_memory),
 				      .to_mem_addr   (to_mem_addr),
 				      .NPC_IF        (NPC_IF),
 				      .INST_IF       (INST_IF));
