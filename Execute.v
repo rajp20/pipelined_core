@@ -80,7 +80,7 @@ begin
 	LF_next = 1'b0;
 
 	/************** BEGIN ALU **************/
-	case(control_in):
+	case(control_in)
 		NOP: begin
 
 		end
@@ -105,6 +105,7 @@ begin
 			DEST_REG_WRITE_EN = 1;
 		end
 		SHRLI:
+		begin
 			result = reg1_data >> immediate;
 			ZF_next = (result == 16'b0) ? 1 : 0;
 			DEST_REG_WRITE_EN = 1;
@@ -133,7 +134,7 @@ begin
 		JUMPNE: begin
 			if(ZF == 0)
 			begin
-				target_next = (npc + 1'b1) + {{9{immediateL[6]}}, immediate};
+				target_next = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
 			end
 		end
 		CMP: begin
@@ -148,11 +149,11 @@ begin
 			end
 		end
 		LOAD: begin
-			result = {{11{0}}, dest_index_out}; //Make top 11 bits 0 and fill bottom 5 bits with destination index to fit width correctly
+			result = {11'b0, dest_index_out}; //Make top 11 bits 0 and fill bottom 5 bits with destination index to fit width correctly
 			DEST_REG_WRITE_EN = 1;
 		end
 		LOADI: begin
-			result = {{9{0}}, immediate}; //Make top 9 bits 0 and fill bottom 7 bits with immediate index to fit width correctly
+			result = {9'b0, immediate}; //Make top 9 bits 0 and fill bottom 7 bits with immediate index to fit width correctly
 			DEST_REG_WRITE_EN = 1;
 		end
 		STORE: begin
