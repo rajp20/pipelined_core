@@ -47,7 +47,23 @@ Execute mut(
 //Initialize values needed to run the Execute module
 initial
 begin: CLOCK_GENERATOR
-	clk = 0;
-	
+	clk = 1'b0;
+	//Initialize inputs to begin testing with SUB instruction
+	control_in    = 5'b00001; //SUB opcode
+	dest_index_in = 5'b00010; //Simulate dest index as $R2
+	reg1_data     = 16'd10;   //R1 data is 10 in decimal
+	reg2_data     = 16'd3;    //R2 data is 3
+        npc           = 16'd0;    //NPC set to 0
+        immediate     = 7'd0;     //Immediate value set to zero
+end
+
+//Beginning of testing sequence
+begin
+	always
+	begin
+		#5 clk = ~clk;
+		//#5 clk = ~clk;
+		$display("\nOpcode: SUB\n reg1_data: ", reg1_data, "\n reg2_data: ", reg2_data, "\n result_out: ", result_out);
+	end
 end
 endmodule
