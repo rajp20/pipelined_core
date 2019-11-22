@@ -9,13 +9,12 @@ module RegisterWriteBack(input             clk,
                     output reg WRITE_EN_RF);  
 
 
-   parameter LOAD   = 4'b1100;
-   parameter LOADI  = 4'b1101;                                                                                                                   
+   parameter LOAD   = 4'b1100;                                                                                                                   
 
    always@(*) begin                                                                                                   
       WRITE_INDEX_RF = DEST_REG_INDEX_MA;
 
-      if(CTRL_MA == LOAD || CTRL_MA == LOADI)
+      if(CTRL_MA == LOAD)
       begin
         WRITE_DATA_RF = DATA_MA;
       end                                
