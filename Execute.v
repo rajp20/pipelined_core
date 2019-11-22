@@ -19,7 +19,7 @@ module Execute(
 	output reg [15:0] result_out,
 	output reg [15:0] target,
 	output reg [4:0] control_out,
-	output reg WRITE_ENABLE //Not sure if we want this to be a reg or output reg
+	output reg WRITE_ENABLE, //Not sure if we want this to be a reg or output reg
 	output reg ZF,
 	output reg GF,
 	output reg LF
