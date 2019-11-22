@@ -21,6 +21,7 @@ module Core(input              clk,
    // Registers for Fetch Stage
    reg [15:0]  next_program_counter_if;
    reg [15:0]  instruction_if;
+   wire [15:0] next_program_counter_if_to_br;
    
    // Registers for Decode Stage
    reg [15:0]  next_program_counter_id;
@@ -59,13 +60,14 @@ module Core(input              clk,
                               .write_en     (write_en_rf),
                               .write_data   (write_data_rf));
    
-   InstructionFetch _InstructionFetch(.clk                     (clk),
-                                      .target_bp               (target_bp),
-                                      .target_en_bp            (target_en_bp),
-                                      .data_from_memory        (data_from_memory),
-                                      .address_to_memory       (address_to_memory),
-                                      .next_program_counter_if (next_program_counter_if),
-                                      .instruction_if          (instruction_if));
+   InstructionFetch _InstructionFetch(.clk                    		 (clk),
+                                      .target_bp              		 (target_bp),
+                                      .target_en_bp           		 (target_en_bp),
+                                      .data_from_memory      	 	 (data_from_memory),
+                                      .address_to_memory       		 (address_to_memory),
+									  .next_program_counter_if_to_bp (next_program_counter_if_to_bp),
+                                      .next_program_counter_if 		 (next_program_counter_if),
+                                      .instruction_if         		 (instruction_if));
    
    InstructionDecode _InstructionDecode(.clk                       (clk),
                                         .next_program_counter_if   (next_program_counter_if),
@@ -75,7 +77,7 @@ module Core(input              clk,
                                         .reg2_data_rf              (reg2_data_rf),
                                         .reg1_index_rf             (reg1_index_rf),
                                         .reg2_index_rf             (reg2_index_rf),
-                                        .opcode_Id                 (opcode_Id),
+                                        .opcode_id                 (opcode_id),
                                         .target_address_id         (target_address_id),
                                         .next_program_counter_id   (next_program_counter_id),
                                         .reg1_data_id              (reg1_data_id),
