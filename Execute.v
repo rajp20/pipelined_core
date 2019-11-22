@@ -13,9 +13,10 @@ module Execute(
 	input [15:0] reg2_data,
 	input [15:0] npc,
 	input [4:0] dest_index_in,
-	output reg [4:0] dest_out_index,
-	output reg [15:0] result,
-	output [15:0] result_forward,
+	input [6:0] immediate,
+	output reg [4:0] dest_index_out,
+	output reg [15:0] output_reg,
+	output reg [15:0] result_out,
 	output reg [15:0] target,
 	output reg [4:0] control_out,
 	output reg WRITE_ENABLE //Not sure if we want this to be a reg or output reg
@@ -42,16 +43,6 @@ parameter LOADI  = 4'b1101;
 parameter STORE  = 4'b1110;
 parameter MOV    = 4'b1111;
 
-//Target updates any time npc or control updates
-assign target = npc + control_in;
-//Assign the output control to the input control
-assign control_out = control_in;
-//Assign destination index
-assign dest_out_index = dest_in_index;
-
-//Register for immediate value
-reg [6:0] immediate;
-
 //Initialize status flags for JUMP and CMP instructions
 initial ZF = 0;
 initial GF = 0;
@@ -62,12 +53,21 @@ reg ZF_next;
 reg GF_next;
 reg LF_next;
 
+//Current state unlatched
+reg [15:0] result;
+reg [15:0] target_next;
+
 //Set all status flags to result of corresponding next status flag
 always@(posedge clk)
 begin
 	ZF <= ZF_next;
 	GF <= GF_next;
 	LF <= LF_next;
+	dest_index_out <= dest_index_in;
+	result_out <= result;
+	output_reg <= reg2_data;
+	target <= target_next;
+	control_out <= control_in;
 end
 
 //Updates for specific opcodes
@@ -110,30 +110,30 @@ begin
 			WRITE_ENABLE = 1;
 		end
 		JUMP: begin
-			target = npc + reg2_data;
+			target_next = npc + reg2_data;
 		end
 		JUMPL: begin
 			if(LF) 
 			begin
-				target = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
+				target_next = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
 			end
 		end
 		JUMPG: begin
 			if(GF)
 			begin
-				target = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
+				target_next = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
 			end
 		end
 		JUMPE: begin
 			if(ZF)
 			begin
-				target = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
+				target_next = (npc + 1'b1) + {{9{immediate[6]}}, immediate};
 			end
 		end
 		JUMPNE: begin
 			if(ZF == 0)
 			begin
-				target = (npc + 1'b1) + {{9{immediateL[6]}}, immediate};
+				target_next = (npc + 1'b1) + {{9{immediateL[6]}}, immediate};
 			end
 		end
 		CMP: begin
@@ -148,7 +148,7 @@ begin
 			end
 		end
 		LOAD: begin
-			result = {{11{0}}, dest_out_index}; //Make top 11 bits 0 and fill bottom 5 bits with destination index to fit width correctly
+			result = {{11{0}}, dest_index_out}; //Make top 11 bits 0 and fill bottom 5 bits with destination index to fit width correctly
 		end
 		LOADI: begin
 			result = {{9{0}}, immediate}; //Make top 9 bits 0 and fill bottom 7 bits with immediate index to fit width correctly
