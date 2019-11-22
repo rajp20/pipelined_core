@@ -1,8 +1,8 @@
-module Core(input             clk,
-	    input [15:0]      from_mem_data,
-	    output reg [15:0] to_mem_addr,
-	    output reg [15:0] core_to_mem_data,
-	    output reg 	      core_to_mem_write_enable);
+module Core(input              clk,
+            input       [15:0] from_mem_data,
+    	    output reg  [15:0] to_mem_addr,
+	        output reg  [15:0] core_to_mem_data,
+	        output reg         core_to_mem_write_enable);
 
    // Wires for register file.
    wire [15:0]  read_data_1;
@@ -78,9 +78,26 @@ module Core(input             clk,
 					.IMMEDIATE_ID      (IMMEDIATE_ID),
 					.CTRL_ID           (CTRL_ID));
 
-   Execute _Execute();
+   Execute _Execute(.clk (clk),
+		    .control_in (CTRL_ID),
+		    .reg1_data (REG1_DATA_ID),
+		    .reg2_data (REG2_DATA_ID),
+		    .npc (NPC_ID),
+		    .dest_index_in (DEST_REG_INDEX_ID),
+		    .immediate (IMMEDIATE_ID),
+		    .dest_index_out (DEST_REG_INDEX_EX),
+		    .ouput_reg (REG_DATA_EX)
+		    .result_out (RES_EX)
+		    .target ()
+		    .control_out (CTRL_EX)
+		    .DEST_REG_WRITE_EN (DEST_REG_WRITE_EN)
+		    .ZF (ZF_EX)
+		    .GF (GF_EX)
+		    .LF (LF_EX));
 
-   MemoryAccess _MemoryAccess();
+   MemoryAccess _MemoryAccess(.clk (clk),
+			      .CTRL_EX (CTRL_EX)
+			      );
 
    RegisterWriteBack _RegisterWriteBack();
    
