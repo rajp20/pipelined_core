@@ -50,3 +50,4 @@ begin: CLOCK_GENERATOR
 	clk = 0;
 	
 end
+endmodule
