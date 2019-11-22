@@ -4,17 +4,14 @@
 //	UPDATED: Nov. 21, 2019
 //	AUTHOR: Blaze Kotsenburg, Raj Patel
 //////////////////////////////////////////////////////////////////////////////////
-module RegisterFile(
-	input clk,
-	input [4:0] read_index_1,
-	input [4:0] read_index_2,
-	input [4:0] write_index,
-	input [15:0] write_data,
-	input WRITE_ENABLE,
-	output reg [15:0] read_data_1,
-	output reg [15:0] read_data_2
-    );
-
+module RegisterFile(input             clk,
+	                input [4:0]       reg1_index,
+	                input [4:0]       reg2_index,
+	                input [4:0]       write_index,
+	                input [15:0]      write_data,
+	                input             write_en,
+	                output reg [15:0] reg1_data,
+	                output reg [15:0] reg2_data);
 
 	// 16-bit registers
 	reg [15:0] r0;
@@ -53,80 +50,80 @@ module RegisterFile(
 
 	always@*
 	begin
-	   case(read_index_1)
-	     0 :   read_data_1 = r0;
-	     1 :   read_data_1 = r1;
-	     2 :   read_data_1 = r2;
-	     3 :   read_data_1 = r3;
-	     4 :   read_data_1 = r4;
-	     5 :   read_data_1 = r5;
-	     6 :   read_data_1 = r6;
-	     7 :   read_data_1 = r7;
-	     8 :   read_data_1 = r8;
-	     9 :   read_data_1 = r9;
-	     10 :  read_data_1 = r10;
-	     11 :  read_data_1 = r11;
-	     12 :  read_data_1 = r12;
-	     13 :  read_data_1 = r13;
-	     14 :  read_data_1 = r14;
-	     15 :  read_data_1 = r15;
-	     16 :  read_data_1 = r16;
-	     17 :  read_data_1 = r17;
-	     18 :  read_data_1 = r18;
-	     19 :  read_data_1 = r19;
-	     20 :  read_data_1 = r20;
-	     21 :  read_data_1 = r21;
-	     22 :  read_data_1 = r22;
-	     23 :  read_data_1 = r23;
-	     24 :  read_data_1 = r24;
-	     25 :  read_data_1 = r25;
-	     26 :  read_data_1 = r26;
-	     27 :  read_data_1 = r27;
-	     28 :  read_data_1 = r28;
-	     29 :  read_data_1 = r29;
-	     30 :  read_data_1 = r30;
-	     31 :  read_data_1 = r31;
+	   case(reg1_index)
+	     0 :   reg1_data = r0;
+	     1 :   reg1_data = r1;
+	     2 :   reg1_data = r2;
+	     3 :   reg1_data = r3;
+	     4 :   reg1_data = r4;
+	     5 :   reg1_data = r5;
+	     6 :   reg1_data = r6;
+	     7 :   reg1_data = r7;
+	     8 :   reg1_data = r8;
+	     9 :   reg1_data = r9;
+	     10 :  reg1_data = r10;
+	     11 :  reg1_data = r11;
+	     12 :  reg1_data = r12;
+	     13 :  reg1_data = r13;
+	     14 :  reg1_data = r14;
+	     15 :  reg1_data = r15;
+	     16 :  reg1_data = r16;
+	     17 :  reg1_data = r17;
+	     18 :  reg1_data = r18;
+	     19 :  reg1_data = r19;
+	     20 :  reg1_data = r20;
+	     21 :  reg1_data = r21;
+	     22 :  reg1_data = r22;
+	     23 :  reg1_data = r23;
+	     24 :  reg1_data = r24;
+	     25 :  reg1_data = r25;
+	     26 :  reg1_data = r26;
+	     27 :  reg1_data = r27;
+	     28 :  reg1_data = r28;
+	     29 :  reg1_data = r29;
+	     30 :  reg1_data = r30;
+	     31 :  reg1_data = r31;
 	   endcase
 	   
-	   case(read_index_2)
-	     0 :   read_data_2 = r0;
-	     1 :   read_data_2 = r1;
-	     2 :   read_data_2 = r2;
-	     3 :   read_data_2 = r3;
-	     4 :   read_data_2 = r4;
-	     5 :   read_data_2 = r5;
-	     6 :   read_data_2 = r6;
-	     7 :   read_data_2 = r7;
-	     8 :   read_data_2 = r8;
-	     9 :   read_data_2 = r9;
-	     10 :  read_data_2 = r10;
-	     11 :  read_data_2 = r11;
-	     12 :  read_data_2 = r12;
-	     13 :  read_data_2 = r13;
-	     14 :  read_data_2 = r14;
-	     15 :  read_data_2 = r15;
-	     16 :  read_data_2 = r16;
-	     17 :  read_data_2 = r17;
-	     18 :  read_data_2 = r18;
-	     19 :  read_data_2 = r19;
-	     20 :  read_data_2 = r20;
-	     21 :  read_data_2 = r21;
-	     22 :  read_data_2 = r22;
-	     23 :  read_data_2 = r23;
-	     24 :  read_data_2 = r24;
-	     25 :  read_data_2 = r25;
-	     26 :  read_data_2 = r26;
-	     27 :  read_data_2 = r27;
-	     28 :  read_data_2 = r28;
-	     29 :  read_data_2 = r29;
-	     30 :  read_data_2 = r30;
-	     31 :  read_data_2 = r31;
+	   case(reg2_index)
+	     0 :   reg2_data = r0;
+	     1 :   reg2_data = r1;
+	     2 :   reg2_data = r2;
+	     3 :   reg2_data = r3;
+	     4 :   reg2_data = r4;
+	     5 :   reg2_data = r5;
+	     6 :   reg2_data = r6;
+	     7 :   reg2_data = r7;
+	     8 :   reg2_data = r8;
+	     9 :   reg2_data = r9;
+	     10 :  reg2_data = r10;
+	     11 :  reg2_data = r11;
+	     12 :  reg2_data = r12;
+	     13 :  reg2_data = r13;
+	     14 :  reg2_data = r14;
+	     15 :  reg2_data = r15;
+	     16 :  reg2_data = r16;
+	     17 :  reg2_data = r17;
+	     18 :  reg2_data = r18;
+	     19 :  reg2_data = r19;
+	     20 :  reg2_data = r20;
+	     21 :  reg2_data = r21;
+	     22 :  reg2_data = r22;
+	     23 :  reg2_data = r23;
+	     24 :  reg2_data = r24;
+	     25 :  reg2_data = r25;
+	     26 :  reg2_data = r26;
+	     27 :  reg2_data = r27;
+	     28 :  reg2_data = r28;
+	     29 :  reg2_data = r29;
+	     30 :  reg2_data = r30;
+	     31 :  reg2_data = r31;
 	   endcase
 	end
 
 	always@(posedge clk)
 	begin
-	  if(WRITE_ENABLE)
+	  if(write_en)
 	  begin
 	     case(write_index)
 	       0 :   r0 <= write_data;

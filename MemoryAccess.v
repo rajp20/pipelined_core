@@ -1,44 +1,44 @@
 module MemoryAccess(input             clk,
-		    input [3:0]       CTRL_EX,
-		    input [15:0]      RES_EX,
-		    input [15:0]      REG_DATA_EX,
-		    input [4:0]       DEST_REG_INDEX_EX,
-		    input 	      DEST_REG_WRITE_EN_EX,
-		    input [15:0]      from_mem_data,
-		    output reg [15:0] to_mem_addr,
-		    output reg [15:0] core_to_mem_data,
-		    output reg 	      core_to_mem_write_enable,
-		    output reg [4:0]  DEST_REG_INDEX_MA,
-		    output reg 	      DEST_REG_WRITE_EN_MA, 
-		    output reg [15:0] RES_MA,
-		    output reg [15:0] DATA_MA,
-		    output reg [4:0]  CTRL_MA);
+		    input [3:0]       control_ex,
+		    input [15:0]      result_ex,
+		    input [15:0]      reg_data_ex,
+		    input [4:0]       dest_reg_index_ex,
+		    input 	      dest_reg_write_en_ex,
+		    input [15:0]      data_from_memory,
+		    output reg [15:0] address_to_memory,
+		    output reg [15:0] data_to_memory,
+		    output reg 	      data_to_memory_write_en,
+		    output reg [4:0]  dest_reg_index_ma,
+		    output reg 	      dest_reg_write_en_ma, 
+		    output reg [15:0] result_ma,
+		    output reg [15:0] data_ma,
+		    output reg [4:0]  control_ma);
 
    parameter LOAD   = 4'b1100;
    parameter STORE  = 4'b1110;
    
    always@(*)
-     core_to_mem_write_enable = 0;
      begin
-	if (CTRL_EX == STORE)
+	core_to_mem_write_enable = 0;
+	if (control_ex == STORE)
 	  begin
-	     to_mem_addr = RES_EX;
-	     core_to_mem_data = REG_DATA_EX;
+	     to_mem_addr = result_ex;
+	     core_to_mem_data = reg_data_ex;
 	     core_to_mem_write_enable = 1;
 	  end
-	else if (CTRL_EX == LOAD)
+	else if (control_ex == LOAD)
 	  begin
-	     to_mem_addr = RES_EX;
+	     to_mem_addr = result_ex;
 	  end
      end
-
+   
    always@(posedge clk) 
      begin
-	CTRL_MA <= CTRL_EX;
-	RES_MA <= RES_MA;
-	DATA_MA <= from_mem_data;
-	DEST_REG_INDEX_MA <= DEST_REG_INDEX_EX;
-	DEST_REG_WRITE_EN_MA <= DEST_REG_WRITE_EN_EX;
+	control_ma <= control_ex;
+	result_ma <= result_ex;
+	data_ma <= from_mem_data;
+	dest_reg_index_ma <= dest_reg_index_ex;
+	dest_reg_write_en_ma <= dest_reg_write_en_ex;
      end
 
 endmodule
