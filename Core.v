@@ -18,6 +18,7 @@ module Core(input             clk,
    reg [15:0] 	TARGET;
    reg  	TARGET_EN;
    reg          BRANCH_PRED;
+   
 
    // Registers for Fetch Stage
    reg [15:0] 	NPC_IF; 
@@ -32,8 +33,9 @@ module Core(input             clk,
    reg [3:0] 	CTRL_ID;
 
    // Registers for Execution Stage
-   reg [5:0] 	REG_EX;
+   reg [15:0] 	REG_DATA_EX;
    reg [15:0] 	RES_EX;
+   reg [4:0] 	DEST_REG_INDEX_EX;
    reg [3:0] 	CTRL_EX;
 
    // Registers for Memory Access Stage.
@@ -67,6 +69,8 @@ module Core(input             clk,
 					.read_data_2       (read_data_2),
 					.read_index_1      (read_index_1),
 					.read_index_2      (read_index_2),
+					.OP_BR             (OP_BR),
+					.TARGET_BR         (TARGET_BR),
 					.NPC_ID            (NPC_ID),
 					.REG1_DATA_ID      (REG1_DATA_ID),
 					.REG2_DATA_ID      (REG2_DATA_ID),
