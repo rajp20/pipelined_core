@@ -68,6 +68,7 @@ begin
 	output_reg <= reg2_data;
 	target <= target_next;
 	control_out <= control_in;
+	//Going to need to latch DEST_REG_WRITE_EN
 end
 
 //Updates for specific opcodes
