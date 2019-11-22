@@ -67,7 +67,7 @@ begin
 	begin
 		#5 clk = ~clk;
 		//Console validation for SUB operation
-		$display("\nOpcode: SUB\n reg1_data: ", reg1_data, "\n reg2_data: ", reg2_data, "\n result_out: ", result_out);
+		//$display("\nOpcode: SUB\n reg1_data: ", reg1_data, "\n reg2_data: ", reg2_data, "\n result_out: ", result_out);
 
 		//TODO: Edge case tests for SUB here later
 
@@ -82,7 +82,7 @@ begin
         	immediate     = 7'd0;     //Immediate value set to zero
 
 		//Console validation for ADD operation
-		$display("\nOpcode: ADD\n reg1_data: ", reg1_data, "\n reg2_data: ", reg2_data, "\n result_out: ", result_out);
+		//$display("\nOpcode: ADD\n reg1_data: ", reg1_data, "\n reg2_data: ", reg2_data, "\n result_out: ", result_out);
 
 		#5 clk = ~clk;
 		
