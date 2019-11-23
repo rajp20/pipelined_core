@@ -145,7 +145,7 @@ begin
 		        		npc           = 16'd0;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to zero
 
-		        		//Console validation for ADDI operation
+		        		//Console validation for SHLLI operation
 					$display("\nOpcode: SHLLI\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n result_out: ", result_out);
 
 					opcode = opcode + 1'b1;
@@ -154,15 +154,100 @@ begin
 					//Initialize inputs to begin testing with SHLLI instruction
 					control_in    = 5'b00011; //ADDI opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
-					reg1_data     = 16'd8;   //R1 data is 10 in decimal
+					reg1_data     = 16'd8;    //R1 data is 10 in decimal
 					reg2_data     = 16'd0;    //R2 data is 5
 		        		npc           = 16'd0;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to zero
 
-		        		//Console validation for ADDI operation
+		        		//Console validation for SHRLI operation
 					$display("\nOpcode: SHRLI\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n result_out: ", result_out);
 
 					opcode = opcode + 1'b1;
+				end
+				JUMP: begin
+					//Initialize inputs to begin testing JUMP instruction
+					control_in    = 5'b00011; //JUMP opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 8 in decimal
+					reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+			
+					//Console Validation for JUMP
+					$display("\nOpcode: JUMP\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
+
+					opcode = opcode + 1'b1;
+				end
+				JUMPL: begin
+					//Initialize inputs to begin testing JUMPL instruction
+					control_in    = 5'b00011; //JUMPL opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 8 in decimal
+					reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+			
+					//Console Validation for JUMPL
+					$display("\nOpcode: JUMPL\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
+					
+					opcode = opcode + 1'b1;//Might want to jump to CMP
+				end
+				JUMPG: begin
+					//Initialize inputs to begin testing JUMPG instruction
+					control_in    = 5'b00011; //JUMPG opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 8 in decimal
+					reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+			
+					//Console Validation for JUMPG
+					$display("\nOpcode: JUMPG\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
+
+					opcode = opcode + 1'b1;//Might want to jump to CMP
+				end
+				JUMPE: begin
+					//Initialize inputs to begin testing JUMPEE instruction
+					control_in    = 5'b00011; //JUMPE opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 8 in decimal
+					reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+			
+					//Console Validation for JUMPE
+					$display("\nOpcode: JUMPE\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
+
+					opcode = opcode + 1'b1;//Might want to jump to CMP
+				end
+				JUMPNE: begin
+					//Initialize inputs to begin testing JUMPNE instruction
+					control_in    = 5'b00011; //JUMPNE opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 8 in decimal
+					reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+			
+					//Console Validation for JUMPNE
+					$display("\nOpcode: JUMPG\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
+
+					opcode = opcode + 1'b1;//Might want to jump to CMP
+				end
+				CMP: begin
+					
+				end
+				LOAD: begin
+
+				end
+				LOADI: begin
+
+				end
+				STORE: begin
+					
+				end
+				MOV: begin
+
 				end
 			endcase
 		end	

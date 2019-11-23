@@ -44,9 +44,9 @@ parameter STORE  = 4'b1110;
 parameter MOV    = 4'b1111;
 
 //Initialize status flags for JUMP and CMP instructions
-initial ZF = 0;
-initial GF = 0;
-initial LF = 0;
+//initial ZF = 0;
+//initial GF = 0;
+//initial LF = 0;
 
 //Set up next status flags
 reg ZF_next;
