@@ -96,7 +96,7 @@ begin
 			DEST_REG_WRITE_EN = 1;
 		end
 		ADDI: begin
-			result = reg1_data + immediate;
+			result = reg1_data + {9'b0, immediate};
 			ZF_next = (result == 16'b0) ? 1 : 0;
 			DEST_REG_WRITE_EN = 1;
 		end
