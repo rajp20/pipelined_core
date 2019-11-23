@@ -21,6 +21,8 @@ wire DEST_REG_WRITE_EN;
 wire ZF;
 wire GF;
 wire LF;
+//Opcode state
+reg [4:0] opcode;
 
 //Create an instance of the Execute module for testing
 Execute mut(
@@ -66,7 +68,7 @@ parameter MOV    = 4'b1111;
 initial
 begin: CLOCK_GENERATOR
 	clk = 1'b1;
-	//#5 clk = ~clk;
+	opcode = 5'b0;
 	//Initialize inputs to begin testing with SUB instruction
 	control_in    = 5'b00000; //SUB opcode
 	dest_index_in = 5'b00000; //Simulate dest index as $R2
@@ -76,7 +78,6 @@ begin: CLOCK_GENERATOR
         immediate     = 7'd0;     //Immediate value set to zero
 	#5 clk = ~clk;
 	//TODO: fix issue from allowing to see first result of testing sequence
-
 end
 
 //Beginning of testing sequence
@@ -87,10 +88,11 @@ begin
 		if(clk)
 		begin
 			
-			case(control_in)
+			case(opcode)
 
 				NOP: begin
 					control_in = control_in + 1'b1;
+					opcode = opcode + 1'b1;
 				end
 				SUB: begin
 					//Console validation for SUB operation
@@ -99,10 +101,12 @@ begin
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd3;    //R2 data is 3
-			        npc           = 16'd0;    //NPC set to 0
-			        immediate     = 7'd0;     //Immediate value set to zero
+			        	npc           = 16'd0;    //NPC set to 0
+			        	immediate     = 7'd0;     //Immediate value set to zero
 
 					$display("\nOpcode: SUB\n reg1_data: ", reg1_data, "\n reg2_data: ", reg2_data, "\n result_out: ", result_out);
+
+					opcode = opcode + 1'b1;
 				end
 				ADD: begin
 					//Initialize inputs to begin testing with ADD instruction
@@ -110,11 +114,13 @@ begin
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd5;    //R2 data is 5
-		        	npc           = 16'd0;    //NPC set to 0
-		        	immediate     = 7'd0;     //Immediate value set to zero
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd0;     //Immediate value set to zero
 
-		        	//Console validation for ADD operation
+		        		//Console validation for ADD operation
 					$display("\nOpcode: ADD\n reg1_data: ", reg1_data, "\n reg2_data: ", reg2_data, "\n result_out: ", result_out);
+					
+					opcode = opcode + 1'b1;
 				end
 				ADDI: begin
 					//Initialize inputs to begin testing with ADDI instruction
@@ -122,12 +128,15 @@ begin
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd5;    //R2 data is 5
-		        	npc           = 16'd0;    //NPC set to 0
-		        	immediate     = 7'd7;     //Immediate value set to zero
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd7;     //Immediate value set to zero
 
-		        	//Console validation for ADDI operation
+		        		//Console validation for ADDI operation
 					$display("\nOpcode: ADDI\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n result_out: ", result_out);
+
+					opcode = opcode + 1'b1;
 				end
+			endcase
 		end	
 	end
 end
