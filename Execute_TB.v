@@ -298,7 +298,7 @@ begin
 		        		immediate     = 7'd1;     //Immediate value set to one
 				
 					//Console Validation for LOAD
-					$display("\n**Opcode: LOAD**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					$display("\n**Opcode: LOAD**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nresult_out: ", result_out, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
 
 					opcode = LOADI;
 				end
@@ -312,7 +312,7 @@ begin
 		        		immediate     = 7'd31;     //Immediate value set to one
 			
 					//Console Validation for LOADI
-					$display("\n**Opcode: LOADI**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					$display("\n**Opcode: LOADI**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nresult_out: ", result_out, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
 
 					opcode = STORE;
 				end
@@ -326,7 +326,7 @@ begin
 		        		immediate     = 7'd31;     //Immediate value set to one
 				
 					//Console Validation for STORE
-					$display("\n**Opcode: STORE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					$display("\n**Opcode: STORE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nresult_out: ", result_out, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
 
 					opcode = MOV;
 				end
@@ -340,9 +340,9 @@ begin
 		        		immediate     = 7'd31;     //Immediate value set to one
 				
 					//Console Validation for STORE
-					$display("\n**Opcode: STORE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					$display("\n**Opcode: MOV**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nresult_out: ", result_out, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
 
-					opcode = MOV;
+					opcode = NOP;
 				end
 			endcase
 		end	
