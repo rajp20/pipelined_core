@@ -136,6 +136,34 @@ begin
 
 					opcode = opcode + 1'b1;
 				end
+				SHLLI: begin
+					//Initialize inputs to begin testing with SHLLI instruction
+					control_in    = 5'b00011; //ADDI opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;   //R1 data is 10 in decimal
+					reg2_data     = 16'd0;    //R2 data is 5
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to zero
+
+		        		//Console validation for ADDI operation
+					$display("\nOpcode: SHLLI\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n result_out: ", result_out);
+
+					opcode = opcode + 1'b1;
+				end
+				SHRLI: begin
+					//Initialize inputs to begin testing with SHLLI instruction
+					control_in    = 5'b00011; //ADDI opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;   //R1 data is 10 in decimal
+					reg2_data     = 16'd0;    //R2 data is 5
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to zero
+
+		        		//Console validation for ADDI operation
+					$display("\nOpcode: SHRLI\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n result_out: ", result_out);
+
+					opcode = opcode + 1'b1;
+				end
 			endcase
 		end	
 	end
