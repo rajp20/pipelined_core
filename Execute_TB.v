@@ -169,12 +169,12 @@ begin
 					control_in    = JUMP; //JUMP opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
-					reg2_data     = 16'd0;    //R2 data is 0
-		        		npc           = 16'd0;    //NPC set to 0
+					reg2_data     = 16'd10;    //R2 data is 10
+		        		npc           = 16'd5;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to one
 			
 					//Console Validation for JUMP
-					$display("\nOpcode: JUMP\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target, "\n result_out", result_out);
+					$display("\nOpcode: JUMP\n npc: ", npc, "\n reg2_data", reg2_data, "\n immediate: ", immediate, "\n target: ", target, "\n result_out", result_out);
 
 					opcode = opcode + 1'b1;
 				end
