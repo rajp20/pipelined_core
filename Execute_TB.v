@@ -176,21 +176,33 @@ begin
 					//Console Validation for JUMP
 					$display("\nOpcode: JUMP\n npc: ", npc, "\n reg2_data", reg2_data, "\n immediate: ", immediate, "\n target: ", target, "\n result_out", result_out);
 
-					opcode = opcode + 1'b1;
+					opcode = JUMPL;
 				end
 				JUMPL: begin
-					//Initialize inputs to begin testing JUMPL instruction
-					control_in    = JUMPL; //JUMPL opcode
-					dest_index_in = 5'b00010; //Simulate dest index as $R2
-					reg1_data     = 16'd8;    //R1 data is 8 in decimal
-					reg2_data     = 16'd0;    //R2 data is 0
-		        		npc           = 16'd0;    //NPC set to 0
-		        		immediate     = 7'd1;     //Immediate value set to one
-			
-					//Console Validation for JUMPL
-					$display("\nOpcode: JUMPL\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
-					
-					opcode = opcode + 1'b1;//Might want to jump to CMP
+					if(control_in != CMP)
+					begin
+						control_in = CMP;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd4;    //R1 data is 8 in decimal
+						reg2_data     = 16'd8;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+
+						$display("\nCMP -> JUMPL\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					end
+					else
+					begin
+						control_in = JUMPL;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd4;    //R1 data is 8 in decimal
+						reg2_data     = 16'd8;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+
+						$display("\nCMP -> JUMPL\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+						opcode = JUMPL;
+					end
 				end
 				JUMPG: begin
 					//Initialize inputs to begin testing JUMPG instruction
@@ -235,6 +247,7 @@ begin
 					opcode = opcode + 1'b1;//Might want to jump to CMP
 				end
 				CMP: begin
+					
 					
 				end
 				LOAD: begin
