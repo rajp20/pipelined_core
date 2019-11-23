@@ -3,7 +3,7 @@
 //  a case statement to produce a result that will be fed back to DECODE stage and
 //  the MEM stage.
 //
-//  UPDATED: Nov. 21, 2019
+//  UPDATED: Nov. 23, 2019
 //  AUTHOR: Blaze Kotsenburg
 //////////////////////////////////////////////////////////////////////////////////
 module Execute(

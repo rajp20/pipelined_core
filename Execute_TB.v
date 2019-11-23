@@ -2,7 +2,7 @@
 //  Execution testbench module. This testbench is used to develop and test all
 //  ALU operations in the Execution stage of the pipelined CPU.
 //
-//  UPDATED: Nov. 22, 2019
+//  UPDATED: Nov. 23, 2019
 //  AUTHOR: Blaze Kotsenburg
 //////////////////////////////////////////////////////////////////////////////////
 module Execute_TB;
@@ -97,7 +97,7 @@ begin
 				SUB: begin
 					//Console validation for SUB operation
 					//Initialize inputs to begin testing with SUB instruction
-					control_in    = 5'b00001; //SUB opcode
+					control_in    = SUB; //SUB opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd3;    //R2 data is 3
@@ -110,7 +110,7 @@ begin
 				end
 				ADD: begin
 					//Initialize inputs to begin testing with ADD instruction
-					control_in    = 5'b00010; //ADD opcode
+					control_in    = ADD; //ADD opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd5;    //R2 data is 5
@@ -124,7 +124,7 @@ begin
 				end
 				ADDI: begin
 					//Initialize inputs to begin testing with ADDI instruction
-					control_in    = 5'b00011; //ADDI opcode
+					control_in    = ADDI; //ADDI opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd5;    //R2 data is 5
@@ -138,7 +138,7 @@ begin
 				end
 				SHLLI: begin
 					//Initialize inputs to begin testing with SHLLI instruction
-					control_in    = 5'b00011; //ADDI opcode
+					control_in    = SHLLI; //ADDI opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;   //R1 data is 10 in decimal
 					reg2_data     = 16'd0;    //R2 data is 5
@@ -152,7 +152,7 @@ begin
 				end
 				SHRLI: begin
 					//Initialize inputs to begin testing with SHLLI instruction
-					control_in    = 5'b00011; //ADDI opcode
+					control_in    = SHRLI; //ADDI opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 10 in decimal
 					reg2_data     = 16'd0;    //R2 data is 5
@@ -166,7 +166,7 @@ begin
 				end
 				JUMP: begin
 					//Initialize inputs to begin testing JUMP instruction
-					control_in    = 5'b00011; //JUMP opcode
+					control_in    = JUMP; //JUMP opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
 					reg2_data     = 16'd0;    //R2 data is 0
@@ -174,13 +174,13 @@ begin
 		        		immediate     = 7'd1;     //Immediate value set to one
 			
 					//Console Validation for JUMP
-					$display("\nOpcode: JUMP\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
+					$display("\nOpcode: JUMP\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target, "\n result_out", result_out);
 
 					opcode = opcode + 1'b1;
 				end
 				JUMPL: begin
 					//Initialize inputs to begin testing JUMPL instruction
-					control_in    = 5'b00011; //JUMPL opcode
+					control_in    = JUMPL; //JUMPL opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
 					reg2_data     = 16'd0;    //R2 data is 0
@@ -194,7 +194,7 @@ begin
 				end
 				JUMPG: begin
 					//Initialize inputs to begin testing JUMPG instruction
-					control_in    = 5'b00011; //JUMPG opcode
+					control_in    = JUMPG; //JUMPG opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
 					reg2_data     = 16'd0;    //R2 data is 0
@@ -208,7 +208,7 @@ begin
 				end
 				JUMPE: begin
 					//Initialize inputs to begin testing JUMPEE instruction
-					control_in    = 5'b00011; //JUMPE opcode
+					control_in    = JUMPE; //JUMPE opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
 					reg2_data     = 16'd0;    //R2 data is 0
@@ -222,7 +222,7 @@ begin
 				end
 				JUMPNE: begin
 					//Initialize inputs to begin testing JUMPNE instruction
-					control_in    = 5'b00011; //JUMPNE opcode
+					control_in    = JUMPNE; //JUMPNE opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
 					reg2_data     = 16'd0;    //R2 data is 0
