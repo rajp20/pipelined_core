@@ -188,7 +188,7 @@ begin
 		        			npc           = 16'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 
-						$display("\nCMP -> JUMPL\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+						$display("\n**CMP -> JUMPL**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
 					end
 					else
 					begin
@@ -199,56 +199,94 @@ begin
 		        			npc           = 16'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 
-						$display("\nCMP -> JUMPL\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+						$display("\nOpcode: JUMPL\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
 
-						opcode = JUMPL;
+						opcode = JUMPG;
 					end
 				end
 				JUMPG: begin
-					//Initialize inputs to begin testing JUMPG instruction
-					control_in    = JUMPG; //JUMPG opcode
-					dest_index_in = 5'b00010; //Simulate dest index as $R2
-					reg1_data     = 16'd8;    //R1 data is 8 in decimal
-					reg2_data     = 16'd0;    //R2 data is 0
+					if(control_in != CMP)
+					begin
+						control_in = CMP;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd4;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+
+						$display("\n**CMP -> JUMPG**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					end
+					else
+					begin
+						//Initialize inputs to begin testing JUMPG instruction
+						control_in    = JUMPG; //JUMPG opcode
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd0;    //R2 data is 0
 		        		npc           = 16'd0;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to one
 			
-					//Console Validation for JUMPG
-					$display("\nOpcode: JUMPG\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
+						//Console Validation for JUMPG
+						$display("\nOpcode: JUMPG\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
 
-					opcode = opcode + 1'b1;//Might want to jump to CMP
+						opcode = JUMPE;
+					end
 				end
 				JUMPE: begin
-					//Initialize inputs to begin testing JUMPEE instruction
-					control_in    = JUMPE; //JUMPE opcode
-					dest_index_in = 5'b00010; //Simulate dest index as $R2
-					reg1_data     = 16'd8;    //R1 data is 8 in decimal
-					reg2_data     = 16'd0;    //R2 data is 0
+					if(control_in != CMP)
+					begin
+						control_in = CMP;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd7;    //R1 data is 8 in decimal
+						reg2_data     = 16'd7;    //R2 data is 0
 		        		npc           = 16'd0;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to one
-			
-					//Console Validation for JUMPE
-					$display("\nOpcode: JUMPE\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
 
-					opcode = opcode + 1'b1;//Might want to jump to CMP
+						$display("\n**CMP -> JUMPE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					end
+					else
+					begin
+						//Initialize inputs to begin testing JUMPE instruction
+						control_in    = JUMPE; //JUMPE opcode
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+				
+						//Console Validation for JUMPE
+						$display("\nOpcode: JUMPE\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+						opcode = JUMPNE;
+					end
 				end
 				JUMPNE: begin
-					//Initialize inputs to begin testing JUMPNE instruction
-					control_in    = JUMPNE; //JUMPNE opcode
-					dest_index_in = 5'b00010; //Simulate dest index as $R2
-					reg1_data     = 16'd8;    //R1 data is 8 in decimal
-					reg2_data     = 16'd0;    //R2 data is 0
+					if(control_in != CMP)
+					begin
+						control_in = CMP;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd4;    //R2 data is 0
 		        		npc           = 16'd0;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to one
-			
-					//Console Validation for JUMPNE
-					$display("\nOpcode: JUMPG\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n target: ", target);
 
-					opcode = opcode + 1'b1;//Might want to jump to CMP
-				end
-				CMP: begin
-					
-					
+						$display("\n**CMP -> JUMPNE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					end
+					else
+					begin
+						//Initialize inputs to begin testing JUMPNE instruction
+						control_in    = JUMPNE; //JUMPNE opcode
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+				
+						//Console Validation for JUMPNE
+						$display("\n**Opcode: JUMPNE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+						opcode = LOAD;
+					end
 				end
 				LOAD: begin
 
