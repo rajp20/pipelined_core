@@ -42,7 +42,8 @@ MemoryAccess matb (
 );
 
 //Parameters for load and store to initalize control execuction.
-parameter LOAD   = 4'b1100;parameter STORE  = 4'b1110;
+parameter LOAD   = 4'b1100;
+	parameter STORE  = 4'b1110;
 
 
 initial
@@ -58,6 +59,23 @@ begin: CLOCK_GENERATOR
        #5 clk = ~clk;
 		
 end
-begin	always	begin		#5 clk = ~clk;		if(clk)		begin						case(state)				LOAD: begin
-					control_ex = STORE;					state = STORE;				end				STORE: begin
-					control_ex = LOAD;					state = LOAD;				end				endcase		end		endendendmodule
+begin
+	always
+	begin
+		#5 clk = ~clk;
+		if(clk)
+		begin
+			case(state)
+				LOAD: begin
+					control_ex = STORE;
+					state = STORE;
+				end
+				STORE: begin
+					control_ex = LOAD;
+					state = LOAD;
+				end
+			endcase
+		end	
+	end
+end
+endmodule
