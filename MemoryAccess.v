@@ -30,7 +30,7 @@ module MemoryAccess(input             clk,
 	  begin
 	     address_to_memory = result_ex;
 	  end
-     ends
+     end
    
    always@(posedge clk) 
      begin
