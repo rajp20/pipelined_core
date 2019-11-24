@@ -51,20 +51,15 @@ module InstructionDecode_TB;
 	end
 	
 	always begin
-		#10;
-		$display("Address = %0d, Data = %b", address_to_memory, data_from_memory);
-		#45;
-		target_bp = 16'd32;
-		target_en_bp = 1;
-		#5;
-		target_en_bp = 0;
-		$display("Address = %0d, Data = %b", address_to_memory, data_from_memory);
-		#40;
-		target_bp = 16'd2;
-		target_en_bp = 1;
-		#5;
-		target_en_bp = 0;
-		$display("Address = %0d, Data = %b", address_to_memory, data_from_memory);
+		#15;
+		instruction_if = 16'b0001000000100010;
+		next_program_counter_if = 1;
+		branch_prediction_bp = 0;
+		#1;
+		reg1_data_rf = 16'h0001;
+		reg2_data_rf = 15'h0002;
+		#20;
+		branch_prediction_bp = 1;
 		#50;
 	end
 

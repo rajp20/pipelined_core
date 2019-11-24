@@ -22,8 +22,7 @@ module InstructionDecode(input             clk,
 
    assign opcode_id = next_control;
    assign target_address_id = {{4{1'b0}}, instruction_if[11:0]};
-   
-   // Need to figure out a way to pass immediate values to the next stage.
+
    always@(*) 
      begin
 		reg1_index_rf = instruction_if[9:5];
