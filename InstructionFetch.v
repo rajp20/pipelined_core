@@ -2,7 +2,7 @@ module InstructionFetch(input 		      clk,
                         input [15:0] 	  target_bp,
                         input             target_en_bp,
                         input [15:0] 	  data_from_memory,
-						output 15:0]	  next_program_counter_if_to_bp,
+						output [15:0]	  next_program_counter_if_to_bp,
                         output reg [15:0] address_to_memory,
                         output reg [15:0] next_program_counter_if,
                         output reg [15:0] instruction_if);
@@ -11,21 +11,20 @@ module InstructionFetch(input 		      clk,
    
    reg [15:0] PC;
    reg [15:0] NPC;
-   reg [15:0] MUX_OUT;
-   
-   initial PC = 16'd0;
-   initial NPC = 16'd0;   
+   reg [15:0] MUX_OUT;  
+
+   initial NPC = 16'h0000;
 
    assign next_program_counter_if_to_bp = NPC;
 
-   always@(*)
-     begin
-        address_to_memory = PC;
+   always@(MUX_OUT, NPC, target_bp, PC, address_to_memory, posedge target_en_bp)
+     begin        
         MUX_OUT = NPC;	
     	if (target_en_bp)
     	  MUX_OUT = target_bp;
 	
     	NPC = MUX_OUT + 1'b1;
+		address_to_memory = PC;
      end
    
    always@(posedge clk) 

@@ -2,7 +2,7 @@
 //  Execution testbench module. This testbench is used to develop and test all
 //  ALU operations in the Execution stage of the pipelined CPU.
 //
-//  UPDATED: Nov. 22, 2019
+//  UPDATED: Nov. 23, 2019
 //  AUTHOR: Blaze Kotsenburg
 //////////////////////////////////////////////////////////////////////////////////
 module Execute_TB;
@@ -97,7 +97,7 @@ begin
 				SUB: begin
 					//Console validation for SUB operation
 					//Initialize inputs to begin testing with SUB instruction
-					control_in    = 5'b00001; //SUB opcode
+					control_in    = SUB; //SUB opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd3;    //R2 data is 3
@@ -110,7 +110,7 @@ begin
 				end
 				ADD: begin
 					//Initialize inputs to begin testing with ADD instruction
-					control_in    = 5'b00010; //ADD opcode
+					control_in    = ADD; //ADD opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd5;    //R2 data is 5
@@ -124,7 +124,7 @@ begin
 				end
 				ADDI: begin
 					//Initialize inputs to begin testing with ADDI instruction
-					control_in    = 5'b00011; //ADDI opcode
+					control_in    = ADDI; //ADDI opcode
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd5;    //R2 data is 5
@@ -135,6 +135,214 @@ begin
 					$display("\nOpcode: ADDI\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n result_out: ", result_out);
 
 					opcode = opcode + 1'b1;
+				end
+				SHLLI: begin
+					//Initialize inputs to begin testing with SHLLI instruction
+					control_in    = SHLLI; //ADDI opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;   //R1 data is 10 in decimal
+					reg2_data     = 16'd0;    //R2 data is 5
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to zero
+
+		        		//Console validation for SHLLI operation
+					$display("\nOpcode: SHLLI\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n result_out: ", result_out);
+
+					opcode = opcode + 1'b1;
+				end
+				SHRLI: begin
+					//Initialize inputs to begin testing with SHLLI instruction
+					control_in    = SHRLI; //ADDI opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 10 in decimal
+					reg2_data     = 16'd0;    //R2 data is 5
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to zero
+
+		        		//Console validation for SHRLI operation
+					$display("\nOpcode: SHRLI\n reg1_data: ", reg1_data, "\n immediate: ", immediate, "\n result_out: ", result_out);
+
+					opcode = opcode + 1'b1;
+				end
+				JUMP: begin
+					//Initialize inputs to begin testing JUMP instruction
+					control_in    = JUMP; //JUMP opcode
+					dest_index_in = 5'b00010; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 8 in decimal
+					reg2_data     = 16'd10;    //R2 data is 10
+		        		npc           = 16'd5;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+			
+					//Console Validation for JUMP
+					$display("\nOpcode: JUMP\n npc: ", npc, "\n reg2_data", reg2_data, "\n immediate: ", immediate, "\n target: ", target, "\n result_out", result_out);
+
+					opcode = JUMPL;
+				end
+				JUMPL: begin
+					if(control_in != CMP)
+					begin
+						control_in = CMP;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd4;    //R1 data is 8 in decimal
+						reg2_data     = 16'd8;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+
+						$display("\n**CMP -> JUMPL**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					end
+					else
+					begin
+						control_in = JUMPL;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd4;    //R1 data is 8 in decimal
+						reg2_data     = 16'd8;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+
+						$display("\nOpcode: JUMPL\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+						opcode = JUMPG;
+					end
+				end
+				JUMPG: begin
+					if(control_in != CMP)
+					begin
+						control_in = CMP;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd4;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+
+						$display("\n**CMP -> JUMPG**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					end
+					else
+					begin
+						//Initialize inputs to begin testing JUMPG instruction
+						control_in    = JUMPG; //JUMPG opcode
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd0;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+			
+						//Console Validation for JUMPG
+						$display("\nOpcode: JUMPG\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+						opcode = JUMPE;
+					end
+				end
+				JUMPE: begin
+					if(control_in != CMP)
+					begin
+						control_in = CMP;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd7;    //R1 data is 8 in decimal
+						reg2_data     = 16'd7;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+
+						$display("\n**CMP -> JUMPE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					end
+					else
+					begin
+						//Initialize inputs to begin testing JUMPE instruction
+						control_in    = JUMPE; //JUMPE opcode
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd0;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+				
+						//Console Validation for JUMPE
+						$display("\nOpcode: JUMPE\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+						opcode = JUMPNE;
+					end
+				end
+				JUMPNE: begin
+					if(control_in != CMP)
+					begin
+						control_in = CMP;
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd4;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+
+						$display("\n**CMP -> JUMPNE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+					end
+					else
+					begin
+						//Initialize inputs to begin testing JUMPNE instruction
+						control_in    = JUMPNE; //JUMPNE opcode
+						dest_index_in = 5'b00010; //Simulate dest index as $R2
+						reg1_data     = 16'd8;    //R1 data is 8 in decimal
+						reg2_data     = 16'd0;    //R2 data is 0
+		        			npc           = 16'd0;    //NPC set to 0
+		        			immediate     = 7'd1;     //Immediate value set to one
+				
+						//Console Validation for JUMPNE
+						$display("\n**Opcode: JUMPNE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+						opcode = LOAD;
+					end
+				end
+				LOAD: begin
+					//Initialize inputs to begin testing LOAD instruction
+					control_in    = LOAD; //LOAD opcode
+					dest_index_in = 5'b01000; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 8 in decimal
+					reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd1;     //Immediate value set to one
+				
+					//Console Validation for LOAD
+					$display("\n**Opcode: LOAD**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nresult_out: ", result_out, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+					opcode = LOADI;
+				end
+				LOADI: begin
+					//Initialize inputs to begin testing LOADI instruction
+					control_in    = LOADI; //LOADI opcode
+					dest_index_in = 5'b00011; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 8 in decimal
+					reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd31;     //Immediate value set to one
+			
+					//Console Validation for LOADI
+					$display("\n**Opcode: LOADI**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nresult_out: ", result_out, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+					opcode = STORE;
+				end
+				STORE: begin
+					//Initialize inputs to begin testing STORE instruction
+					control_in    = STORE; //STORE opcode
+					dest_index_in = 5'b00011; //Simulate dest index as $R2
+					reg1_data     = 16'd16;    //R1 data is 8 in decimal
+					reg2_data     = 16'd0;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd31;     //Immediate value set to one
+				
+					//Console Validation for STORE
+					$display("\n**Opcode: STORE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nresult_out: ", result_out, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+					opcode = MOV;
+				end
+				MOV: begin
+					//Initialize inputs to begin testing STORE instruction
+					control_in    = STORE; //STORE opcode
+					dest_index_in = 5'b00011; //Simulate dest index as $R2
+					reg1_data     = 16'd8;    //R1 data is 8 in decimal
+					reg2_data     = 16'd11;    //R2 data is 0
+		        		npc           = 16'd0;    //NPC set to 0
+		        		immediate     = 7'd31;     //Immediate value set to one
+				
+					//Console Validation for STORE
+					$display("\n**Opcode: MOV**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nresult_out: ", result_out, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
+
+					opcode = NOP;
 				end
 			endcase
 		end	

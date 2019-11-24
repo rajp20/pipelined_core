@@ -3,7 +3,7 @@
 //  a case statement to produce a result that will be fed back to DECODE stage and
 //  the MEM stage.
 //
-//  UPDATED: Nov. 21, 2019
+//  UPDATED: Nov. 23, 2019
 //  AUTHOR: Blaze Kotsenburg
 //////////////////////////////////////////////////////////////////////////////////
 module Execute(
@@ -44,9 +44,9 @@ parameter STORE  = 4'b1110;
 parameter MOV    = 4'b1111;
 
 //Initialize status flags for JUMP and CMP instructions
-initial ZF = 0;
-initial GF = 0;
-initial LF = 0;
+//initial ZF = 0;
+//initial GF = 0;
+//initial LF = 0;
 
 //Set up next status flags
 reg ZF_next;
@@ -56,6 +56,7 @@ reg LF_next;
 //Current state unlatched
 reg [15:0] result;
 reg [15:0] target_next;
+reg dest_reg_write_en;
 
 //Set all status flags to result of corresponding next status flag
 always@(posedge clk)
@@ -68,6 +69,7 @@ begin
 	output_reg <= reg2_data;
 	target <= target_next;
 	control_out <= control_in;
+	DEST_REG_WRITE_EN <= dest_reg_write_en;
 	//Going to need to latch DEST_REG_WRITE_EN
 end
 
@@ -79,6 +81,7 @@ begin
 	ZF_next = 1'b0;
 	GF_next = 1'b0;
 	LF_next = 1'b0;
+	dest_reg_write_en = 1'b0;
 
 	/************** BEGIN ALU **************/
 	case(control_in)
@@ -88,28 +91,28 @@ begin
 		SUB: begin
 			result = reg1_data - reg2_data;
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_EN = 1;
+			dest_reg_write_en = 1;
 		end
 		ADD: begin
 			result = reg1_data + reg2_data;
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_EN = 1;
+			dest_reg_write_en = 1;
 		end
 		ADDI: begin
 			result = reg1_data + {9'b0, immediate};
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_EN = 1;
+			dest_reg_write_en = 1;
 		end
 		SHLLI: begin
 			result = reg1_data << immediate;
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_EN = 1;
+			dest_reg_write_en = 1;
 		end
 		SHRLI:
 		begin
 			result = reg1_data >> immediate;
 			ZF_next = (result == 16'b0) ? 1 : 0;
-			DEST_REG_WRITE_EN = 1;
+			dest_reg_write_en = 1;
 		end
 		JUMP: begin
 			target_next = npc + reg2_data;
@@ -151,18 +154,18 @@ begin
 		end
 		LOAD: begin
 			result = {11'b0, dest_index_out}; //Make top 11 bits 0 and fill bottom 5 bits with destination index to fit width correctly
-			DEST_REG_WRITE_EN = 1;
+			dest_reg_write_en = 1;
 		end
 		LOADI: begin
 			result = {9'b0, immediate}; //Make top 9 bits 0 and fill bottom 7 bits with immediate index to fit width correctly
-			DEST_REG_WRITE_EN = 1;
+			dest_reg_write_en = 1;
 		end
 		STORE: begin
 			result = reg1_data;
 		end
 		MOV: begin
 			result = reg2_data;
-			DEST_REG_WRITE_EN = 1;
+			dest_reg_write_en = 1;
 		end
 	endcase
 	/************** END ALU **************/
