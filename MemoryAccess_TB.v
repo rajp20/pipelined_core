@@ -51,11 +51,11 @@ begin: CLOCK_GENERATOR
        clk = 1'b1;
        control_ex = LOAD;
        state = LOAD;
-       result_ex = 16'd10; //result_ex set to decimal 10.
-       reg_data_ex = 16'd10;//reg_data_ex set to decimal 10.
+       result_ex = 16'd12; //result_ex set to decimal 10.
+       reg_data_ex = 16'd13;//reg_data_ex set to decimal 10.
        dest_reg_index_ex = 5'b00000;
        dest_reg_write_en_ex = 1'b1;
-       data_from_memory = 16'd10; 
+       data_from_memory = 16'd14; 
        #5 clk = ~clk;
 		
 end
@@ -69,10 +69,12 @@ begin
 				LOAD: begin
 					control_ex = STORE;
 					state = STORE;
+					result_ex = 16'd10;
 				end
 				STORE: begin
 					control_ex = LOAD;
 					state = LOAD;
+					result_ex = 16'd11;
 				end
 			endcase
 		end	
