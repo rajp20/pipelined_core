@@ -1,3 +1,9 @@
+//////////////////////////////////////////////////////////////////////////////////
+//	Memory Access Module.
+//
+//	UPDATED: Nov. 23, 2019
+//	AUTHOR: Raj Patel, Brandon Ward
+//////////////////////////////////////////////////////////////////////////////////
 module MemoryAccess(input             clk,
 		    input [3:0]       control_ex,
 		    input [15:0]      result_ex,
@@ -30,7 +36,7 @@ module MemoryAccess(input             clk,
 	  begin
 	     address_to_memory = result_ex;
 	  end
-     ends
+     end
    
    always@(posedge clk) 
      begin

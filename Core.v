@@ -1,8 +1,10 @@
 module Core(input              clk,
-            input       [15:0] data_from_memory,
-            output reg  [15:0] address_to_memory,
-            output reg  [15:0] data_to_memory,
-            output reg         data_to_memory_write_en);
+            input       [15:0] data_from_instruction_memory,
+			input       [15:0] data_from_main_memory,
+            output reg  [15:0] address_to_instruction_memory,
+            output reg  [15:0] address_to_main_memory,
+            output reg  [15:0] data_to_main_memory,
+            output reg         data_to_main_memory_write_en);
 
    // Wires & Registers for register file.
    wire [15:0] reg1_data_rf;
@@ -63,8 +65,8 @@ module Core(input              clk,
    InstructionFetch _InstructionFetch(.clk                    		 (clk),
                                       .target_bp              		 (target_bp),
                                       .target_en_bp           		 (target_en_bp),
-                                      .data_from_memory      	 	 (data_from_memory),
-                                      .address_to_memory       		 (address_to_memory),
+                                      .data_from_memory      	 	 (data_from_instruction_memory),
+                                      .address_to_memory       		 (address_to_instruction_memory),
 									  .next_program_counter_if_to_bp (next_program_counter_if_to_bp),
                                       .next_program_counter_if 		 (next_program_counter_if),
                                       .instruction_if         		 (instruction_if));
@@ -104,15 +106,15 @@ module Core(input              clk,
                     .LF                (LF_ex));
    
    MemoryAccess _MemoryAccess(.clk                      (clk),
-			      .control_ex               (control_ex),
-			      .result_ex                (result_ex),
+			      			  .control_ex               (control_ex),
+			      			  .result_ex                (result_ex),
                               .reg_data_ex              (reg_data_ex),
                               .dest_reg_index_ex        (dest_reg_index_ex),
                               .dest_reg_write_en_ex     (des_reg_write_en_ex),
-                              .address_to_memory        (address_to_memory),
-                              .data_from_memory         (data_from_memory),
-                              .data_to_memory           (data_to_memory),
-                              .data_to_memory_write_en  (data_to_memory_write_en),
+                              .address_to_memory        (address_to_main_memory),
+                              .data_from_memory         (data_from_main_memory),
+                              .data_to_memory           (data_to_main_memory),
+                              .data_to_memory_write_en  (data_to_main_memory_write_en),
                               .dest_reg_index_ma        (dest_reg_index_ma),
                               .dest_reg_write_en_ma     (dest_reg_write_en_ma),
                               .result_ma                (result_ma),
