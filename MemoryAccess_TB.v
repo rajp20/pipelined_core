@@ -43,7 +43,7 @@ MemoryAccess matb (
 
 //Parameters for load and store to initalize control execuction.
 parameter LOAD   = 4'b1100;
-	parameter STORE  = 4'b1110;
+parameter STORE  = 4'b1110;
 
 
 initial
