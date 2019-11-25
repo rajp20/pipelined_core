@@ -83,7 +83,7 @@ begin
 	/************** BEGIN ALU **************/
 	case(control_in)
 		NOP: begin
-
+			result = 0;
 		end
 		SUB: begin
 			result = reg1_data - reg2_data;
