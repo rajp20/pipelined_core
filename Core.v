@@ -1,4 +1,4 @@
-rmodule Core(input              clk,
+module Core(input              clk,
             input  [15:0] data_from_instruction_memory,
 			input  [15:0] data_from_main_memory,
             output [15:0] address_to_instruction_memory,
