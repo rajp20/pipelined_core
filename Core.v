@@ -1,4 +1,5 @@
-module Core(input              clk,
+module Core(input         clk,
+			input         reset,
             input  [15:0] data_from_instruction_memory,
 			input  [15:0] data_from_main_memory,
             output [15:0] address_to_instruction_memory,
@@ -63,6 +64,7 @@ module Core(input              clk,
                               .write_data   (write_data_rf));
    
    InstructionFetch _InstructionFetch(.clk                    		 (clk),
+									  .reset						 (reset),
                                       .target_bp              		 (target_bp),
                                       .target_en_bp           		 (target_en_bp),
                                       .data_from_memory      	 	 (data_from_instruction_memory),

@@ -2,6 +2,7 @@ module Core_TB;
 
 	// Inputs
 	reg 	 	clk;
+	reg			reset;
 	wire [15:0] data_from_instruction_memory;
 	wire [15:0] data_from_main_memory;
 	
@@ -18,6 +19,7 @@ module Core_TB;
 	assign data_from_main_memory = main_memory[address_to_main_memory];
 
 	Core _Core(.clk                    		  (clk),
+			   .reset						  (reset),
 			   .data_from_instruction_memory  (data_from_instruction_memory),
 			   .data_from_main_memory         (data_from_main_memory),
 			   .address_to_instruction_memory (address_to_instruction_memory),
@@ -28,7 +30,8 @@ module Core_TB;
 	initial begin
 		$readmemb("pipelined_core/InstructionMemory.data", instruction_memory);
 		$readmemb("pipelined_core/MainMemory.data", main_memory);
-		clk = 0;		
+		clk = 0;	
+		reset = 1;	
 	end
 
 	always begin
@@ -37,6 +40,7 @@ module Core_TB;
 
 	always begin
 		#1;
+		reset = 0;
 		if (data_to_main_memory_write_en) begin
 			$display("Write En: %b, Address: %b, Data: %b", data_to_main_memory_write_en, address_to_main_memory, data_to_main_memory);
 		end
