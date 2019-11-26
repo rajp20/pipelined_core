@@ -48,7 +48,7 @@ module RegisterFile(input             clk,
    	reg [15:0] r31;
 
 
-	always@*
+	always@(*)
 	begin
 	   case(reg1_index)
 	     0 :   reg1_data = r0;

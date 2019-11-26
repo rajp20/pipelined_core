@@ -3,7 +3,7 @@ module RegisterWriteBack(input              clk,
                          input              dest_reg_write_en_ma,
                          input [15:0]       result_ma,
                          input [15:0]       data_ma,
-                         input [4:0]        control_ma,
+                         input [3:0]        control_ma,
                          output reg [4:0]   write_index_rf,
                          output reg [15:0]  write_data_rf,
                          output reg         write_en_rf);  
