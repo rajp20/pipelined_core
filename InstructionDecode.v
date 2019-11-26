@@ -18,7 +18,7 @@ module InstructionDecode(input             clk,
    parameter NOP = 4'b0000;
 
    reg [3:0] next_control;
-   initial next_control = NOP;
+   //initial next_control = NOP;
 
    assign opcode_id = next_control;
    assign target_address_id = {{4{1'b0}}, instruction_if[11:0]};
