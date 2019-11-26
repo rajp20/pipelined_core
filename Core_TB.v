@@ -34,9 +34,14 @@ module Core_TB;
 	always begin
 		#10 clk = ~clk;
 	end
-	
+
 	always begin
-		
+		#1;
+		if (data_to_main_memory_write_en) begin
+			$display("Write En: %b, Address: %b, Data: %b", data_to_main_memory_write_en, address_to_main_memory, data_to_main_memory);
+		end
+		main_memory[address_to_main_memory] = data_to_main_memory_write_en ? data_to_main_memory : main_memory[address_to_main_memory];
 	end
+
 
 endmodule

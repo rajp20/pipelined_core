@@ -1,57 +1,57 @@
-module Core(input              clk,
-            input       [15:0] data_from_instruction_memory,
-			input       [15:0] data_from_main_memory,
-            output reg  [15:0] address_to_instruction_memory,
-            output reg  [15:0] address_to_main_memory,
-            output reg  [15:0] data_to_main_memory,
-            output reg         data_to_main_memory_write_en);
+rmodule Core(input              clk,
+            input  [15:0] data_from_instruction_memory,
+			input  [15:0] data_from_main_memory,
+            output [15:0] address_to_instruction_memory,
+            output [15:0] address_to_main_memory,
+            output [15:0] data_to_main_memory,
+            output        data_to_main_memory_write_en);
 
    // Wires & Registers for register file.
    wire [15:0] reg1_data_rf;
    wire [15:0] reg2_data_rf;
-   reg [4:0]   reg1_index_rf;
-   reg [4:0]   reg2_index_rf;
-   reg [4:0]   write_index_rf;
-   reg [15:0]  write_data_rf;
-   reg         write_en_rf;
+   wire [4:0]  reg1_index_rf;
+   wire [4:0]  reg2_index_rf;
+   wire [4:0]  write_index_rf;
+   wire [15:0] write_data_rf;
+   wire        write_en_rf;
    
    // Registers for Branch Predictor
-   reg [15:0]  target_bp;
-   reg         target_en_bp;
-   reg         branch_prediction_bp;
+   wire [15:0] target_bp;
+   wire        target_en_bp;
+   wire        branch_prediction_bp;
    
    // Registers for Fetch Stage
-   reg [15:0]  next_program_counter_if;
-   reg [15:0]  instruction_if;
-   wire [15:0] next_program_counter_if_to_br;
+   wire [15:0] next_program_counter_if;
+   wire [15:0] instruction_if;
+   wire [15:0] next_program_counter_if_to_bp;
    
    // Registers for Decode Stage
-   reg [15:0]  next_program_counter_id;
-   reg [15:0]  reg1_data_id;
-   reg [15:0]  reg2_data_id;
-   reg [4:0]   dest_reg_index_id;
-   reg [6:0]   immediate_id;
-   reg [3:0]   control_id;
+   wire [15:0] next_program_counter_id;
+   wire [15:0] reg1_data_id;
+   wire [15:0] reg2_data_id;
+   wire [4:0]  dest_reg_index_id;
+   wire [6:0]  immediate_id;
+   wire [3:0]  control_id;
    wire [3:0]  opcode_id;
-   wire [15:4] target_address_id;
+   wire [15:0] target_address_id;
    
    // Registers for Execution Stage
-   reg [15:0]  reg_data_ex;
-   reg [15:0]  result_ex;
-   reg [15:0]  target_ex;
-   reg [4:0]   dest_reg_index_ex;
-   reg         des_reg_write_en_ex;
-   reg [3:0]   control_ex;
-   reg         ZF_ex;
-   reg         GF_ex;
-   reg         LF_ex;
+   wire [15:0] reg_data_ex;
+   wire [15:0] result_ex;
+   wire [15:0] target_ex;
+   wire [4:0]  dest_reg_index_ex;
+   wire        des_reg_write_en_ex;
+   wire [3:0]  control_ex;
+   wire        ZF_ex;
+   wire        GF_ex;
+   wire        LF_ex;
    
    // Registers for Memory Access Stage.
-   reg [4:0]   dest_reg_index_ma;
-   reg         dest_reg_write_en_ma;
-   reg [15:0]  result_ma;
-   reg [15:0]  data_ma;
-   reg [3:0]   control_ma;
+   wire [4:0]  dest_reg_index_ma;
+   wire        dest_reg_write_en_ma;
+   wire [15:0] result_ma;
+   wire [15:0] data_ma;
+   wire [3:0]  control_ma;
    
    RegisterFile _RegisterFile(.clk          (clk),
                               .reg1_data    (reg1_data_rf),
@@ -96,7 +96,7 @@ module Core(input              clk,
                     .dest_index_in     (dest_reg_index_id),
                     .immediate         (immediate_id),
                     .dest_index_out    (dest_reg_index_ex),
-                    .ouput_reg         (reg_data_ex),
+                    .output_reg         (reg_data_ex),
                     .result_out        (result_ex),
                     .target            (target_ex),
                     .control_out       (control_ex),

@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module Execute(
 	input clk,
-	input [4:0] control_in,
+	input [3:0] control_in,
 	input [15:0] reg1_data,
 	input [15:0] reg2_data,
 	input [15:0] npc,
@@ -18,7 +18,7 @@ module Execute(
 	output reg [15:0] output_reg,
 	output reg [15:0] result_out,
 	output reg [15:0] target,
-	output reg [4:0] control_out,
+	output reg [3:0] control_out,
 	output reg DEST_REG_WRITE_EN, //Not sure if we want this to be a reg or output reg
 	output reg ZF,
 	output reg GF,
@@ -99,7 +99,7 @@ begin
 			dest_reg_write_en = 1;
 		end
 		ADDI: begin
-			result = reg1_data + {9'b0, immediate};
+			result = reg2_data + {9'b0, immediate};
 			ZF_next = (result == 16'b0) ? 1 : 0;
 			dest_reg_write_en = 1;
 		end
