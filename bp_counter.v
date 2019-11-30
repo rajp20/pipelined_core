@@ -11,13 +11,15 @@ module bp_counter(out, clk, actual, enable, rst);
 	parameter s_STRONG_TAKEN = 2'b11;
 
 	//Behaviorial Description
-	always @(negedge clk, posedge rst)
-	begin
+	always @(posedge rst) begin
 		if (rst)
 		begin
 			r_SM <= s_WEAK_NTAKEN;
 		end
+	end
 
+	always @(negedge clk)
+	begin
 		if (enable) begin
 			case (r_SM)
 				s_STRONG_NTAKEN:

@@ -9,8 +9,10 @@ module btb_tb;
 	wire lflag;
 	wire table_hit;
 	wire [15:0] b_target;
+	wire insert_nop;
 
 	btb U1 (
+		.r_nop(insert_nop),
 		.clk (clk),
 		.rst(rst),
 		.fetch_pc(fetch_pc),

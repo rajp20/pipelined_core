@@ -1,4 +1,4 @@
-module btb_entry (hit, prediction, out_target, empty, clk, enable, op, pc, in_pc, in_target);
+module btb_entry (hit, insert_bubble, update_hit, prediction, out_target, empty, clk, enable, op, pc, in_pc, in_target);
 	input clk, enable;
 	input [2:0] op;
 	input [15:0] pc;
@@ -6,9 +6,11 @@ module btb_entry (hit, prediction, out_target, empty, clk, enable, op, pc, in_pc
 	input [15:0] in_target;
 
 	output wire hit;
+	output wire update_hit;
 	output wire prediction;
 	output wire [15:0] out_target;
 	output wire empty;
+	output wire insert_bubble;
 
 	wire write;
 	wire outcome;
@@ -22,34 +24,38 @@ module btb_entry (hit, prediction, out_target, empty, clk, enable, op, pc, in_pc
 	//2-BIT PREDICTOR
 	bp_counter U1 (
 		.clk(clk),
-		.enable (write),
+		.enable (enable),
 		.actual (outcome),
 		.rst (rst),
 		.out (prediction));
 
 	//PARAMETERS
 	parameter op_IDLE = 3'b000;
-	parameter op_CLEAR = 3'b001;
-	parameter op_LOOKUP = 3'b100;
+	parameter op_CLEAR = 3'b111;
+	parameter op_LOOKUP = 3'bxxx;
 	parameter op_VERIFY_FALLTHROUGH = 3'b010;
 	parameter op_VERIFY_TARGET = 3'b011;
-	parameter op_INSERT_FALLTHROUGH = 3'b110;
-	parameter op_INSERT_TARGET = 3'b111;
+	parameter op_INSERT_FALLTHROUGH = 3'b100;
+	parameter op_INSERT_TARGET = 3'b101;
 
 	assign out_target = btb_target;
 	assign hit = (pc[15:5]==btb_ins_pc)&valid_flag;
+	assign update_hit = (in_pc == btb_ins_pc)&valid_flag;
 	assign write = op[1]&valid_flag;
-	assign rst = (enable & (op == op_INSERT_FALLTHROUGH)|(op == op_INSERT_TARGET))|(op == op_CLEAR);
+	assign rst = (enable & ((op == op_INSERT_FALLTHROUGH)|(op == op_INSERT_TARGET)))|(op == op_CLEAR);
 	assign outcome = op[0];
 	assign empty = ~valid_flag;
+	assign insert_bubble = update_hit&(outcome ^ prediction);
 
-	always @(negedge clk, rst) begin
+	always @(rst) begin
 		if (rst) begin
 			btb_ins_pc <={11{1'b0}};
 			btb_target <= {16{1'b0}};
 			valid_flag <= 0;
 		end
-
+	end
+	
+	always @(negedge clk) begin
 		if (enable) begin
 			case (op)
 				op_CLEAR: begin
