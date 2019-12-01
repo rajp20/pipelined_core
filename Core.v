@@ -1,11 +1,11 @@
 module Core(input         clk,
-			input         reset,
-            input  [15:0] data_from_instruction_memory,
-			input  [15:0] data_from_main_memory,
+	    input 	  reset,
+            input [15:0]  data_from_instruction_memory,
+	    input [15:0]  data_from_main_memory,
             output [15:0] address_to_instruction_memory,
             output [15:0] address_to_main_memory,
             output [15:0] data_to_main_memory,
-            output        data_to_main_memory_write_en);
+            output 	  data_to_main_memory_write_en);
 
    // Wires & Registers for register file.
    wire [15:0] reg1_data_rf;
@@ -64,12 +64,12 @@ module Core(input         clk,
                               .write_data   (write_data_rf));
    
    InstructionFetch _InstructionFetch(.clk                    		 (clk),
-									  .reset						 (reset),
+				      .reset				 (reset),
                                       .target_bp              		 (target_bp),
                                       .target_en_bp           		 (target_en_bp),
                                       .data_from_memory      	 	 (data_from_instruction_memory),
                                       .address_to_memory       		 (address_to_instruction_memory),
-									  .next_program_counter_if_to_bp (next_program_counter_if_to_bp),
+				      .next_program_counter_if_to_bp     (next_program_counter_if_to_bp),
                                       .next_program_counter_if 		 (next_program_counter_if),
                                       .instruction_if         		 (instruction_if));
    
@@ -98,7 +98,7 @@ module Core(input         clk,
                     .dest_index_in     (dest_reg_index_id),
                     .immediate         (immediate_id),
                     .dest_index_out    (dest_reg_index_ex),
-                    .output_reg         (reg_data_ex),
+                    .output_reg        (reg_data_ex),
                     .result_out        (result_ex),
                     .target            (target_ex),
                     .control_out       (control_ex),
@@ -132,5 +132,18 @@ module Core(input         clk,
                                         .write_index_rf         (write_index_rf),
                                         .write_data_rf          (write_data_rf),
                                         .write_en_rf            (write_en_rf));
+
+   btb _btb(.clk            (clk)
+	    .rst            (reset)
+	    .fetch_PC       (next_program_counter_if_to_bp)
+	    .ex_pc          (target_ex)
+	    .ex_opcode      (opcode_id)
+	    .target_entry   (target_address_id)
+	    .lflag          (LF_ex)
+	    .gflag          (GF_ex)
+	    .zflag          (ZF_ex)
+	    .btb_target     (target_bp)
+	    .btb_prediction (target_en_bp)
+	    .r_nop          (branch_prediction_bp));  
    
 endmodule
