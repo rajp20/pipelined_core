@@ -1,0 +1,97 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : Core
+Version: K-2015.06-SP5-6
+Date   : Sun Dec  1 17:48:45 2019
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: PVT_1P8V_25C   Library: sclib_tsmc180_ss
+Wire Load Model Mode: top
+
+  Startpoint: _btb/btb_prediction_reg
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: _btb/next_target_reg[0]
+            (rising edge-triggered flip-flop clocked by clk')
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  _btb/btb_prediction_reg/CLK (DFFQX1)                    0.00 #     0.00 r
+  _btb/btb_prediction_reg/Q (DFFQX1)                      0.16       0.16 f
+  _btb/btb_prediction (btb)                               0.00       0.16 f
+  _InstructionFetch/target_en_bp (InstructionFetch)       0.00       0.16 f
+  _InstructionFetch/U75/Z (BUFX1)                         0.23       0.39 f
+  _InstructionFetch/U51/Z (NAND2X1)                       0.15       0.54 r
+  _InstructionFetch/U48/Z (NAND2X1)                       0.13       0.67 f
+  _InstructionFetch/add_30/A[0] (InstructionFetch_DW01_inc_0)
+                                                          0.00       0.67 f
+  _InstructionFetch/add_30/U38/Z (NAND3X1)                0.16       0.83 r
+  _InstructionFetch/add_30/U10/Z (INVX4)                  0.07       0.90 f
+  _InstructionFetch/add_30/U37/Z (NAND3X1)                0.12       1.02 r
+  _InstructionFetch/add_30/U8/Z (INVX2)                   0.06       1.08 f
+  _InstructionFetch/add_30/U36/Z (NAND3X1)                0.12       1.20 r
+  _InstructionFetch/add_30/U5/Z (INVX2)                   0.06       1.25 f
+  _InstructionFetch/add_30/U35/Z (NAND3X1)                0.13       1.38 r
+  _InstructionFetch/add_30/U9/Z (INVX4)                   0.06       1.44 f
+  _InstructionFetch/add_30/U32/Z (NAND3X1)                0.09       1.53 r
+  _InstructionFetch/add_30/U6/Z (INVX2)                   0.06       1.59 f
+  _InstructionFetch/add_30/U27/Z (NAND3X1)                0.17       1.77 r
+  _InstructionFetch/add_30/U25/Z (NOR2X1)                 0.15       1.92 f
+  _InstructionFetch/add_30/U23/Z (AND2X1)                 0.16       2.09 f
+  _InstructionFetch/add_30/U22/Z (XOR2X1)                 0.19       2.27 f
+  _InstructionFetch/add_30/SUM[15] (InstructionFetch_DW01_inc_0)
+                                                          0.00       2.27 f
+  _InstructionFetch/U74/Z (INVX4)                         0.05       2.32 r
+  _InstructionFetch/U53/Z (INVX4)                         0.06       2.38 f
+  _InstructionFetch/next_program_counter_if_to_bp[15] (InstructionFetch)
+                                                          0.00       2.38 f
+  _btb/fetch_pc[15] (btb)                                 0.00       2.38 f
+  _btb/W1/current_pc[15] (btb_way_3)                      0.00       2.38 f
+  _btb/W1/U11/Z (INVX2)                                   0.07       2.45 r
+  _btb/W1/U9/Z (INVX2)                                    0.22       2.67 f
+  _btb/W1/U1282/Z (NOR2X1)                                0.12       2.78 r
+  _btb/W1/U1279/Z (AND2X1)                                0.09       2.88 r
+  _btb/W1/U1278/Z (NAND3X1)                               0.08       2.95 f
+  _btb/W1/U178/Z (INVX2)                                  0.07       3.02 r
+  _btb/W1/U1235/Z (NAND3X1)                               0.05       3.07 f
+  _btb/W1/U175/Z (INVX2)                                  0.11       3.19 r
+  _btb/W1/U7/Z (AND2X1)                                   0.27       3.46 r
+  _btb/W1/U1212/Z (NAND2X1)                               0.07       3.53 f
+  _btb/W1/U1209/Z (AND2X1)                                0.10       3.63 f
+  _btb/W1/U1208/Z (NAND3X1)                               0.11       3.74 r
+  _btb/W1/U1197/Z (NOR2X1)                                0.09       3.83 f
+  _btb/W1/U1175/Z (AND2X1)                                0.10       3.92 f
+  _btb/W1/U1174/Z (NAND3X1)                               0.16       4.09 r
+  _btb/W1/way_hit (btb_way_3)                             0.00       4.09 r
+  _btb/U328/Z (NOR2X1)                                    0.08       4.17 f
+  _btb/U327/Z (NAND3X1)                                   0.15       4.32 r
+  _btb/U304/Z (NOR2X1)                                    0.13       4.45 f
+  _btb/U23/Z (BUFX1)                                      0.16       4.61 f
+  _btb/U303/Z (NAND2X1)                                   0.10       4.71 r
+  _btb/U302/Z (AND2X1)                                    0.10       4.81 r
+  _btb/U276/Z (NAND3X1)                                   0.08       4.88 f
+  _btb/next_target_reg[0]/D (DFFQX1)                      0.00       4.88 f
+  data arrival time                                                  4.88
+
+  clock clk' (rise edge)                                  5.00       5.00
+  clock network delay (ideal)                             0.00       5.00
+  _btb/next_target_reg[0]/CLK (DFFQX1)                    0.00       5.00 r
+  library setup time                                     -0.11       4.89
+  data required time                                                 4.89
+  --------------------------------------------------------------------------
+  data required time                                                 4.89
+  data arrival time                                                 -4.88
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1

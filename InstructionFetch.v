@@ -18,13 +18,11 @@ module InstructionFetch(input 		      clk,
 
    assign next_program_counter_if_to_bp = NPC;
 
-   always@(posedge reset)
-	 begin
-		NPC = 0;
-	 end
-
    always@(*)
-     begin        
+     begin
+		if (reset) 
+		  NPC = 0;    
+
         MUX_OUT = NPC;	
     	if (target_en_bp)
     	  MUX_OUT = target_bp;

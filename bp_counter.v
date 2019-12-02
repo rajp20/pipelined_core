@@ -3,20 +3,13 @@ module bp_counter(out, clk, actual, enable, rst);
 	output out;
 
 	//PREDICTOR STATE
-	reg [1:0] r_SM;	
+   reg [1:0] r_SM;
 	//State Parameters
 	parameter s_STRONG_NTAKEN = 2'b00;
 	parameter s_WEAK_NTAKEN = 2'b01;
 	parameter s_WEAK_TAKEN = 2'b10;
 	parameter s_STRONG_TAKEN = 2'b11;
 
-	//Behaviorial Description
-	always @(posedge rst) begin
-		if (rst)
-		begin
-			r_SM <= s_WEAK_NTAKEN;
-		end
-	end
 
 	always @(negedge clk)
 	begin
@@ -39,6 +32,11 @@ module bp_counter(out, clk, actual, enable, rst);
 					r_SM <= (actual == 1) ? s_STRONG_TAKEN : s_WEAK_TAKEN;
 				end
 			endcase
+		end
+
+       if (rst)
+		begin
+			r_SM <= s_WEAK_NTAKEN;
 		end
 	end
 

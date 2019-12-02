@@ -22,6 +22,7 @@ module btb(r_nop, btb_target, btb_prediction, clk, rst, fetch_pc, ex_pc, ex_opco
 	wire [3:0] update;
 	wire [3:0] prediction;
 	wire [63:0] bubble_target;
+   	wire [15:0] next_bubble_target;
 	wire [63:0] target;
 	wire [3:0] empty;
 	wire [3:0] entry_en;
@@ -67,25 +68,28 @@ module btb(r_nop, btb_target, btb_prediction, clk, rst, fetch_pc, ex_pc, ex_opco
 
 	always @(r_DEC_HIT) begin
 		r_NEXT_EX_HIT <= r_DEC_HIT;
-	end
-
-	always @(posedge rst) begin
-		btb_target = 16'd0;
-		btb_prediction = 1'b0;
-		r_DEC_HIT = 4'd0;
-		r_NEXT_EX_HIT = 4'd0;
-		r_EX_HIT = 4'd0;
+       if (rst)
+         r_NEXT_EX_HIT <= 4'd0;
 	end
 	
 	always @(posedge clk) begin
-		btb_prediction <= next_prediction;
-		btb_target <= next_target;
-		r_nop <= next_nop;
+	   btb_prediction <= next_prediction;
+	   btb_target <= next_target;
+	   r_nop <= next_nop;
+       if (rst) begin
+          btb_target <= 16'd0;
+          btb_prediction <= 1'b0;
+       end
 	end
 
 	always @(negedge clk) begin
 		r_EX_HIT <= r_NEXT_EX_HIT;
-		next_nop <= 1'b0;
+
+       if (rst) begin
+		  r_EX_HIT <= 4'd0;
+          r_DEC_HIT <= 4'd0;
+       end
+	   next_nop <= 1'b0;
 
 		if (|insert_bubble) begin
 			next_nop <= 1'b1;

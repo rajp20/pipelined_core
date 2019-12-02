@@ -47,14 +47,6 @@ module btb_entry (hit, insert_bubble, update_hit, prediction, out_target, empty,
 	assign empty = ~valid_flag;
 	assign insert_bubble = update_hit&(outcome ^ prediction);
 
-	always @(rst) begin
-		if (rst) begin
-			btb_ins_pc <={11{1'b0}};
-			btb_target <= {16{1'b0}};
-			valid_flag <= 0;
-		end
-	end
-	
 	always @(negedge clk) begin
 		if (enable) begin
 			case (op)
@@ -66,7 +58,7 @@ module btb_entry (hit, insert_bubble, update_hit, prediction, out_target, empty,
 				op_INSERT_FALLTHROUGH: begin
 					btb_ins_pc <= in_pc;
 					btb_target <= in_target;
-					valid_flag <= 1'b1;	
+					valid_flag <= 1'b1;
 				end
 				op_INSERT_TARGET: begin
 					btb_ins_pc <= in_pc;
@@ -79,6 +71,12 @@ module btb_entry (hit, insert_bubble, update_hit, prediction, out_target, empty,
 					btb_target <= btb_target;
 				end
 			endcase
+		end // if (enable)
+
+       if (rst) begin
+		  btb_ins_pc <={11{1'b0}};
+		  btb_target <= {16{1'b0}};
+		  valid_flag <= 0;
 		end
 	end
 

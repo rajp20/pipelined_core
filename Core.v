@@ -133,17 +133,17 @@ module Core(input         clk,
                                         .write_data_rf          (write_data_rf),
                                         .write_en_rf            (write_en_rf));
 
-   btb _btb(.clk            (clk)
-	    .rst            (reset)
-	    .fetch_PC       (next_program_counter_if_to_bp)
-	    .ex_pc          (target_ex)
-	    .ex_opcode      (opcode_id)
-	    .target_entry   (target_address_id)
-	    .lflag          (LF_ex)
-	    .gflag          (GF_ex)
-	    .zflag          (ZF_ex)
-	    .btb_target     (target_bp)
-	    .btb_prediction (target_en_bp)
+   btb _btb(.clk            (clk),
+	    .rst            (reset),
+	    .fetch_pc       (next_program_counter_if_to_bp),
+	    .ex_pc          (target_ex),
+	    .ex_opcode      (opcode_id),
+	    .target_entry   (target_address_id),
+	    .lflag          (LF_ex),
+	    .gflag          (GF_ex),
+	    .zflag          (ZF_ex),
+	    .btb_target     (target_bp),
+	    .btb_prediction (target_en_bp),
 	    .r_nop          (branch_prediction_bp));  
    
 endmodule
