@@ -2,8 +2,8 @@ module Core(input         clk,
 	    input 	  reset,
             input [15:0]  data_from_instruction_memory,
 	    input [15:0]  data_from_main_memory,
-            output [15:0] address_to_instruction_memory,
-            output [15:0] address_to_main_memory,
+            output [3:0] address_to_instruction_memory,
+            output [3:0] address_to_main_memory,
             output [15:0] data_to_main_memory,
             output 	  data_to_main_memory_write_en);
 

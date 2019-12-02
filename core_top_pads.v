@@ -1,5 +1,5 @@
 `include "/research/ece/lnis-teaching/5710_6710/Lab_files/HDL/padlib_tsmc180_innovus.v"
-`include "/HDL/GATE/core_mapped.v"
+`include "/home/brward/vlsi/pipelined_core/HDL/GATE/core_mapped.v"
 
 module core_top_pads (clk,
 					  rst,
@@ -13,9 +13,15 @@ input clk, rst;
 input [15:0] data_from_inst_memory;
 input [15:0] data_from_main_memory;
 output data_to_main_mem_write_en;
-output [4:0] address_to_main_mem;
-output [4:0] address_to_inst_mem;
+output [3:0] address_to_main_mem;
+output [3:0] address_to_inst_mem;
 output [15:0] data_to_main_mem;
+
+wire [15:0] data_from_inst_memory_pad;
+wire [15:0] data_from_main_memory_pad;
+wire [3:0] address_to_main_mem_pad;
+wire [3:0] address_to_inst_mem_pad;
+wire [15:0] data_to_main_mem_pad;
 
 //***************INPUTS*************************//
 

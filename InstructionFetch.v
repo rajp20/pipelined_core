@@ -4,7 +4,7 @@ module InstructionFetch(input 		      clk,
                         input [15:0] 	  data_from_memory,
 						input 			  reset,
 						output [15:0]	  next_program_counter_if_to_bp,
-                        output reg [15:0] address_to_memory,
+                        output reg [3:0] address_to_memory,
                         output reg [15:0] next_program_counter_if,
                         output reg [15:0] instruction_if);
 

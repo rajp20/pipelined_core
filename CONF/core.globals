@@ -11,7 +11,8 @@
 
 set init_gnd_net VSS
 set init_pwr_net VDD
-#set init_top_cell mips
-#set init_verilog {../HDL/GATE/core_mapped.v}
+set init_top_cell core_top_pads
+set init_verilog {../HDL/GATE/core_mapped.v}
+create_constraint_mode -name constraint -sdc_files {core_mapped.sdc}
 set init_lef_file {/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/tech.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/sclib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/padlib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4.vclef}
 set init_mmmc_file {core.view}
