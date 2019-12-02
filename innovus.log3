@@ -1,0 +1,599 @@
+
+Cadence Innovus(TM) Implementation System.
+Copyright 2017 Cadence Design Systems, Inc. All rights reserved worldwide.
+
+Version:	v17.11-s080_1, built Fri Aug 4 11:13:11 PDT 2017
+Options:	
+Date:		Mon Dec  2 14:35:55 2019
+Host:		lab1-10.eng.utah.edu (x86_64 w/Linux 3.10.0-1062.7.1.el7.x86_64) (4cores*8cpus*Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz 8192KB)
+OS:		Red Hat Enterprise Linux Server release 7.7 (Maipo)
+
+License:
+		invs	Innovus Implementation System	17.1	checkout succeeded
+		8 CPU jobs allowed with the current license(s). Use setMultiCpuUsage to set your required CPU count.
+Change the soft stacksize limit to 0.2%RAM (64 mbytes). Set global soft_stack_size_limit to change the value.
+
+**INFO:  MMMC transition support version v31-84 
+
+<CMD> set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+<CMD> suppressMessage ENCEXT-2799
+<CMD> getDrawView
+<CMD> loadWorkspace -name Physical
+<CMD> win
+<CMD> set init_design_uniquify 1
+<CMD> set init_gnd_net VSS
+<CMD> set init_pwr_net VDD
+<CMD> set init_top_cell core_top_pads
+<CMD> set init_verilog HDL/GATE/Core_mapped.v
+<CMD> set init_verilog HDL/RTL/core_top_pads.v
+<CMD> create_constraint_mode -name constraint -sdc_files {SDC/Core_mapped.sdc}
+<CMD> set init_lef_file {/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/tech.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/sclib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/padlib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4.vclef}
+<CMD> set init_mmmc_file CONF/core.view
+<CMD> init_design
+#% Begin Load MMMC data ... (date=12/02 14:36:29, mem=452.6M)
+#% End Load MMMC data ... (date=12/02 14:36:29, total cpu=0:00:00.0, real=0:00:00.0, peak res=452.7M, current mem=452.7M)
+wc bc
+
+Loading LEF file /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/tech.lef ...
+
+Loading LEF file /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/sclib_tsmc180.lef ...
+Set DBUPerIGU to M2 pitch 1120.
+
+Loading LEF file /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/padlib_tsmc180.lef ...
+
+Loading LEF file /research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4.vclef ...
+WARNING (LEFPARS-2007): NAMESCASESENSITIVE statement is obsolete in version 5.6 and later.
+The LEF parser will ignore this statement.
+To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4.vclef at line 12.
+WARNING (LEFPARS-2001): No VERSION statement found, using the default value 5.8. See file /research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4.vclef at line 902.
+**WARN: (IMPLF-200):	Pin 'A[0]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'A[1]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'A[2]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'CEN' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'CLK' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'D[0]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'D[1]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'D[2]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'D[3]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'D[4]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'D[5]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'D[6]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'D[7]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-201):	Pin 'Q[0]' in macro 'rfsphs8x8m1wm4' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Q[1]' in macro 'rfsphs8x8m1wm4' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Q[2]' in macro 'rfsphs8x8m1wm4' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Q[3]' in macro 'rfsphs8x8m1wm4' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Q[4]' in macro 'rfsphs8x8m1wm4' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Q[5]' in macro 'rfsphs8x8m1wm4' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Q[6]' in macro 'rfsphs8x8m1wm4' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Q[7]' in macro 'rfsphs8x8m1wm4' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-200):	Pin 'WEN[0]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'WEN[1]' in macro 'rfsphs8x8m1wm4' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'DataOut' in macro 'pad_out' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-201):	Pin 'pad' in macro 'pad_out' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-200):	Pin 'pad' in macro 'pad_out' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-201):	Pin 'DataIn' in macro 'pad_in' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'pad' in macro 'pad_in' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-200):	Pin 'pad' in macro 'pad_in' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-201):	Pin 'DataIn' in macro 'pad_bidirhe' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-200):	Pin 'DataOut' in macro 'pad_bidirhe' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-200):	Pin 'EN' in macro 'pad_bidirhe' has no ANTENNAGATEAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-200' for more detail.
+**WARN: (IMPLF-201):	Pin 'pad' in macro 'pad_bidirhe' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (EMS-27):	Message (IMPLF-200) has exceeded the current message display limit of 20.
+To increase the message display limit, refer to the product command reference manual.
+**WARN: (IMPLF-201):	Pin 'Z' in macro 'XOR2X1' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Z' in macro 'TIE1' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Z' in macro 'TIE0' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Z' in macro 'OR2X1' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Z' in macro 'NOR2X1' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Z' in macro 'NAND3X1' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (IMPLF-201):	Pin 'Z' in macro 'NAND2X1' has no ANTENNADIFFAREA value defined. The library data is incomplete and some process antenna rules will not be checked correctly.
+Type 'man IMPLF-201' for more detail.
+**WARN: (EMS-27):	Message (IMPLF-201) has exceeded the current message display limit of 20.
+To increase the message display limit, refer to the product command reference manual.
+
+viaInitial starts at Mon Dec  2 14:36:29 2019
+viaInitial ends at Mon Dec  2 14:36:29 2019
+Loading view definition file from CONF/core.view
+Reading wc timing library '/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib' ...
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'AND2X1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'BUFX1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'QB' of cell 'DFFQBX1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Q' of cell 'DFFQQBX1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'QB' of cell 'DFFQQBX1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Q' of cell 'DFFQSRX1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Q' of cell 'DFFQX1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'INVX1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'INVX16' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'INVX2' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'INVX32' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'INVX4' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'INVX8' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'MUX2X1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'NAND2X1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'NAND3X1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'NOR2X1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'OR2X1' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_capacitance' on 'output/inout' pin 'Z' of cell 'TIE0' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-436):	Attribute 'max_fanout' on 'output/inout' pin 'Z' of cell 'TIE0' is not defined in the library. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+Message <TECHLIB-436> has exceeded the message display limit of '20'. Use 'set_message -no_limit -id list_of_msgIDs' to reset the message limit.
+**WARN: (TECHLIB-302):	No function defined for cell 'ANTENNA'. The cell will only be used for analysis. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.lib)
+Read 21 cells in library 'sclib_tsmc180_ss' 
+Reading wc timing library '/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/padlib_tsmc180_ss_nldm.lib' ...
+**WARN: (TECHLIB-302):	No function defined for cell 'pad_vdd'. The cell will only be used for analysis. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/padlib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-302):	No function defined for cell 'pad_gnd'. The cell will only be used for analysis. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/padlib_tsmc180_ss_nldm.lib)
+**WARN: (TECHLIB-302):	No function defined for cell 'pad_ana'. The cell will only be used for analysis. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/padlib_tsmc180_ss_nldm.lib)
+Read 6 cells in library 'padlib_tsmc180_ss' 
+Reading wc timing library '/research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4_slow_syn.lib' ...
+Read 1 cells in library 'USERLIB' 
+Reading bc timing library '/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ff_nldm.lib' ...
+**WARN: (TECHLIB-302):	No function defined for cell 'ANTENNA'. The cell will only be used for analysis. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ff_nldm.lib)
+Read 21 cells in library 'sclib_tsmc180_ff' 
+Reading bc timing library '/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/padlib_tsmc180_ff_nldm.lib' ...
+**WARN: (TECHLIB-302):	No function defined for cell 'pad_vdd'. The cell will only be used for analysis. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/padlib_tsmc180_ff_nldm.lib)
+**WARN: (TECHLIB-302):	No function defined for cell 'pad_gnd'. The cell will only be used for analysis. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/padlib_tsmc180_ff_nldm.lib)
+**WARN: (TECHLIB-302):	No function defined for cell 'pad_ana'. The cell will only be used for analysis. (File /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/padlib_tsmc180_ff_nldm.lib)
+Read 6 cells in library 'padlib_tsmc180_ff' 
+Reading bc timing library '/research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4_fast@-40C_syn.lib' ...
+Read 1 cells in library 'USERLIB' 
+*** End library_loading (cpu=0.00min, real=0.02min, mem=17.7M, fe_cpu=0.17min, fe_real=0.58min, fe_mem=511.4M) ***
+#% Begin Load netlist data ... (date=12/02 14:36:30, mem=491.8M)
+*** Begin netlist parsing (mem=511.4M) ***
+Pin 'pad' of cell 'pad_ana' is declared as power/ground in LEF but as signal in timing library.  Treat it as power/ground.
+**WARN: (IMPVL-159):	Pin 'VDD' of cell 'rfsphs8x8m1wm4' is defined in LEF but not in the timing library.
+**WARN: (IMPVL-159):	Pin 'VSS' of cell 'rfsphs8x8m1wm4' is defined in LEF but not in the timing library.
+Created 28 new cells from 6 timing libraries.
+Reading netlist ...
+Backslashed names will retain backslash and a trailing blank character.
+Reading verilog netlist 'HDL/RTL/core_top_pads.v'
+**WARN: (IMPVL-346):	Module '\**FFGEN** ' is instantiated in the netlist, but is not defined in the LEF files.  Since there is no real cell definition for such a cell, it will be treated as an empty module.
+Type 'man IMPVL-346' for more detail.
+**WARN: (IMPVL-346):	Module '\**TSGEN** ' is instantiated in the netlist, but is not defined in the LEF files.  Since there is no real cell definition for such a cell, it will be treated as an empty module.
+Type 'man IMPVL-346' for more detail.
+
+*** Memory Usage v#1 (Current mem = 526.426M, initial mem = 179.684M) ***
+*** End netlist parsing (cpu=0:00:00.2, real=0:00:00.0, mem=526.4M) ***
+#% End Load netlist data ... (date=12/02 14:36:30, total cpu=0:00:00.2, real=0:00:00.0, peak res=491.8M, current mem=483.5M)
+Set top cell to core_top_pads.
+Hooked 56 DB cells to tlib cells.
+**WARN: (IMPDB-2504):	Cell '\**TSGEN** ' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+**WARN: (IMPDB-2504):	Cell '\**FFGEN** ' is instantiated in the Verilog netlist, but it is not defined in the library or design data.  Its pin directions may be derived incorrectly.  Provide the cell definition or its pin information in the library or design data and reload the design to avoid potential issues.
+2 empty module found.
+Starting recursive module instantiation check.
+No recursion found.
+Term dir updated for 0 vinsts of 2 cells.
+Building hierarchical netlist for Cell core_top_pads ...
+*** Netlist is NOT unique.
+** info: there are 353 modules.
+** info: there are 32259 stdCell insts.
+** info: there are 63 Pad insts.
+
+*** Memory Usage v#1 (Current mem = 583.352M, initial mem = 179.684M) ***
+Initializing I/O assignment ...
+Adjusting Core to Left to: 0.3200. Core to Bottom to: 0.3200.
+**WARN: (IMPFP-3961):	The techSite 'corner' has no related standard cells in LEF/OA library. Cannot make calculations for this site type unless standard cell models of this type exist in the LEF/OA library. If the SITE is not used by the library you can ignore this warning or remove the SITE definition from the LEF/OA to avoid this message.
+Type 'man IMPFP-3961' for more detail.
+**WARN: (IMPFP-3961):	The techSite 'pad' has no related standard cells in LEF/OA library. Cannot make calculations for this site type unless standard cell models of this type exist in the LEF/OA library. If the SITE is not used by the library you can ignore this warning or remove the SITE definition from the LEF/OA to avoid this message.
+Type 'man IMPFP-3961' for more detail.
+Generated pitch 1.12 in METAL6 is different from 0.9 defined in technology file in preferred direction.
+Set Default Net Delay as 1000 ps.
+Set Default Net Load as 0.5 pF. 
+Set Default Input Pin Transition as 0.1 ps.
+Pre-connect netlist-defined P/G connections...
+  Updated 0 instances.
+*Info: initialize multi-corner CTS.
+Reading timing constraints file './SDC/Core_mapped.sdc' ...
+Current (total cpu=0:00:11.0, real=0:00:35.0, peak res=627.9M, current mem=627.9M)
+INFO (CTE): Constraints read successfully.
+WARNING (CTE-25): Line: 9 of File ./SDC/Core_mapped.sdc : Skipped unsupported command: set_max_area
+
+
+WARNING (CTE-25): Line: 8 of File ./SDC/Core_mapped.sdc : Skipped unsupported command: set_units
+
+
+Ending "Constraint file reading stats" (total cpu=0:00:00.0, real=0:00:00.0, peak res=635.2M, current mem=635.2M)
+Current (total cpu=0:00:11.0, real=0:00:35.0, peak res=635.2M, current mem=635.2M)
+Total number of combinational cells: 17
+Total number of sequential cells: 4
+Total number of tristate cells: 0
+Total number of level shifter cells: 0
+Total number of power gating cells: 0
+Total number of isolation cells: 0
+Total number of power switch cells: 0
+Total number of pulse generator cells: 0
+Total number of always on buffers: 0
+Total number of retention cells: 0
+List of usable buffers: BUFX1
+Total number of usable buffers: 1
+List of unusable buffers:
+Total number of unusable buffers: 0
+List of usable inverters: INVX2 INVX1 INVX16 INVX32 INVX4 INVX8
+Total number of usable inverters: 6
+List of unusable inverters:
+Total number of unusable inverters: 0
+List of identified usable delay cells:
+Total number of identified usable delay cells: 0
+List of identified unusable delay cells:
+Total number of identified unusable delay cells: 0
+No delay cells were detected in the set of buffers. Buffers will be used to fix hold violations.
+**WARN: (IMPSYC-2):	Timing information is not defined for cell pad_corner; Check the timing library (.lib) file and make sure the timing information exists for the cell and you can run the checkTimingLibrary command to verify if the timing library has complete information after the design is loaded.
+Type 'man IMPSYC-2' for more detail.
+Extraction setup Started 
+Initializing multi-corner RC extraction with 2 active RC Corners ...
+Reading Capacitance Table File /research/ece/lnis-teaching/Designkits/tsmc180nm/tsmc18rf_1.8v_3.3v/captable/t018lo_1p6m_typical.captable ...
+Reading Capacitance Table File /research/ece/lnis-teaching/Designkits/tsmc180nm/tsmc18rf_1.8v_3.3v/captable/t018lo_1p6m_typical.captable ...
+Importing multi-corner RC tables ... 
+Summary of Active RC-Corners : 
+ 
+ Analysis View: wc
+    RC-Corner Name        : wc
+    RC-Corner Index       : 0
+    RC-Corner Temperature : 25 Celsius
+    RC-Corner Cap Table   : '/research/ece/lnis-teaching/Designkits/tsmc180nm/tsmc18rf_1.8v_3.3v/captable/t018lo_1p6m_typical.captable'
+    RC-Corner PreRoute Res Factor         : 1
+    RC-Corner PreRoute Cap Factor         : 1
+    RC-Corner PostRoute Res Factor        : 1 {1 1 1}
+    RC-Corner PostRoute Cap Factor        : 1 {1 1 1}
+    RC-Corner PostRoute XCap Factor       : 1 {1 1 1}
+    RC-Corner PreRoute Clock Res Factor   : 1	[Derived from postRoute_res (effortLevel low)]
+    RC-Corner PreRoute Clock Cap Factor   : 1	[Derived from postRoute_cap (effortLevel low)]
+    RC-Corner PostRoute Clock Cap Factor  : 1 {1 1 1} 	[Derived from postRoute_cap (effortLevel low)]
+    RC-Corner PostRoute Clock Res Factor  : 1 {1 1 1} 	[Derived from postRoute_res (effortLevel low)]
+ 
+ Analysis View: bc
+    RC-Corner Name        : bc
+    RC-Corner Index       : 1
+    RC-Corner Temperature : 25 Celsius
+    RC-Corner Cap Table   : '/research/ece/lnis-teaching/Designkits/tsmc180nm/tsmc18rf_1.8v_3.3v/captable/t018lo_1p6m_typical.captable'
+    RC-Corner PreRoute Res Factor         : 1
+    RC-Corner PreRoute Cap Factor         : 1
+    RC-Corner PostRoute Res Factor        : 1 {1 1 1}
+    RC-Corner PostRoute Cap Factor        : 1 {1 1 1}
+    RC-Corner PostRoute XCap Factor       : 1 {1 1 1}
+    RC-Corner PreRoute Clock Res Factor   : 1	[Derived from postRoute_res (effortLevel low)]
+    RC-Corner PreRoute Clock Cap Factor   : 1	[Derived from postRoute_cap (effortLevel low)]
+    RC-Corner PostRoute Clock Cap Factor  : 1 {1 1 1} 	[Derived from postRoute_cap (effortLevel low)]
+    RC-Corner PostRoute Clock Res Factor  : 1 {1 1 1} 	[Derived from postRoute_res (effortLevel low)]
+
+*** Summary of all messages that are not suppressed in this session:
+Severity  ID               Count  Summary                                  
+WARNING   IMPLF-200           55  Pin '%s' in macro '%s' has no ANTENNAGAT...
+WARNING   IMPLF-201           34  Pin '%s' in macro '%s' has no ANTENNADIF...
+WARNING   IMPFP-3961           2  The techSite '%s' has no related standar...
+WARNING   IMPSYC-2             1  Timing information is not defined for ce...
+WARNING   IMPVL-346            2  Module '%s' is instantiated in the netli...
+WARNING   IMPVL-159            2  Pin '%s' of cell '%s' is defined in LEF ...
+WARNING   IMPDB-2504           2  Cell '%s' is instantiated in the Verilog...
+WARNING   TECHLIB-302          8  No function defined for cell '%s'. The c...
+WARNING   TECHLIB-436         20  Attribute '%s' on '%s' pin '%s' of cell ...
+*** Message Summary: 126 warning(s), 0 error(s)
+
+<CMD> saveDesign DBS/core_top_pads-import.enc
+#% Begin save design ... (date=12/02 14:36:30, mem=640.4M)
+% Begin Save netlist data ... (date=12/02 14:36:30, mem=641.2M)
+Writing Binary DB to DBS/core_top_pads-import.enc.dat/core_top_pads.v.bin in single-threaded mode...
+% End Save netlist data ... (date=12/02 14:36:30, total cpu=0:00:00.0, real=0:00:00.0, peak res=646.1M, current mem=646.1M)
+% Begin Save AAE data ... (date=12/02 14:36:30, mem=646.1M)
+Saving AAE Data ...
+% End Save AAE data ... (date=12/02 14:36:30, total cpu=0:00:00.0, real=0:00:00.0, peak res=646.1M, current mem=646.1M)
+% Begin Save clock tree data ... (date=12/02 14:36:30, mem=646.6M)
+% End Save clock tree data ... (date=12/02 14:36:30, total cpu=0:00:00.0, real=0:00:00.0, peak res=646.7M, current mem=646.7M)
+Saving preference file DBS/core_top_pads-import.enc.dat/gui.pref.tcl ...
+Saving mode setting ...
+Saving global file ...
+% Begin Save floorplan data ... (date=12/02 14:36:30, mem=647.8M)
+Saving floorplan file ...
+% End Save floorplan data ... (date=12/02 14:36:30, total cpu=0:00:00.0, real=0:00:00.0, peak res=650.1M, current mem=650.1M)
+Saving Drc markers ...
+... No Drc file written since there is no markers found.
+% Begin Save placement data ... (date=12/02 14:36:30, mem=650.2M)
+** Saving stdCellPlacement_binary (version# 1) ...
+% End Save placement data ... (date=12/02 14:36:31, total cpu=0:00:00.0, real=0:00:00.0, peak res=650.4M, current mem=650.4M)
+% Begin Save routing data ... (date=12/02 14:36:31, mem=650.4M)
+Saving route file ...
+*** Completed saveRoute (cpu=0:00:00.0 real=0:00:00.0 mem=717.2M) ***
+% End Save routing data ... (date=12/02 14:36:31, total cpu=0:00:00.0, real=0:00:00.0, peak res=650.4M, current mem=650.4M)
+Saving property file DBS/core_top_pads-import.enc.dat/core_top_pads.prop
+*** Completed saveProperty (cpu=0:00:00.0 real=0:00:00.0 mem=717.2M) ***
+% Begin Save power constraints data ... (date=12/02 14:36:31, mem=652.7M)
+% End Save power constraints data ... (date=12/02 14:36:31, total cpu=0:00:00.0, real=0:00:00.0, peak res=652.7M, current mem=652.7M)
+wc bc
+Generated self-contained design core_top_pads-import.enc.dat
+#% End save design ... (date=12/02 14:36:31, total cpu=0:00:00.3, real=0:00:01.0, peak res=652.9M, current mem=652.9M)
+*** Message Summary: 0 warning(s), 0 error(s)
+
+<CMD> setDrawView fplan
+<CMD> fit
+<CMD> gui_select -rect {2511.042 766.960 3206.145 816.819}
+<CMD> pan 2299.412 225.835
+<CMD> selectObject Module core_dut
+<CMD> gui_select -rect {-1023.130 558.722 -732.770 482.466}
+<CMD> selectObject Module core_dut
+<CMD> get_visible_nets
+<CMD> deselectAll
+<CMD> selectObject Module core_dut
+<CMD> deselectAll
+<CMD> selectObject Module core_dut
+<CMD> ungroup
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_btb
+<CMD> pan 304.670 185.251
+<CMD> pan -453.475 286.070
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_btb
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_btb
+<CMD> ungroup
+<CMD> pan -166.880 -379.690
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_RegisterFile
+<CMD> ungroup
+**WARN: (IMPSYT-3162):	Cannot ungroup Module 'core_dut/_RegisterFile' because it has no child.
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_InstructionFetch
+<CMD> ungroup
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_RegisterFile
+<CMD> ungroup
+**WARN: (IMPSYT-3162):	Cannot ungroup Module 'core_dut/_RegisterFile' because it has no child.
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_Execute
+<CMD> ungroup
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_btb/W0
+<CMD> ungroup
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_btb/W3
+<CMD> ungroup
+<CMD> deselectAll
+<CMD> group
+<CMD> ungroup
+<CMD> ungroup
+<CMD> group
+<CMD> pan -316.611 -149.580
+<CMD> group
+<CMD> group
+<CMD> selectObject Module core_dut/_btb/W2
+<CMD> group
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_Execute/r340
+<CMD> group
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_Execute
+<CMD> group
+<CMD> deselectAll
+<CMD> selectObject Module core_dut
+<CMD> group
+<CMD> deselectAll
+<CMD> selectObject Module core_dut
+<CMD> ungroup
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_RegisterFile
+<CMD> ungroup
+**WARN: (IMPSYT-3162):	Cannot ungroup Module 'core_dut/_RegisterFile' because it has no child.
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_RegisterFile
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_RegisterFile
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_Execute
+<CMD> ungroup
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_Execute/r340
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_Execute/add_97
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_Execute/add_118
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_btb
+<CMD> ungroup
+<CMD> pan -525.427 6.637
+<CMD> pan 569.539 -450.120
+<CMD> pan -82.675 -346.010
+<CMD> pan -261.805 -124.013
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_btb/W1
+<CMD> panCenter -252.470 1178.752
+<CMD> pan -55.117 -81.144
+<CMD> group
+<CMD> pan 300.196 969.600
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_RegisterFile
+<CMD> group
+<CMD> deselectAll
+<CMD> selectObject Module core_dut
+<CMD> ungroup
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_RegisterFile
+<CMD> ungroup
+**WARN: (IMPSYT-3162):	Cannot ungroup Module 'core_dut/_RegisterFile' because it has no child.
+<CMD> deselectAll
+<CMD> pan -123.184 -225.839
+<CMD> pan -96.302 -262.877
+<CMD> pan -40.343 -295.412
+<CMD> pan -329.248 -42.946
+<CMD> pan -329.621 -120.681
+<CMD> pan -277.723 372.957
+<CMD> selectInst corner3
+<CMD> gui_select -rect {112.050 99.841 1822.139 127.389}
+<CMD> get_visible_nets
+<CMD> selectInst corner3
+<CMD> get_visible_nets
+<CMD> pan 739.556 -228.859
+<CMD> pan 309.384 317.861
+<CMD> floorPlan -site core7T -r 1.0 0.7 30 30 30 30
+Adjusting Core to Left to: 30.5600. Core to Bottom to: 30.5600.
+Generated pitch 1.12 in METAL6 is different from 0.9 defined in technology file in preferred direction.
+**WARN: (IMPFP-325):	Floorplan of the design is resized. All current floorplan objects are automatically derived based on specified new floorplan. This may change blocks, fixed standard cells, existing routes and blockages.
+<CMD> fit
+<CMD> saveDesign DBS/core_top_pads-fplan.enc
+#% Begin save design ... (date=12/02 14:39:20, mem=988.9M)
+% Begin Save netlist data ... (date=12/02 14:39:20, mem=988.9M)
+Writing Binary DB to DBS/core_top_pads-fplan.enc.dat/core_top_pads.v.bin in single-threaded mode...
+% End Save netlist data ... (date=12/02 14:39:20, total cpu=0:00:00.0, real=0:00:00.0, peak res=988.9M, current mem=988.9M)
+% Begin Save AAE data ... (date=12/02 14:39:20, mem=988.9M)
+Saving AAE Data ...
+% End Save AAE data ... (date=12/02 14:39:20, total cpu=0:00:00.0, real=0:00:00.0, peak res=988.9M, current mem=988.9M)
+% Begin Save clock tree data ... (date=12/02 14:39:20, mem=988.9M)
+% End Save clock tree data ... (date=12/02 14:39:20, total cpu=0:00:00.0, real=0:00:00.0, peak res=988.9M, current mem=988.9M)
+Saving preference file DBS/core_top_pads-fplan.enc.dat/gui.pref.tcl ...
+Saving mode setting ...
+Saving global file ...
+% Begin Save floorplan data ... (date=12/02 14:39:20, mem=988.9M)
+Saving floorplan file ...
+% End Save floorplan data ... (date=12/02 14:39:20, total cpu=0:00:00.0, real=0:00:00.0, peak res=988.9M, current mem=988.9M)
+Saving Drc markers ...
+... No Drc file written since there is no markers found.
+% Begin Save placement data ... (date=12/02 14:39:20, mem=988.9M)
+** Saving stdCellPlacement_binary (version# 1) ...
+% End Save placement data ... (date=12/02 14:39:20, total cpu=0:00:00.0, real=0:00:00.0, peak res=988.9M, current mem=988.9M)
+% Begin Save routing data ... (date=12/02 14:39:20, mem=988.9M)
+Saving route file ...
+*** Completed saveRoute (cpu=0:00:00.0 real=0:00:01.0 mem=1066.5M) ***
+% End Save routing data ... (date=12/02 14:39:21, total cpu=0:00:00.0, real=0:00:01.0, peak res=988.9M, current mem=988.9M)
+Saving property file DBS/core_top_pads-fplan.enc.dat/core_top_pads.prop
+*** Completed saveProperty (cpu=0:00:00.0 real=0:00:00.0 mem=1066.5M) ***
+% Begin Save power constraints data ... (date=12/02 14:39:21, mem=988.9M)
+% End Save power constraints data ... (date=12/02 14:39:21, total cpu=0:00:00.0, real=0:00:00.0, peak res=988.9M, current mem=988.9M)
+wc bc
+Generated self-contained design core_top_pads-fplan.enc.dat
+#% End save design ... (date=12/02 14:39:21, total cpu=0:00:00.3, real=0:00:01.0, peak res=988.9M, current mem=877.3M)
+*** Message Summary: 0 warning(s), 0 error(s)
+
+<CMD> deselectAll
+<CMD> selectObject Module core_dut/_btb
+<CMD> pan 1070.672 100.914
+<CMD> globalNetConnect VDD -type pgpin -pin VDD -all -verbose
+32322 new pwr-pin connections were made to global net 'VDD'.
+<CMD> globalNetConnect VSS -type pgpin -pin VSS -all -verbose
+32322 new gnd-pin connections were made to global net 'VSS'.
+<CMD> globalNetConnect VDD -type tiehi
+<CMD> globalNetConnect VSS -type tielo
+<CMD> deselectAll
+<CMD> pan -484.879 -108.297
+<CMD> deleteIoFiller
+No cell name specified, will delete physical io cells with CLASS PAD SPACER only.
+Total 0 cells are deleted.
+<CMD> loadIoFile SCRIPTS/place_io.io
+**ERROR: (IMPSYUTIL-96):	Cannot open (for read) FE IO file file: 'SCRIPTS/place_io.io'. The reason is: No such file or directory
+Type 'man IMPSYUTIL-96' for more detail.
+**WARN: (IMPFP-110):	Failed to open file 'SCRIPTS/place_io.io' for reading.
+
+<CMD> deleteIoFiller
+No cell name specified, will delete physical io cells with CLASS PAD SPACER only.
+Total 0 cells are deleted.
+<CMD> loadIoFile SCRIPTS/place_io.io
+Reading IO assignment file "SCRIPTS/place_io.io" ...
+<CMD> addIoFiller -cell pad_fill_32 -prefix FILLER -side n
+Added 0 of filler cell 'pad_fill_32' on top side.
+<CMD> addIoFiller -cell pad_fill_16 -prefix FILLER -side n
+Added 0 of filler cell 'pad_fill_16' on top side.
+<CMD> addIoFiller -cell pad_fill_8 -prefix FILLER -side n
+Added 0 of filler cell 'pad_fill_8' on top side.
+<CMD> addIoFiller -cell pad_fill_4 -prefix FILLER -side n
+Added 0 of filler cell 'pad_fill_4' on top side.
+<CMD> addIoFiller -cell pad_fill_2 -prefix FILLER -side n
+Added 0 of filler cell 'pad_fill_2' on top side.
+<CMD> addIoFiller -cell pad_fill_1 -prefix FILLER -side n
+Added 0 of filler cell 'pad_fill_1' on top side.
+<CMD> addIoFiller -cell pad_fill_01 -prefix FILLER -side n
+Added 0 of filler cell 'pad_fill_01' on top side.
+<CMD> addIoFiller -cell pad_fill_005 -prefix FILLER -side n -fillAnyGap
+Added 0 of filler cell 'pad_fill_005' on top side.
+<CMD> addIoFiller -cell pad_fill_32 -prefix FILLER -side s
+Added 0 of filler cell 'pad_fill_32' on bottom side.
+<CMD> addIoFiller -cell pad_fill_16 -prefix FILLER -side s
+Added 0 of filler cell 'pad_fill_16' on bottom side.
+<CMD> addIoFiller -cell pad_fill_8 -prefix FILLER -side s
+Added 0 of filler cell 'pad_fill_8' on bottom side.
+<CMD> addIoFiller -cell pad_fill_4 -prefix FILLER -side s
+Added 0 of filler cell 'pad_fill_4' on bottom side.
+<CMD> addIoFiller -cell pad_fill_2 -prefix FILLER -side s
+Added 0 of filler cell 'pad_fill_2' on bottom side.
+<CMD> addIoFiller -cell pad_fill_1 -prefix FILLER -side s
+Added 0 of filler cell 'pad_fill_1' on bottom side.
+<CMD> addIoFiller -cell pad_fill_01 -prefix FILLER -side s
+Added 0 of filler cell 'pad_fill_01' on bottom side.
+<CMD> addIoFiller -cell pad_fill_005 -prefix FILLER -side s -fillAnyGap
+Added 0 of filler cell 'pad_fill_005' on bottom side.
+<CMD> addIoFiller -cell pad_fill_32 -prefix FILLER -side e
+Added 0 of filler cell 'pad_fill_32' on right side.
+<CMD> addIoFiller -cell pad_fill_16 -prefix FILLER -side e
+Added 12 of filler cell 'pad_fill_16' on right side.
+<CMD> addIoFiller -cell pad_fill_8 -prefix FILLER -side e
+Added 0 of filler cell 'pad_fill_8' on right side.
+<CMD> addIoFiller -cell pad_fill_4 -prefix FILLER -side e
+Added 12 of filler cell 'pad_fill_4' on right side.
+<CMD> addIoFiller -cell pad_fill_2 -prefix FILLER -side e
+Added 12 of filler cell 'pad_fill_2' on right side.
+<CMD> addIoFiller -cell pad_fill_1 -prefix FILLER -side e
+Added 0 of filler cell 'pad_fill_1' on right side.
+<CMD> addIoFiller -cell pad_fill_01 -prefix FILLER -side e
+Added 60 of filler cell 'pad_fill_01' on right side.
+<CMD> addIoFiller -cell pad_fill_005 -prefix FILLER -side e -fillAnyGap
+Added 0 of filler cell 'pad_fill_005' on right side.
+<CMD> addIoFiller -cell pad_fill_32 -prefix FILLER -side w
+Added 0 of filler cell 'pad_fill_32' on left side.
+<CMD> addIoFiller -cell pad_fill_16 -prefix FILLER -side w
+Added 0 of filler cell 'pad_fill_16' on left side.
+<CMD> addIoFiller -cell pad_fill_8 -prefix FILLER -side w
+Added 0 of filler cell 'pad_fill_8' on left side.
+<CMD> addIoFiller -cell pad_fill_4 -prefix FILLER -side w
+Added 0 of filler cell 'pad_fill_4' on left side.
+<CMD> addIoFiller -cell pad_fill_2 -prefix FILLER -side w
+Added 0 of filler cell 'pad_fill_2' on left side.
+<CMD> addIoFiller -cell pad_fill_1 -prefix FILLER -side w
+Added 0 of filler cell 'pad_fill_1' on left side.
+<CMD> addIoFiller -cell pad_fill_01 -prefix FILLER -side w
+Added 0 of filler cell 'pad_fill_01' on left side.
+<CMD> addIoFiller -cell pad_fill_005 -prefix FILLER -side w -fillAnyGap
+Added 0 of filler cell 'pad_fill_005' on left side.
+<CMD> pan -142.756 56.611
+<CMD> pan -241.209 -31.997
+<CMD> pan 332.278 19.691
+**INFO (INTERRUPT): One more Ctrl-C to exit Innovus ...
+Innovus terminated by user interrupt.
+
+*** Memory Usage v#1 (Current mem = 957.031M, initial mem = 179.684M) ***
+*** Message Summary: 132 warning(s), 1 error(s)
+
+--- Ending "Innovus" (totcpu=0:01:01, real=0:10:59, mem=957.0M) ---

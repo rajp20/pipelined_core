@@ -1,7 +1,8 @@
 # place_route.tcl
 #Change the design name as well as the required density
-set design					core_top_pads
+#set design					topmodule_withpads
 #set design					mips
+set design                  core_top_pads
 set density					0.7
 set max_route_layer			5
 
@@ -267,25 +268,25 @@ proc add_power_nets {} {
       -extend_corner $EXTEND -jog_distance 0 -snap_wire_center_to_grid None -threshold 0
 
    if {$design == "mips"} {
-   deleteAllPowerPreroutes
-   proc_create_register_partition
-
-   set MACRO_POWER_WIDTH      1     ;# microns
-   set MACRO_POWER_SPACING    0.5   ;# microns
-   set MACRO_POWER_OFFSET     0.5   ;# microns
-
-   # add rings around macro block
-   addRing -around each_block -type block_rings \
+       deleteAllPowerPreroutes
+       proc_create_register_partition
+       
+       set MACRO_POWER_WIDTH      1     ;# microns
+       set MACRO_POWER_SPACING    0.5   ;# microns
+       set MACRO_POWER_OFFSET     0.5   ;# microns
+       
+       # add rings around macro block
+       addRing -around each_block -type block_rings \
            -layer {bottom METAL1 top METAL1 right METAL2 left METAL2} \
            -nets {VSS VDD} -follow core -width $MACRO_POWER_WIDTH \
            -spacing $MACRO_POWER_SPACING -offset $MACRO_POWER_OFFSET \
            -center 0 -extend_corner {tl rb} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
-   flattenPartition
-
-   #Create the halo
-   proc_create_halo
-	
-   fit
+       flattenPartition
+       
+       #Create the halo
+       proc_create_halo
+       
+       fit
 	 }
    save_design power
 }

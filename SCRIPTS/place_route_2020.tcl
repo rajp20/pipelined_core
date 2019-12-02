@@ -1,7 +1,8 @@
 # place_route.tcl
 #Change the design name as well as the required density
-set design					core_top_pads
+#set design					topmodule_withpads
 #set design					mips
+set design                  core_top_pads
 set density					0.7
 set max_route_layer			5
 
@@ -156,24 +157,24 @@ proc floorplan_design {} {
    put_header [concat "Floorplanning " $design "..."]
 
    set ASPECT_RATIO   1.0     ;# rectangle with height = 1.0*width
-   set CORE_TO_LEFT   30     ;# micron
-   set CORE_TO_BOTTOM 30     ;# micron
-   set CORE_TO_RIGHT  30     ;# micron
-   set CORE_TO_TOP    30     ;# micron
+   set CORE_TO_LEFT   12     ;# micron
+   set CORE_TO_BOTTOM 12     ;# micron
+   set CORE_TO_RIGHT  12     ;# micron
+   set CORE_TO_TOP    12     ;# micron
 
    floorPlan -site core7T -r $ASPECT_RATIO $density $CORE_TO_LEFT $CORE_TO_BOTTOM $CORE_TO_RIGHT $CORE_TO_TOP
-   fit
+    fit
 
-   if {$design == "mips"} {
-   #place reg module
-   selectObject Module dp
-   ungroup
-   deselectAll
-   selectObject Module dp/rf
-   create_relative_floorplan -place dp/rf -ref_type core_boundary -horizontal_edge_separate {0  ""  0} -vertical_edge_separate {0  ""  0}
-   fit
-	 }
-
+    if {$design == "mips"} {
+        #place reg module
+        selectObject Module dp
+        ungroup
+        deselectAll
+        selectObject Module dp/rf
+        create_relative_floorplan -place dp/rf -ref_type core_boundary -horizontal_edge_separate {0  ""  0} -vertical_edge_separate {0  ""  0}
+         fit
+    }
+    
    save_design fplan
 }
 
@@ -202,8 +203,6 @@ proc connect_global_nets {} {
 proc place_io_add_io_filler {} {
    #global design
    global rpt_dir
-
-	 deleteIoFiller
 
    put_header "Loading IO file..."
    loadIoFile SCRIPTS/place_io.io
@@ -237,7 +236,7 @@ proc place_io_add_io_filler {} {
 }
 #=========================================================================================
 # add_power_nets
-#   
+#
 #
 proc add_power_nets {} {
    global design
@@ -248,45 +247,43 @@ proc add_power_nets {} {
 
    set POWER_NETS    "$gnd_net $pwr_net"  ;# from core
    set CENTER_RING   1         ;# center rings between I/O and core
-   set WIDTH         8       ;# width of ring segments
-   set SPACING       5       ;# spacing of ring segments
+   set WIDTH         1.0       ;# width of ring segments
+   set SPACING       1.5       ;# spacing of ring segments
 
-   set LAYERS  {top METAL5 bottom METAL5 left METAL4 right METAL4}
-   set EXTEND  {} ;# tl, tr, bl, bt, lt, rt, lb, rb
+   set LAYERS  {top METAL1 bottom METAL1 left METAL2 right METAL2}
+    set EXTEND  {} ;# tl, tr, bl, bt, lt, rt, lb, rb
 
+    # add power rings
+    addRing \
+       -type core_rings -follow core \
+       -nets $POWER_NETS \
+       -center $CENTER_RING \
+       -width $WIDTH -spacing $SPACING \
+       -layer $LAYERS \
+       -extend_corner $EXTEND -jog_distance 0 -snap_wire_center_to_grid None -threshold 0
 
+    if {$design == "mips"} {
+        deleteAllPowerPreroutes
 
-   # add power rings
+        proc_create_register_partition
 
-   addRing \
-      -type core_rings -follow core \
-      -nets $POWER_NETS \
-      -center $CENTER_RING \
-      -width $WIDTH -spacing $SPACING \
-      -layer $LAYERS \
-      -extend_corner $EXTEND -jog_distance 0 -snap_wire_center_to_grid None -threshold 0
+        set MACRO_POWER_WIDTH      1     ;# microns
+        set MACRO_POWER_SPACING    0.5   ;# microns
+        set MACRO_POWER_OFFSET     0.5   ;# microns
 
-   if {$design == "mips"} {
-   deleteAllPowerPreroutes
-   proc_create_register_partition
+        # add rings around macro block
+        addRing -around each_block -type block_rings \
+            -layer {bottom METAL1 top METAL1 right METAL2 left METAL2} \
+            -nets {VSS VDD} -follow core -width $MACRO_POWER_WIDTH \
+            -spacing $MACRO_POWER_SPACING -offset $MACRO_POWER_OFFSET \
+            -center 0 -extend_corner {tl rb} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
+        flattenPartition
 
-   set MACRO_POWER_WIDTH      1     ;# microns
-   set MACRO_POWER_SPACING    0.5   ;# microns
-   set MACRO_POWER_OFFSET     0.5   ;# microns
+        #Create the halo
+        proc_create_halo
 
-   # add rings around macro block
-   addRing -around each_block -type block_rings \
-           -layer {bottom METAL1 top METAL1 right METAL2 left METAL2} \
-           -nets {VSS VDD} -follow core -width $MACRO_POWER_WIDTH \
-           -spacing $MACRO_POWER_SPACING -offset $MACRO_POWER_OFFSET \
-           -center 0 -extend_corner {tl rb} -threshold 0 -jog_distance 0 -snap_wire_center_to_grid None
-   flattenPartition
-
-   #Create the halo
-   proc_create_halo
-	
-   fit
-	 }
+        fit
+    }
    save_design power
 }
 
@@ -299,7 +296,7 @@ proc route_power_nets {} {
 
    set POWER_NETS    "$gnd_net $pwr_net"  ;
 
-   sroute -connect { blockPin corePin padPin } \
+   sroute -connect { blockPin corePin } \
           -layerChangeRange { METAL1(1) METAL5(5) } \
           -blockPinTarget { nearestTarget } \
           -corePinTarget { firstAfterRowEnd } \

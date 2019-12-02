@@ -1,7 +1,8 @@
 # place_route.tcl
 #Change the design name as well as the required density
-set design					core_top_pads
+#set design					topmodule_withpads
 #set design					mips
+set design                  core_top_pads
 set density					0.7
 set max_route_layer			5
 

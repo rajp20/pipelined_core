@@ -1,0 +1,30 @@
+# PPCMD 1 
+# addRing -type core_rings -follow core -nets {VSS VDD} -center 1 -width 1.0 -spacing 1.5 -layer {top METAL1 bottom METAL1 left METAL2 right METAL2} -extend_corner {} -jog_distance 0 -snap_wire_center_to_grid None -threshold 0
+# 1 
+# 32 
+# 1 
+# 0 
+# 0 
+# 0 
+# BOX_LIST 
+# END_BOX_LIST 
+# NET_INFO_LIST 
+# VDD 2000 1 1 0 0 0 0 0 
+# RING_PT_INFO_LIST 
+# 1816520 476540 1816520 3332740 
+# END_RING_PT_INFO_LIST 
+# VDD 2000 2 1 0 0 0 0 0 
+# RING_PT_INFO_LIST 
+# 476540 1904640 3156500 1904640 
+# END_RING_PT_INFO_LIST 
+# VSS 2000 1 1 0 0 0 0 0 
+# RING_PT_INFO_LIST 
+# 1816520 481540 1816520 3327740 
+# END_RING_PT_INFO_LIST 
+# VSS 2000 2 1 0 0 0 0 0 
+# RING_PT_INFO_LIST 
+# 481540 1904640 3151500 1904640 
+# END_RING_PT_INFO_LIST 
+# END_NET_INFO_LIST 
+# END_PPCMD 1 
+
