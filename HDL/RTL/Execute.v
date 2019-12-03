@@ -82,12 +82,11 @@ begin
 	GF_next = 1'b0;
 	LF_next = 1'b0;
 	dest_reg_write_en = 1'b0;
+	result = 16'd0;
+	target_next = 16'd0;
 
 	/************** BEGIN ALU **************/
 	case(control_in)
-		NOP: begin
-
-		end
 		SUB: begin
 			result = reg1_data - reg2_data;
 			ZF_next = (result == 16'b0) ? 1 : 0;
@@ -166,6 +165,14 @@ begin
 		MOV: begin
 			result = reg2_data;
 			dest_reg_write_en = 1;
+		end
+		default: begin
+			ZF_next = 1'b0;
+			GF_next = 1'b0;
+			LF_next = 1'b0;
+			dest_reg_write_en = 1'b0;
+			result = 16'd0;
+			target_next = 16'd0;
 		end
 	endcase
 	/************** END ALU **************/

@@ -1,5 +1,5 @@
 # PPCMD 1 
-# addRing -type core_rings -follow core -nets {VSS VDD} -center 1 -width 1.0 -spacing 1.5 -layer {top METAL1 bottom METAL1 left METAL2 right METAL2} -extend_corner {} -jog_distance 0 -snap_wire_center_to_grid None -threshold 0
+# addRing -type core_rings -follow core -nets {VSS VDD} -center 1 -width 8 -spacing 5 -layer {top METAL5 bottom METAL5 left METAL4 right METAL4} -extend_corner {} -jog_distance 0 -snap_wire_center_to_grid None -threshold 0
 # 1 
 # 32 
 # 1 
@@ -9,21 +9,21 @@
 # BOX_LIST 
 # END_BOX_LIST 
 # NET_INFO_LIST 
-# VDD 2000 1 1 0 0 0 0 0 
+# VDD 16000 5 1 0 0 0 0 0 
 # RING_PT_INFO_LIST 
-# 1816520 476540 1816520 3332740 
+# 1816520 483960 1816520 3325880 
 # END_RING_PT_INFO_LIST 
-# VDD 2000 2 1 0 0 0 0 0 
+# VDD 16000 4 1 0 0 0 0 0 
 # RING_PT_INFO_LIST 
-# 476540 1904640 3156500 1904640 
+# 483960 1904920 3149080 1904920 
 # END_RING_PT_INFO_LIST 
-# VSS 2000 1 1 0 0 0 0 0 
+# VSS 16000 5 1 0 0 0 0 0 
 # RING_PT_INFO_LIST 
-# 1816520 481540 1816520 3327740 
+# 1816520 509960 1816520 3299880 
 # END_RING_PT_INFO_LIST 
-# VSS 2000 2 1 0 0 0 0 0 
+# VSS 16000 4 1 0 0 0 0 0 
 # RING_PT_INFO_LIST 
-# 481540 1904640 3151500 1904640 
+# 509960 1904920 3123080 1904920 
 # END_RING_PT_INFO_LIST 
 # END_NET_INFO_LIST 
 # END_PPCMD 1 

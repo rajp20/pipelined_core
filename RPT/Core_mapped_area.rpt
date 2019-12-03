@@ -3,30 +3,28 @@
 Report : area
 Design : Core
 Version: K-2015.06-SP5-6
-Date   : Mon Dec  2 13:34:13 2019
+Date   : Mon Dec  2 20:24:13 2019
 ****************************************
 
 Library(s) Used:
 
     sclib_tsmc180_ss (File: /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lib/sclib_tsmc180_ss_nldm.db)
 
-Number of ports:                        11100
-Number of nets:                         40515
-Number of cells:                        32499
-Number of combinational cells:          27566
-Number of sequential cells:              4657
+Number of ports:                        11132
+Number of nets:                         40397
+Number of cells:                        32349
+Number of combinational cells:          27472
+Number of sequential cells:              4601
 Number of macros/black boxes:               0
-Number of buf/inv:                       3024
+Number of buf/inv:                       3017
 Number of references:                       8
 
-Combinational area:             396286.253443
-Buf/Inv area:                    25765.062933
+Combinational area:             395071.915833
+Buf/Inv area:                    25704.969332
 Noncombinational area:          242608.918964
 Macro/Black Box area:                0.000000
 Net Interconnect area:      undefined  (No wire load specified)
 
-Total cell area:                638895.172407
+Total cell area:                637680.834797
 Total area:                 undefined
-
-Information: This design contains unmapped logic. (RPT-7)
 1

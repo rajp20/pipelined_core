@@ -2209,3 +2209,8 @@ Generated self-contained design core_top_pads-power.enc.dat.tmp
 <CMD> pan 270.844 420.463
 <CMD> pan 402.990 -364.765
 <CMD> pan -514.385 -508.925
+
+*** Memory Usage v#1 (Current mem = 1037.625M, initial mem = 179.684M) ***
+*** Message Summary: 437 warning(s), 7 error(s)
+
+--- Ending "Innovus" (totcpu=0:03:38, real=0:46:43, mem=1037.6M) ---

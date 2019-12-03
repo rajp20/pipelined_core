@@ -17,7 +17,8 @@ module core_top_pads (clk,
    inout [15:0]  data_mem_bus;
 
    wire [15:0]   data_from_inst_memory_pad;
-   wire [15:0]   data_mem_bus_pad;
+   wire [15:0]   data_mem_bus_in_pad;
+   wire [15:0]   data_mem_bus_out_pad;
    wire [7:0]    address_to_main_mem_pad;
    wire [13:0]   address_to_inst_mem_pad;
    wire          data_to_main_mem_write_en_pad;
@@ -48,22 +49,22 @@ module core_top_pads (clk,
    pad_in pad_in16 (.pad(data_from_inst_memory[15]), .DataIn(data_from_inst_memory_pad[15]));
 
    //data_mem_bus
-   pad_bidirhe pad_bi1 (.pad(data_mem_bus[0]), .DataIn(data_mem_bus_pad[0]), .DataOut(data_mem_bus_pad[0]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi2 (.pad(data_mem_bus[1]), .DataIn(data_mem_bus_pad[1]), .DataOut(data_mem_bus_pad[1]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi3 (.pad(data_mem_bus[2]), .DataIn(data_mem_bus_pad[2]), .DataOut(data_mem_bus_pad[2]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi4 (.pad(data_mem_bus[3]), .DataIn(data_mem_bus_pad[3]), .DataOut(data_mem_bus_pad[3]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi5 (.pad(data_mem_bus[4]), .DataIn(data_mem_bus_pad[4]), .DataOut(data_mem_bus_pad[4]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi6 (.pad(data_mem_bus[5]), .DataIn(data_mem_bus_pad[5]), .DataOut(data_mem_bus_pad[5]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi7 (.pad(data_mem_bus[6]), .DataIn(data_mem_bus_pad[6]), .DataOut(data_mem_bus_pad[6]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi8 (.pad(data_mem_bus[7]), .DataIn(data_mem_bus_pad[7]), .DataOut(data_mem_bus_pad[7]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi9 (.pad(data_mem_bus[8]), .DataIn(data_mem_bus_pad[8]), .DataOut(data_mem_bus_pad[8]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi10 (.pad(data_mem_bus[9]), .DataIn(data_mem_bus_pad[9]), .DataOut(data_mem_bus_pad[9]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi11 (.pad(data_mem_bus[10]), .DataIn(data_mem_bus_pad[10]), .DataOut(data_mem_bus_pad[10]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi12 (.pad(data_mem_bus[11]), .DataIn(data_mem_bus_pad[11]), .DataOut(data_mem_bus_pad[11]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi13 (.pad(data_mem_bus[12]), .DataIn(data_mem_bus_pad[12]), .DataOut(data_mem_bus_pad[12]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi14 (.pad(data_mem_bus[13]), .DataIn(data_mem_bus_pad[13]), .DataOut(data_mem_bus_pad[13]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi15 (.pad(data_mem_bus[14]), .DataIn(data_mem_bus_pad[14]), .DataOut(data_mem_bus_pad[14]), .EN(data_to_main_mem_write_en));
-   pad_bidirhe pad_bi16 (.pad(data_mem_bus[15]), .DataIn(data_mem_bus_pad[15]), .DataOut(data_mem_bus_pad[15]), .EN(data_to_main_mem_write_en));
+   pad_bidirhe pad_bi1 (.pad(data_mem_bus[0]), .DataIn(data_mem_bus_in_pad[0]), .DataOut(data_mem_bus_out_pad[0]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi2 (.pad(data_mem_bus[1]), .DataIn(data_mem_bus_in_pad[1]), .DataOut(data_mem_bus_out_pad[1]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi3 (.pad(data_mem_bus[2]), .DataIn(data_mem_bus_in_pad[2]), .DataOut(data_mem_bus_out_pad[2]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi4 (.pad(data_mem_bus[3]), .DataIn(data_mem_bus_in_pad[3]), .DataOut(data_mem_bus_out_pad[3]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi5 (.pad(data_mem_bus[4]), .DataIn(data_mem_bus_in_pad[4]), .DataOut(data_mem_bus_out_pad[4]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi6 (.pad(data_mem_bus[5]), .DataIn(data_mem_bus_in_pad[5]), .DataOut(data_mem_bus_out_pad[5]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi7 (.pad(data_mem_bus[6]), .DataIn(data_mem_bus_in_pad[6]), .DataOut(data_mem_bus_out_pad[6]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi8 (.pad(data_mem_bus[7]), .DataIn(data_mem_bus_in_pad[7]), .DataOut(data_mem_bus_out_pad[7]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi9 (.pad(data_mem_bus[8]), .DataIn(data_mem_bus_in_pad[8]), .DataOut(data_mem_bus_out_pad[8]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi10 (.pad(data_mem_bus[9]), .DataIn(data_mem_bus_in_pad[9]), .DataOut(data_mem_bus_out_pad[9]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi11 (.pad(data_mem_bus[10]), .DataIn(data_mem_bus_in_pad[10]), .DataOut(data_mem_bus_out_pad[10]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi12 (.pad(data_mem_bus[11]), .DataIn(data_mem_bus_in_pad[11]), .DataOut(data_mem_bus_out_pad[11]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi13 (.pad(data_mem_bus[12]), .DataIn(data_mem_bus_in_pad[12]), .DataOut(data_mem_bus_out_pad[12]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi14 (.pad(data_mem_bus[13]), .DataIn(data_mem_bus_in_pad[13]), .DataOut(data_mem_bus_out_pad[13]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi15 (.pad(data_mem_bus[14]), .DataIn(data_mem_bus_in_pad[14]), .DataOut(data_mem_bus_out_pad[14]), .EN(data_to_main_mem_write_en_pad));
+   pad_bidirhe pad_bi16 (.pad(data_mem_bus[15]), .DataIn(data_mem_bus_in_pad[15]), .DataOut(data_mem_bus_out_pad[15]), .EN(data_to_main_mem_write_en_pad));
 
    //***************OUTPUTS*************************//
 
@@ -109,7 +110,8 @@ module core_top_pads (clk,
 	 .data_from_instruction_memory (data_from_inst_memory_pad),
 	 .data_to_main_memory_write_en (data_to_main_mem_write_en_pad),
 	 .address_to_main_memory (address_to_main_mem_pad),
-	 .data_main_memory_bus (data_mem_bus_pad),
+	 .data_to_main_memory (data_mem_bus_out_pad),
+	 .data_from_main_memory (data_mem_bus_in_pad),
 	 .address_to_instruction_memory (address_to_inst_mem_pad));
 
 endmodule

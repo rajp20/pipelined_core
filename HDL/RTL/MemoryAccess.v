@@ -10,39 +10,35 @@ module MemoryAccess(input             clk,
 		    		input [15:0]      reg_data_ex,
 		    		input [4:0]       dest_reg_index_ex,
 		    		input 	      	  dest_reg_write_en_ex,
+					input [15:0]	  data_from_main_memory,
 		    		output reg [7:0]  address_to_main_memory,
 		    		output reg 	      data_to_memory_write_en,
 		    		output reg [4:0]  dest_reg_index_ma,
 		    		output reg 	      dest_reg_write_en_ma, 
 		    		output reg [15:0] result_ma,
+					output reg [15:0] data_to_main_memory,
 		    		output reg [15:0] data_ma,
-		    		output reg [3:0]  control_ma,
-		    		inout [15:0]      data_memory_bus);
+		    		output reg [3:0]  control_ma);
 
-   parameter LOAD   = 4'b1100;
    parameter STORE  = 4'b1110;
-
-	assign data_memory_bus = data_to_memory_write_en ? reg_data_ex : 16'bz;
    
-   always@(*)
+   always@(control_ex or result_ex)
      begin
 	data_to_memory_write_en = 0;
+	data_to_main_memory = 16'd0;
+	address_to_main_memory = result_ex[7:0];
 	if (control_ex == STORE)
 	  begin
-	     address_to_main_memory = result_ex[7:0];
 	     data_to_memory_write_en = 1;
+		 data_to_main_memory = reg_data_ex;
 	  end
-	else if (control_ex == LOAD)
-	  begin
-	     address_to_main_memory = result_ex[7:0];
-	  end
-     end
+	end
    
    always@(posedge clk) 
      begin
 	control_ma <= control_ex;
 	result_ma <= result_ex;
-	data_ma <= data_memory_bus;
+	data_ma <= data_from_main_memory;
 	dest_reg_index_ma <= dest_reg_index_ex;
 	dest_reg_write_en_ma <= dest_reg_write_en_ex;
      end

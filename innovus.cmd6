@@ -1,0 +1,602 @@
+#######################################################
+#                                                     
+#  Innovus Command Logging File                     
+#  Created on Mon Dec  2 15:47:24 2019                
+#                                                     
+#######################################################
+
+#@(#)CDS: Innovus v17.11-s080_1 (64bit) 08/04/2017 11:13 (Linux 2.6.18-194.el5)
+#@(#)CDS: NanoRoute 17.11-s080_1 NR170721-2155/17_11-UB (database version 2.30, 390.7.1) {superthreading v1.44}
+#@(#)CDS: AAE 17.11-s034 (64bit) 08/04/2017 (Linux 2.6.18-194.el5)
+#@(#)CDS: CTE 17.11-s053_1 () Aug  1 2017 23:31:41 ( )
+#@(#)CDS: SYNTECH 17.11-s012_1 () Jul 21 2017 02:29:12 ( )
+#@(#)CDS: CPE v17.11-s095
+#@(#)CDS: IQRC/TQRC 16.1.1-s215 (64bit) Thu Jul  6 20:18:10 PDT 2017 (Linux 2.6.18-194.el5)
+
+set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+suppressMessage ENCEXT-2799
+getDrawView
+loadWorkspace -name Physical
+win
+set init_design_uniquify 1
+set init_gnd_net VSS
+set init_pwr_net VDD
+set init_top_cell core_top_pads
+set init_verilog HDL/GATE/Core_mapped.v
+set init_verilog HDL/RTL/core_top_pads.v
+create_constraint_mode -name constraint -sdc_files {SDC/Core_mapped.sdc}
+set init_lef_file {/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/tech.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/sclib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/padlib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4.vclef}
+set init_mmmc_file CONF/core.view
+init_design
+saveDesign DBS/core_top_pads-import.enc
+setDrawView fplan
+fit
+floorPlan -site core7T -r 1.0 0.6 30 30 30 30
+fit
+saveDesign DBS/core_top_pads-fplan.enc
+globalNetConnect VDD -type pgpin -pin VDD -all -verbose
+globalNetConnect VSS -type pgpin -pin VSS -all -verbose
+globalNetConnect VDD -type tiehi
+globalNetConnect VSS -type tielo
+deleteIoFiller
+loadIoFile SCRIPTS/place_io.io
+addIoFiller -cell pad_fill_32 -prefix FILLER -side n
+addIoFiller -cell pad_fill_16 -prefix FILLER -side n
+addIoFiller -cell pad_fill_8 -prefix FILLER -side n
+addIoFiller -cell pad_fill_4 -prefix FILLER -side n
+addIoFiller -cell pad_fill_2 -prefix FILLER -side n
+addIoFiller -cell pad_fill_1 -prefix FILLER -side n
+addIoFiller -cell pad_fill_01 -prefix FILLER -side n
+addIoFiller -cell pad_fill_005 -prefix FILLER -side n -fillAnyGap
+addIoFiller -cell pad_fill_32 -prefix FILLER -side s
+addIoFiller -cell pad_fill_16 -prefix FILLER -side s
+addIoFiller -cell pad_fill_8 -prefix FILLER -side s
+addIoFiller -cell pad_fill_4 -prefix FILLER -side s
+addIoFiller -cell pad_fill_2 -prefix FILLER -side s
+addIoFiller -cell pad_fill_1 -prefix FILLER -side s
+addIoFiller -cell pad_fill_01 -prefix FILLER -side s
+addIoFiller -cell pad_fill_005 -prefix FILLER -side s -fillAnyGap
+addIoFiller -cell pad_fill_32 -prefix FILLER -side e
+addIoFiller -cell pad_fill_16 -prefix FILLER -side e
+addIoFiller -cell pad_fill_8 -prefix FILLER -side e
+addIoFiller -cell pad_fill_4 -prefix FILLER -side e
+addIoFiller -cell pad_fill_2 -prefix FILLER -side e
+addIoFiller -cell pad_fill_1 -prefix FILLER -side e
+addIoFiller -cell pad_fill_01 -prefix FILLER -side e
+addIoFiller -cell pad_fill_005 -prefix FILLER -side e -fillAnyGap
+addIoFiller -cell pad_fill_32 -prefix FILLER -side w
+addIoFiller -cell pad_fill_16 -prefix FILLER -side w
+addIoFiller -cell pad_fill_8 -prefix FILLER -side w
+addIoFiller -cell pad_fill_4 -prefix FILLER -side w
+addIoFiller -cell pad_fill_2 -prefix FILLER -side w
+addIoFiller -cell pad_fill_1 -prefix FILLER -side w
+addIoFiller -cell pad_fill_01 -prefix FILLER -side w
+addIoFiller -cell pad_fill_005 -prefix FILLER -side w -fillAnyGap
+uiSetTool ruler
+addRing -type core_rings -follow core -nets {VSS VDD} -center 1 -width 8 -spacing 5 -layer {top METAL5 bottom METAL5 left METAL4 right METAL4} -extend_corner {} -jog_distance 0 -snap_wire_center_to_grid None -threshold 0
+saveDesign DBS/core_top_pads-power.enc
+sroute -connect { blockPin corePin padPin } -layerChangeRange { METAL1(1) METAL5(5) } -blockPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -crossoverViaLayerRange { METAL1(1) METAL5(5) } -nets {VSS VDD} -allowJogging 1 -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { METAL1(1) METAL5(5) }
+fit
+saveDesign DBS/core_top_pads-power-routed.enc
+setMultiCpuUsage -localCpu 2 -keepLicense true -acquireLicense 2
+setDesignMode -process 180
+setRouteMode -earlyGlobalMaxRouteLayer 5
+setPlaceMode -timingDriven true -congEffort auto -placeIOPins 1
+placeDesign -noPrePlaceOpt
+setDrawView place
+checkPlace ./RPT/place.rpt
+saveDesign DBS/core_top_pads-placed.enc
+setMultiCpuUsage -localCpu 2 -keepLicense true -acquireLicense 2
+set_ccopt_property route_type_override_preferred_routing_layer_effort none
+setNanoRouteMode -routeTopRoutingLayer 5
+setNanoRouteMode -routeBottomRoutingLayer 2
+create_route_type -name clkroute -top_preferred_layer 5
+set_ccopt_property route_type clkroute -net_type trunk
+set_ccopt_property route_type clkroute -net_type leaf
+set_ccopt_property buffer_cells BUFX1
+set_ccopt_property inverter_cells {INVX1 INVX2 INVX4 INVX8 INVX16 INVX32}
+create_ccopt_clock_tree_spec -file ccopt.spec
+ccopt_check_and_flatten_ilms_no_restore
+create_ccopt_clock_tree -name clk -source clk -no_skew_group
+set_ccopt_property clock_period -pin clk 15
+create_ccopt_skew_group -name clk/constraint -sources clk -auto_sinks
+set_ccopt_property include_source_latency -skew_group clk/constraint true
+set_ccopt_property extracted_from_clock_name -skew_group clk/constraint clk
+set_ccopt_property extracted_from_constraint_mode_name -skew_group clk/constraint constraint
+set_ccopt_property extracted_from_delay_corners -skew_group clk/constraint {wc bc}
+check_ccopt_clock_tree_convergence
+get_ccopt_property auto_design_state_for_ilms
+ccopt_design -cts
+saveDesign DBS/core_top_pads-cts.enc
+setMultiCpuUsage -localCpu 2 -keepLicense true -acquireLicense 2
+setNanoRouteMode -routeWithTimingDriven true -routeTopRoutingLayer 5 -routeTdrEffort 5 -drouteFixAntenna true -routeInsertAntennaDiode true -routeAntennaCellName ANTENNA -routeInsertDiodeForClockNets true
+routeDesign -globalDetail -wireOpt -viaOpt
+checkRoute
+saveDesign DBS/core_top_pads-routed.enc
+addFiller -cell {FILL32 FILL16 FILL8 FILL4 FILL2 FILL1} -prefix FILLER
+setDrawView place
+saveDesign DBS/core_top_pads-filled.enc
+verifyConnectivity -type all -report ./RPT/connectivity.rpt
+setVerifyGeometryMode -regRoutingOnly true -error 100000
+verifyGeometry -report ./RPT/geometry.rpt
+verifyProcessAntenna -report ./RPT/antenna.rpt
+pan -104.109 -48.992
+pan -45.930 -21.434
+uiSetTool ruler
+uiSetTool select
+pan 76.550 -50.523
+pan 108.403 98.447
+pan 134.951 74.112
+pan 50.883 -213.487
+pan 522.344 426.880
+pan -307.510 -267.747
+selectInst pad_out0/pad_out0
+pan 101.626 -14.436
+deselectAll
+selectInst pad_bi14
+deselectAll
+selectInst pad_bi14
+pan 77.374 144.355
+pan -5.774 -49.081
+get_visible_nets
+deselectAll
+selectInst pad_bi14
+pan -66.981 -12.703
+pan 2.837 23.050
+deselectAll
+selectInst pad_bi16
+pan 137.588 4.610
+pan -158.757 0.653
+pan -202.748 1.960
+pan 142.642 6.534
+deselectAll
+selectInst pad_out0/pad_out0
+deselectAll
+selectInst pad_out1/pad_out0
+deselectAll
+selectInst pad_out1/pad_out0
+deselectAll
+selectInst pad_out0/pad_out0
+pan 251.294 -21.105
+gui_select -rect {329.928 134.173 398.368 66.442}
+pan 150.355 -33.688
+pan -9.362 -5.751
+pan -97.538 70.709
+pan 183.444 -61.086
+pan 3.844 109.657
+pan -262.612 -13.579
+pan -155.262 12.042
+pan -68.877 11.903
+pan 64.999 -25.544
+pan 135.214 -5.083
+pan -28.755 5.350
+pan -1.605 -16.450
+pan -73.859 7.590
+pan -20.918 0.925
+pan -4.072 -17.585
+pan 178.559 16.688
+pan -205.398 -100.701
+pan -453.154 -1.599
+pan -249.354 -52.748
+pan -98.303 -361.244
+pan 31.969 -293.311
+pan 27.174 -327.678
+pan 18.381 -218.984
+pan 678.861 78.041
+pan 68.639 416.531
+pan -11.283 307.462
+pan -181.469 -63.938
+pan -356.355 -225.660
+pan 29.867 -117.255
+pan -28.335 126.605
+pan 438.873 -189.986
+pan -623.662 100.479
+pan 247.155 259.282
+pan 312.409 250.042
+pan 236.184 252.930
+pan 17.395 24.835
+pan -7.617 -34.221
+pan 11.010 11.457
+pan 13.977 11.757
+pan 26.896 16.511
+pan -31.172 30.771
+pan -10.435 9.232
+pan -2.961 3.070
+pan -5.901 8.324
+pan -3.674 25.134
+pan -54.811 12.084
+pan -71.631 -1.257
+pan -68.151 0.580
+pan -0.502 5.128
+pan 40.133 16.213
+pan 124.643 23.534
+pan -94.085 -44.094
+pan -193.497 -111.481
+pan -334.270 -25.590
+pan -30.640 -369.471
+pan 479.260 370.790
+selectInst pad_bi15
+deselectAll
+selectInst pad_out0/pad_out0
+deselectAll
+selectInst pad_out0/pad_out0
+get_visible_nets
+deselectAll
+selectInst pad_out0/pad_out0
+deselectAll
+selectInst pad_bi15
+pan 15.225 -183.185
+pan -11.720 -230.483
+pan 468.780 230.483
+deselectAll
+selectInst pad_bi14
+deselectAll
+selectInst pad_bi14
+pan -0.093 -7.253
+pan -78.411 -99.214
+pan -207.905 -239.726
+pan -169.718 -216.390
+pan 309.735 439.144
+deselectAll
+selectInst pad_bi14
+deselectAll
+selectInst pad_bi14
+get_visible_nets
+uiSetTool move
+get_visible_nets
+pan -194.171 -36.937
+pan -481.736 -159.471
+pan 54.098 -335.410
+setDrawView fplan
+setDrawView ameba
+setDrawView fplan
+setDrawView ameba
+setDrawView place
+setDrawView fplan
+setDrawView ameba
+setDrawView place
+setDrawView ameba
+pan 68.525 483.279
+pan 80.843 -262.464
+pan 52.050 -275.752
+pan -37.653 -420.827
+pan -91.918 294.579
+pan -19.934 600.233
+pan -388.712 -335.555
+pan 106.314 -438.547
+pan 65.339 -423.042
+pan -42.083 504.993
+setDrawView place
+pan 111.852 434.117
+uiSetTool select
+pan 16.611 338.877
+freeDesign
+set init_gnd_net VSS
+set init_pwr_net VDD
+set init_top_cell core_top_pads
+set init_verilog HDL/GATE/Core_mapped.v
+set init_verilog HDL/RTL/core_top_pads.v
+create_constraint_mode -name constraint -sdc_files {SDC/Core_mapped.sdc}
+set init_lef_file {/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/tech.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/sclib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/padlib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4.vclef}
+set init_mmmc_file CONF/core.view
+init_design
+saveDesign DBS/core_top_pads-import.enc
+setDrawView fplan
+fit
+floorPlan -site core7T -r 1.0 0.6 30 30 30 30
+fit
+saveDesign DBS/core_top_pads-fplan.enc
+globalNetConnect VDD -type pgpin -pin VDD -all -verbose
+globalNetConnect VSS -type pgpin -pin VSS -all -verbose
+globalNetConnect VDD -type tiehi
+globalNetConnect VSS -type tielo
+deleteIoFiller
+loadIoFile SCRIPTS/place_io.io
+addIoFiller -cell pad_fill_32 -prefix FILLER -side n
+addIoFiller -cell pad_fill_16 -prefix FILLER -side n
+addIoFiller -cell pad_fill_8 -prefix FILLER -side n
+addIoFiller -cell pad_fill_4 -prefix FILLER -side n
+addIoFiller -cell pad_fill_2 -prefix FILLER -side n
+addIoFiller -cell pad_fill_1 -prefix FILLER -side n
+addIoFiller -cell pad_fill_01 -prefix FILLER -side n
+addIoFiller -cell pad_fill_005 -prefix FILLER -side n -fillAnyGap
+addIoFiller -cell pad_fill_32 -prefix FILLER -side s
+addIoFiller -cell pad_fill_16 -prefix FILLER -side s
+addIoFiller -cell pad_fill_8 -prefix FILLER -side s
+addIoFiller -cell pad_fill_4 -prefix FILLER -side s
+addIoFiller -cell pad_fill_2 -prefix FILLER -side s
+addIoFiller -cell pad_fill_1 -prefix FILLER -side s
+addIoFiller -cell pad_fill_01 -prefix FILLER -side s
+addIoFiller -cell pad_fill_005 -prefix FILLER -side s -fillAnyGap
+addIoFiller -cell pad_fill_32 -prefix FILLER -side e
+addIoFiller -cell pad_fill_16 -prefix FILLER -side e
+addIoFiller -cell pad_fill_8 -prefix FILLER -side e
+addIoFiller -cell pad_fill_4 -prefix FILLER -side e
+addIoFiller -cell pad_fill_2 -prefix FILLER -side e
+addIoFiller -cell pad_fill_1 -prefix FILLER -side e
+addIoFiller -cell pad_fill_01 -prefix FILLER -side e
+addIoFiller -cell pad_fill_005 -prefix FILLER -side e -fillAnyGap
+addIoFiller -cell pad_fill_32 -prefix FILLER -side w
+addIoFiller -cell pad_fill_16 -prefix FILLER -side w
+addIoFiller -cell pad_fill_8 -prefix FILLER -side w
+addIoFiller -cell pad_fill_4 -prefix FILLER -side w
+addIoFiller -cell pad_fill_2 -prefix FILLER -side w
+addIoFiller -cell pad_fill_1 -prefix FILLER -side w
+addIoFiller -cell pad_fill_01 -prefix FILLER -side w
+addIoFiller -cell pad_fill_005 -prefix FILLER -side w -fillAnyGap
+addRing -type core_rings -follow core -nets {VSS VDD} -center 1 -width 8 -spacing 5 -layer {top METAL5 bottom METAL5 left METAL4 right METAL4} -extend_corner {} -jog_distance 0 -snap_wire_center_to_grid None -threshold 0
+saveDesign DBS/core_top_pads-power.enc
+sroute -connect { blockPin corePin padPin } -layerChangeRange { METAL1(1) METAL5(5) } -blockPinTarget { nearestTarget } -corePinTarget { firstAfterRowEnd } -crossoverViaLayerRange { METAL1(1) METAL5(5) } -nets {VSS VDD} -allowJogging 1 -allowLayerChange 1 -blockPin useLef -targetViaLayerRange { METAL1(1) METAL5(5) }
+fit
+saveDesign DBS/core_top_pads-power-routed.enc
+pan -280.590 -66.456
+setDrawView place
+pan 98.453 127.989
+setMultiCpuUsage -localCpu 2 -keepLicense true -acquireLicense 2
+setDesignMode -process 180
+setPlaceMode -timingDriven true -congEffort auto -placeIOPins 1
+placeDesign -noPrePlaceOpt
+setDrawView place
+checkPlace ./RPT/place.rpt
+saveDesign DBS/core_top_pads-placed.enc
+setMultiCpuUsage -localCpu 2 -keepLicense true -acquireLicense 2
+set_ccopt_property route_type_override_preferred_routing_layer_effort none
+setNanoRouteMode -routeTopRoutingLayer 5
+setNanoRouteMode -routeBottomRoutingLayer 2
+create_route_type -name clkroute -top_preferred_layer 5
+set_ccopt_property route_type clkroute -net_type trunk
+set_ccopt_property route_type clkroute -net_type leaf
+set_ccopt_property buffer_cells BUFX1
+set_ccopt_property inverter_cells {INVX1 INVX2 INVX4 INVX8 INVX16 INVX32}
+create_ccopt_clock_tree_spec -file ccopt.spec
+ccopt_check_and_flatten_ilms_no_restore
+create_ccopt_clock_tree -name clk -source clk -no_skew_group
+set_ccopt_property clock_period -pin clk 15
+create_ccopt_skew_group -name clk/constraint -sources clk -auto_sinks
+set_ccopt_property include_source_latency -skew_group clk/constraint true
+set_ccopt_property extracted_from_clock_name -skew_group clk/constraint clk
+set_ccopt_property extracted_from_constraint_mode_name -skew_group clk/constraint constraint
+set_ccopt_property extracted_from_delay_corners -skew_group clk/constraint {wc bc}
+check_ccopt_clock_tree_convergence
+get_ccopt_property auto_design_state_for_ilms
+ccopt_design -cts
+saveDesign DBS/core_top_pads-cts.enc
+setMultiCpuUsage -localCpu 2 -keepLicense true -acquireLicense 2
+setNanoRouteMode -routeWithTimingDriven true -routeTopRoutingLayer 5 -routeTdrEffort 5 -drouteFixAntenna true -routeInsertAntennaDiode true -routeAntennaCellName ANTENNA -routeInsertDiodeForClockNets true
+routeDesign -globalDetail -wireOpt -viaOpt
+checkRoute
+saveDesign DBS/core_top_pads-routed.enc
+selectInst pad_in14
+pan 244.872 423.236
+pan 138.680 -6.236
+pan 39.992 -28.166
+pan 119.974 17.846
+pan -165.126 -15.696
+pan -0.019 4.707
+pan 2.284 -1.419
+pan 26.272 -5.003
+pan 32.031 -2.196
+pan 111.339 -0.132
+pan 173.562 6.526
+pan 0.000 -17.193
+pan -1.683 -14.440
+pan -43.465 -26.198
+pan -161.654 71.151
+pan 46.740 -89.014
+pan 100.346 -77.078
+pan -82.895 -158.518
+pan 15.246 248.054
+pan 42.288 6.413
+pan -72.404 72.221
+pan -167.113 20.660
+pan 52.897 -0.138
+pan 223.991 23.791
+pan -0.325 -34.650
+pan -252.431 49.681
+pan -7.652 -147.582
+pan -572.385 -788.244
+pan 20.141 231.620
+pan 131.020 301.068
+pan 446.284 -77.167
+pan 337.025 170.526
+pan -234.977 313.526
+pan -402.952 68.680
+deselectAll
+selectInst core_dut/_MemoryAccess/U3
+pan -6.584 24.057
+pan -377.817 -104.442
+pan 99.876 -191.762
+pan 138.685 -224.864
+pan -81.612 -321.315
+pan 50.224 -213.450
+pan 538.760 43.375
+pan 104.442 26.824
+pan -5.707 218.014
+pan 8.561 147.816
+pan -100.447 255.683
+pan -18.263 96.451
+pan -14.838 104.442
+pan 174.573 327.029
+deselectAll
+selectInst corner2
+pan 8.342 147.173
+get_visible_nets
+pan 22.782 -79.564
+deselectAll
+selectInst pad_bi14
+deselectAll
+selectInst pad_bi14
+pan -82.426 -22.550
+pan -118.576 109.041
+pan -36.485 -7.641
+pan -12.287 -1.244
+pan 66.097 0.155
+pan 7.931 -62.053
+pan 26.639 26.989
+pan 20.329 -131.090
+pan -45.916 -64.844
+pan -11.917 -153.173
+pan 104.275 210.920
+pan -63.924 241.997
+pan 30.564 -128.561
+pan -95.962 -4.832
+pan 34.385 -9.889
+deselectAll
+selectWire 327.7400 235.3400 418.1800 235.6200 3 data_to_main_mem_write_en
+pan 38.741 10.620
+pan 21.271 28.416
+deselectAll
+selectWire 276.7800 162.5400 277.0600 233.9400 4 data_to_main_mem_write_en
+pan 2.522 -5.836
+deselectAll
+selectObject Pin pad_bi14/EN
+panCenter 243.401 233.334
+pan -4.812 -44.068
+pan -63.096 161.246
+deselectAll
+selectInst pad_bi14
+pan -69.695 -83.716
+deselectAll
+selectInst pad_bi14
+pan -90.806 -512.788
+pan 5.341 -226.125
+pan 119.294 454.031
+pan 22.306 -302.067
+pan 15.800 -245.372
+pan 24.166 -349.469
+pan -18.589 -173.805
+pan -84.579 382.000
+pan -22.306 318.798
+pan -21.377 502.827
+deselectAll
+selectInst pad_in16
+get_visible_nets
+uiSetTool move
+setObjFPlanBox Instance pad_in16 133.8395 51.648 367.0395 141.648
+setObjFPlanBox Instance pad_in16 69.939 379.211 159.939 612.411
+setObjFPlanBox Instance pad_in16 0.412 412.565 233.612 502.565
+pan -61.860 109.698
+pan 26.806 131.968
+pan 0.671 -115.502
+deselectAll
+selectInst pad_bi14
+setObjFPlanBox Instance pad_bi14 -79.0575 -25.5175 10.9425 207.6825
+setObjFPlanBox Instance pad_bi14 106.2825 196.0845 196.2825 429.2845
+deselectAll
+selectInst pad_in16
+setObjFPlanBox Instance pad_in16 191.3835 69.4175 424.5835 159.4175
+deselectAll
+selectInst pad_in14
+setObjFPlanBox Instance pad_in14 1.343 414.511 234.543 504.511
+pan -5.373 -39.620
+deselectAll
+selectInst pad_bi15
+setObjFPlanBox Instance pad_bi15 58.621 232.3465 148.621 465.5465
+deselectAll
+selectInst pad_in15
+setObjFPlanBox Instance pad_in15 278.01 104.284 511.21 194.284
+setObjFPlanBox Instance pad_in15 302.8565 -0.6715 392.8565 232.5285
+setObjFPlanBox Instance pad_in15 299.4985 1.343 389.4985 234.543
+setObjFPlanBox Instance pad_in15 318.974 0.0 408.974 233.2
+setObjFPlanBox Instance pad_in15 323.676 2.0145 413.676 235.2145
+deselectAll
+selectInst pad_bi14
+setObjFPlanBox Instance pad_bi14 1.343 322.1605 234.543 412.1605
+pan -40.963 -65.809
+pan -4.700 48.349
+deselectAll
+selectInst pad_bi16
+setObjFPlanBox Instance pad_bi16 33.7905 274.652 123.7905 507.852
+deselectAll
+selectInst pad_in14
+setObjFPlanBox Instance pad_in14 378.0665 78.078 611.2665 168.078
+setObjFPlanBox Instance pad_in14 413.6555 -1.3435 503.6555 231.8565
+setObjFPlanBox Instance pad_in14 408.2835 0.0 498.2835 233.2
+setObjFPlanBox Instance pad_in14 415.6715 3.358 505.6715 236.558
+deselectAll
+selectInst pad_bi14
+setObjFPlanBox Instance pad_bi14 -2.0145 408.1145 231.1855 498.1145
+setObjFPlanBox Instance pad_bi14 0.6715 416.173 233.8715 506.173
+deselectAll
+selectInst pad_bi16
+setObjFPlanBox Instance pad_bi16 -1.343 326.357 231.857 416.357
+pan 91.999 -100.728
+deselectAll
+selectInst pad_bi15
+setObjFPlanBox Instance pad_bi15 0.6715 316.789 233.8715 406.789
+deselectAll
+selectInst pad_bi16
+setObjFPlanBox Instance pad_bi16 2.0145 235.702 235.2145 325.702
+deselectAll
+selectInst pad_bi15
+setObjFPlanBox Instance pad_bi15 0.0 324.1765 233.2 414.1765
+panCenter -79.490 292.115
+pan -44.320 -119.531
+setObjFPlanBox Instance pad_bi15 0.732 325.822 233.932 415.822
+pan -31.839 -64.227
+pan -1.098 -85.819
+pan 16.468 14.639
+pan 11.162 86.552
+pan -24.337 78.317
+deselectAll
+selectInst pad_bi16
+setObjFPlanBox Instance pad_bi16 0.183 233.687 233.383 323.687
+pan -7.502 -57.639
+deselectAll
+selectInst pad_bi15
+setObjFPlanBox Instance pad_bi15 0.0 324.539 233.2 414.539
+pan -2.378 -45.197
+pan 1.098 -54.163
+deselectAll
+selectInst pad_bi14
+setObjFPlanBox Instance pad_bi14 0.183 412.8815 233.383 502.8815
+pan -76.487 51.418
+pan 22.690 37.695
+deselectAll
+selectInst pad_bi15
+setObjFPlanBox Instance pad_bi15 0.0 322.5275 233.2 412.5275
+pan -16.102 28.912
+pan 75.755 50.321
+deselectAll
+selectInst pad_bi16
+setObjFPlanBox Instance pad_bi16 0.549 232.5875 233.749 322.5875
+pan -31.473 6.038
+pan -141.322 -0.507
+pan -40.291 147.736
+pan -83.269 -128.933
+getMultiCpuUsage -localCpu
+get_verify_drc_mode -disable_rules -quiet
+get_verify_drc_mode -quiet -area
+get_verify_drc_mode -quiet -layer_range
+get_verify_drc_mode -check_implant -quiet
+get_verify_drc_mode -check_implant_across_rows -quiet
+get_verify_drc_mode -check_ndr_spacing -quiet
+get_verify_drc_mode -check_only -quiet
+get_verify_drc_mode -check_same_via_cell -quiet
+get_verify_drc_mode -exclude_pg_net -quiet
+get_verify_drc_mode -ignore_trial_route -quiet
+get_verify_drc_mode -max_wrong_way_halo -quiet
+get_verify_drc_mode -use_min_spacing_on_block_obs -quiet
+get_verify_drc_mode -limit -quiet
+set_verify_drc_mode -disable_rules {} -check_implant true -check_implant_across_rows false -check_ndr_spacing false -check_same_via_cell false -exclude_pg_net false -ignore_trial_route false -report core_top_pads.drc.rpt -limit 1000
+verify_drc
+set_verify_drc_mode -area {0 0 0 0}
+freeDesign
+set init_gnd_net VSS
+set init_pwr_net VDD
+set init_top_cell core_top_pads
+set init_verilog HDL/GATE/Core_mapped.v
+set init_verilog HDL/RTL/core_top_pads.v
+create_constraint_mode -name constraint -sdc_files {SDC/Core_mapped.sdc}
+set init_lef_file {/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/tech.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/sclib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/padlib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4.vclef}
+set init_mmmc_file CONF/core.view
+init_design
+set init_gnd_net VSS
+set init_pwr_net VDD
+set init_top_cell core_top_pads
+set init_verilog HDL/GATE/Core_mapped.v
+set init_verilog HDL/RTL/core_top_pads.v
+create_constraint_mode -name constraint -sdc_files {SDC/Core_mapped.sdc}
+set init_lef_file {/research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/tech.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/sclib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/full_custom_lib/lef/padlib_tsmc180.lef /research/ece/lnis-teaching/Designkits/tsmc180nm/arm_ip/rf8x8/rfsphs8x8m1wm4.vclef}
+set init_mmmc_file CONF/core.view
+init_design

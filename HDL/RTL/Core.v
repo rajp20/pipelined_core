@@ -1,10 +1,11 @@
 module Core(input         clk,
 	        input         reset,
             input [15:0]  data_from_instruction_memory,
+			input [15:0]  data_from_main_memory,
             output [13:0] address_to_instruction_memory,
             output [7:0]  address_to_main_memory,
             output        data_to_main_memory_write_en,
-			inout [15:0]  data_main_memory_bus);
+			output [15:0]  data_to_main_memory);
 
    // Wires & Registers for register file.
    wire [15:0] reg1_data_rf;
@@ -112,8 +113,9 @@ module Core(input         clk,
                               .reg_data_ex              (reg_data_ex),
                               .dest_reg_index_ex        (dest_reg_index_ex),
                               .dest_reg_write_en_ex     (des_reg_write_en_ex),
-                              .address_to_main_memory        (address_to_main_memory),
-                              .data_memory_bus         (data_main_memory_bus),
+                              .address_to_main_memory   (address_to_main_memory),
+							  .data_from_main_memory    (data_from_main_memory),
+                              .data_to_main_memory      (data_to_main_memory),
                               .data_to_memory_write_en  (data_to_main_memory_write_en),
                               .dest_reg_index_ma        (dest_reg_index_ma),
                               .dest_reg_write_en_ma     (dest_reg_write_en_ma),

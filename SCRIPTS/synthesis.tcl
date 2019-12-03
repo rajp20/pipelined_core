@@ -15,7 +15,18 @@ set SDC_DIR 	 "${BASE_DIR}/SDC"
 set DDC_DIR 	 "${BASE_DIR}/DDC"
 
 #  dependency rules
-set HDL_FILES $RTL_DIR/*
+set HDL_FILES [list \
+                   $RTL_DIR/Core.v \
+                   $RTL_DIR/bp_counter.v \
+                   $RTL_DIR/btb.v \
+                   $RTL_DIR/btb_entry.v \
+                   $RTL_DIR/btb_way.v \
+                   $RTL_DIR/Execute.v \
+                   $RTL_DIR/InstructionDecode.v \
+                   $RTL_DIR/InstructionFetch.v \
+                   $RTL_DIR/MemoryAccess.v \
+                   $RTL_DIR/RegisterFile.v \
+                   $RTL_DIR/RegisterWriteBack.v ]
 
 #  Start from fresh state
 remove_design -designs

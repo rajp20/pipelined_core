@@ -32,7 +32,7 @@ module btb_entry (hit, insert_bubble, update_hit, prediction, out_target, empty,
 	//PARAMETERS
 	parameter op_IDLE = 3'b000;
 	parameter op_CLEAR = 3'b111;
-	parameter op_LOOKUP = 3'bxxx;
+	//parameter op_LOOKUP = 3'bxxx;
 	parameter op_VERIFY_FALLTHROUGH = 3'b010;
 	parameter op_VERIFY_TARGET = 3'b011;
 	parameter op_INSERT_FALLTHROUGH = 3'b100;

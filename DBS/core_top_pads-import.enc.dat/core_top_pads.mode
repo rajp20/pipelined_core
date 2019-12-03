@@ -1,4 +1,11 @@
 catch { setAnalysisMode -analysisType bcwc }
+catch { setAnalysisMode -clkSrcPath true }
+catch { setAnalysisMode -clockPropagation sdcControl }
+catch { setAnalysisMode -virtualIPO false }
 setExtractRCMode  -engine preRoute
+catch { setPlaceMode -place_global_cong_effort auto }
+catch { setPlaceMode -place_global_place_io_pins false }
+catch { setPlaceMode -timingDriven true }
 catch { setIlmMode -keepHighFanoutPorts true -keepLoopBack false -keepFlatten true }
 catch { setDelayCalMode -engine aae }
+catch { setRouteMode -earlyGlobalMaxRouteLayer 5 }

@@ -6,7 +6,7 @@ Report : timing
         -max_paths 1
 Design : Core
 Version: K-2015.06-SP5-6
-Date   : Mon Dec  2 13:34:13 2019
+Date   : Mon Dec  2 20:24:13 2019
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.

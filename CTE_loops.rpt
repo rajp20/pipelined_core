@@ -1,0 +1,220 @@
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U48/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U37/A |   INVX1 | 
+     | core_dut/_InstructionFetch/add_30/U37/Z |   INVX1 | 
+     |        core_dut/_InstructionFetch/U49/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U49/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U48/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U48/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U27/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U19/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U19/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U28/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U28/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U27/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U27/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U24/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U18/A |   INVX1 | 
+     | core_dut/_InstructionFetch/add_30/U18/Z |   INVX1 | 
+     | core_dut/_InstructionFetch/add_30/U16/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U16/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U25/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U25/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U24/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U24/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U21/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U15/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U15/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U22/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U22/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U21/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U21/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U18/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U13/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U13/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U19/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U19/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U18/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U18/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U15/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U12/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U12/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U69/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U69/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U68/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U68/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U16/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U16/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U15/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U15/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U12/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U10/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U10/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U55/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U55/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U54/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U54/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U13/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U13/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U12/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U12/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +--------------------------------------------------+ 
+     |                  Pin                   |  Cell   | 
+     |----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U9/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U9/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U9/Z |  XOR2X1 | 
+     |       core_dut/_InstructionFetch/U63/A |   INVX4 | 
+     |       core_dut/_InstructionFetch/U63/Z |   INVX4 | 
+     |       core_dut/_InstructionFetch/U62/A |   INVX4 | 
+     |       core_dut/_InstructionFetch/U62/Z |   INVX4 | 
+     |       core_dut/_InstructionFetch/U10/A | NAND2X1 | 
+     |       core_dut/_InstructionFetch/U10/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U9/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U9/Z | NAND2X1 | 
+     +--------------------------------------------------+ 
+     +--------------------------------------------------+ 
+     |                  Pin                   |  Cell   | 
+     |----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U6/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U7/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U7/Z |  XOR2X1 | 
+     |       core_dut/_InstructionFetch/U57/A |   INVX4 | 
+     |       core_dut/_InstructionFetch/U57/Z |   INVX4 | 
+     |       core_dut/_InstructionFetch/U56/A |   INVX4 | 
+     |       core_dut/_InstructionFetch/U56/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U7/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U7/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U6/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U6/Z | NAND2X1 | 
+     +--------------------------------------------------+ 
+     +--------------------------------------------------+ 
+     |                  Pin                   |  Cell   | 
+     |----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U3/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U6/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U6/Z |  XOR2X1 | 
+     |       core_dut/_InstructionFetch/U65/A |   INVX4 | 
+     |       core_dut/_InstructionFetch/U65/Z |   INVX4 | 
+     |       core_dut/_InstructionFetch/U64/A |   INVX4 | 
+     |       core_dut/_InstructionFetch/U64/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U4/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U4/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U3/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U3/Z | NAND2X1 | 
+     +--------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U45/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U31/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U31/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U59/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U59/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U58/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U58/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U46/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U46/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U45/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U45/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U42/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U29/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U29/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U67/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U67/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U66/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U66/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U43/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U43/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U42/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U42/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U39/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U27/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U27/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U61/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U61/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U60/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U60/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U40/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U40/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U39/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U39/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     | core_dut/_InstructionFetch/add_30/U26/Z |   INVX1 | 
+     | core_dut/_InstructionFetch/add_30/U24/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U24/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U37/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U37/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U36/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U36/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U26/A |   INVX1 | 
+     | core_dut/_InstructionFetch/add_30/U26/Z |   INVX1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U33/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U22/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U22/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U53/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U53/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U52/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U52/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U34/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U34/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U33/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U33/Z | NAND2X1 | 
+     +---------------------------------------------------+ 
+     +---------------------------------------------------+ 
+     |                   Pin                   |  Cell   | 
+     |-----------------------------------------+---------| 
+     |        core_dut/_InstructionFetch/U70/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U31/A | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U31/Z | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U30/B | NAND2X1 | 
+     |        core_dut/_InstructionFetch/U30/Z | NAND2X1 | 
+     | core_dut/_InstructionFetch/add_30/U20/A |  XOR2X1 | 
+     | core_dut/_InstructionFetch/add_30/U20/Z |  XOR2X1 | 
+     |        core_dut/_InstructionFetch/U71/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U71/Z |   INVX4 | 
+     |        core_dut/_InstructionFetch/U70/A |   INVX4 | 
+     |        core_dut/_InstructionFetch/U70/Z |   INVX4 | 
+     +---------------------------------------------------+ 
