@@ -11,13 +11,15 @@ module MemoryAccess_TB;
 reg clk;
 reg dest_reg_write_en_ex;
 reg [3:0] control_ex;
-reg [15:0] result_ex, reg_data_ex, data_from_memory;
+reg [15:0] result_ex, reg_data_ex, data_from_main_memory;
 reg [4:0] dest_reg_index_ex;
 //Outputs to simulate Memory Access module
 wire data_to_memory_write_en;
 wire dest_reg_write_en_ma;
-wire [15:0] address_to_memory, data_to_memory, result_ma, data_ma;
+wire [7:0] address_to_main_memory;
+wire [15:0] data_to_main_memory, result_ma, data_ma;
 wire [4:0] control_ma;
+wire [3:0] dest_reg_index_ma;
 
 reg [4:0] state;
 
@@ -29,10 +31,10 @@ MemoryAccess matb (
 .reg_data_ex(reg_data_ex),
 .dest_reg_index_ex(dest_reg_index_ex),
 .dest_reg_write_en_ex(dest_reg_write_en_ex),
-.data_from_memory(data_from_memory),
+.data_from_main_memory(data_from_main_memory),
 //Outputs
-.address_to_memory(address_to_memory),
-.data_to_memory(data_to_memory),
+.address_to_main_memory(address_to_main_memory),
+.data_to_main_memory(data_to_main_memory),
 .data_to_memory_write_en(data_to_memory_write_en),
 .dest_reg_index_ma(dest_reg_index_ma),
 .dest_reg_write_en_ma(dest_reg_write_en_ma),
@@ -55,7 +57,7 @@ begin: CLOCK_GENERATOR
        reg_data_ex = 16'd13;//reg_data_ex set to decimal 10.
        dest_reg_index_ex = 5'b00000;
        dest_reg_write_en_ex = 1'b1;
-       data_from_memory = 16'd14; 
+       data_from_main_memory = 16'd14; 
        #5 clk = ~clk;
 		
 end

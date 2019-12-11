@@ -11,10 +11,10 @@ reg [4:0] dest_reg_index_ma;
 reg dest_reg_write_en_ma;
 reg [15:0] result_ma;
 reg [15:0] data_ma;
-reg [4:0] control_ma;
+reg [3:0] control_ma;
 //Outputs;
 wire [4:0] write_index_rf;
-wire [4:0] write_data_rf;
+wire [15:0] write_data_rf;
 wire write_en_rf;
 
 reg [4:0] state;
@@ -67,6 +67,3 @@ begin
 	end
 end
 endmodule
-				
-
-
