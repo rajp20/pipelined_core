@@ -2,7 +2,7 @@ module InstructionDecode_TB;
 
 	// Inputs
 	reg 	 	clk;
-	reg [15:0] 	next_program_counter_if;
+	reg [13:0] 	next_program_counter_if;
 	reg [15:0]  instruction_if;
 	reg         branch_prediction_bp;
 	reg [15:0]  reg1_data_rf;
@@ -12,8 +12,8 @@ module InstructionDecode_TB;
 	wire [4:0]  reg1_index_rf;
 	wire [4:0]  reg2_index_rf;
 	wire [3:0]  opcode_id;
-	wire [15:0] target_address_id;
-	wire [15:0] next_program_counter_id;
+	wire [13:0] target_address_id;
+	wire [13:0] next_program_counter_id;
 	wire [15:0] reg1_data_id;
 	wire [15:0] reg2_data_id;
 	wire [4:0]  dest_reg_index_id;
