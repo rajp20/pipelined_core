@@ -11,13 +11,13 @@ module Execute(
 	input [3:0] control_in,
 	input [15:0] reg1_data,
 	input [15:0] reg2_data,
-	input [15:0] npc,
+	input [13:0] npc,
 	input [4:0] dest_index_in,
 	input [6:0] immediate,
 	output reg [4:0] dest_index_out,
 	output reg [15:0] output_reg,
 	output reg [15:0] result_out,
-	output reg [15:0] target,
+	output reg [13:0] target,
 	output reg [3:0] control_out,
 	output reg DEST_REG_WRITE_EN, //Not sure if we want this to be a reg or output reg
 	output reg ZF,
@@ -55,7 +55,7 @@ reg LF_next;
 
 //Current state unlatched
 reg [15:0] result;
-reg [15:0] target_next;
+reg [13:0] target_next;
 reg dest_reg_write_en;
 
 //Set all status flags to result of corresponding next status flag
@@ -82,8 +82,8 @@ begin
 	GF_next = 1'b0;
 	LF_next = 1'b0;
 	dest_reg_write_en = 1'b0;
-	result = 16'd0;
-	target_next = 16'd0;
+	result = 14'd0;
+	target_next = 14'd0;
 
 	/************** BEGIN ALU **************/
 	case(control_in)
@@ -172,7 +172,7 @@ begin
 			LF_next = 1'b0;
 			dest_reg_write_en = 1'b0;
 			result = 16'd0;
-			target_next = 16'd0;
+			target_next = 14'd0;
 		end
 	endcase
 	/************** END ALU **************/
