@@ -9,14 +9,15 @@ module Execute_TB;
 //Inputs to simulate Execute module
 reg clk;
 reg [4:0]  control_in, dest_index_in;
-reg [15:0] reg1_data, reg2_data, npc;
+reg [15:0] reg1_data, reg2_data;
+reg [13:0] npc;
 reg [6:0]  immediate;
 //Outputs to simulate Execute module
 wire [4:0] dest_index_out;
 wire [4:0] control_out;
 wire [15:0] output_reg;
 wire [15:0] result_out;
-wire [15:0] target;
+wire [13:0] target;
 wire DEST_REG_WRITE_EN;
 wire ZF;
 wire GF;
@@ -74,7 +75,7 @@ begin: CLOCK_GENERATOR
 	dest_index_in = 5'b00000; //Simulate dest index as $R2
 	reg1_data     = 16'd0;   //R1 data is 10 in decimal
 	reg2_data     = 16'd0;    //R2 data is 3
-        npc           = 16'd0;    //NPC set to 0
+        npc           = 14'd0;    //NPC set to 0
         immediate     = 7'd0;     //Immediate value set to zero
 	#5 clk = ~clk;
 	//TODO: fix issue from allowing to see first result of testing sequence
@@ -101,7 +102,7 @@ begin
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd3;    //R2 data is 3
-			        	npc           = 16'd0;    //NPC set to 0
+			        	npc           = 14'd0;    //NPC set to 0
 			        	immediate     = 7'd0;     //Immediate value set to zero
 
 					$display("\nOpcode: SUB\n reg1_data: ", reg1_data, "\n reg2_data: ", reg2_data, "\n result_out: ", result_out);
@@ -114,7 +115,7 @@ begin
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd5;    //R2 data is 5
-		        		npc           = 16'd0;    //NPC set to 0
+		        		npc           = 14'd0;    //NPC set to 0
 		        		immediate     = 7'd0;     //Immediate value set to zero
 
 		        		//Console validation for ADD operation
@@ -128,7 +129,7 @@ begin
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd10;   //R1 data is 10 in decimal
 					reg2_data     = 16'd5;    //R2 data is 5
-		        		npc           = 16'd0;    //NPC set to 0
+		        		npc           = 14'd0;    //NPC set to 0
 		        		immediate     = 7'd7;     //Immediate value set to zero
 
 		        		//Console validation for ADDI operation
@@ -142,7 +143,7 @@ begin
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;   //R1 data is 10 in decimal
 					reg2_data     = 16'd0;    //R2 data is 5
-		        		npc           = 16'd0;    //NPC set to 0
+		        		npc           = 14'd0;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to zero
 
 		        		//Console validation for SHLLI operation
@@ -156,7 +157,7 @@ begin
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 10 in decimal
 					reg2_data     = 16'd0;    //R2 data is 5
-		        		npc           = 16'd0;    //NPC set to 0
+		        		npc           = 14'd0;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to zero
 
 		        		//Console validation for SHRLI operation
@@ -170,7 +171,7 @@ begin
 					dest_index_in = 5'b00010; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
 					reg2_data     = 16'd10;    //R2 data is 10
-		        		npc           = 16'd5;    //NPC set to 0
+		        		npc           = 14'd5;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to one
 			
 					//Console Validation for JUMP
@@ -185,7 +186,7 @@ begin
 						dest_index_in = 5'b00010; //Simulate dest index as $R2
 						reg1_data     = 16'd4;    //R1 data is 8 in decimal
 						reg2_data     = 16'd8;    //R2 data is 0
-		        			npc           = 16'd0;    //NPC set to 0
+		        			npc           = 14'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 
 						$display("\n**CMP -> JUMPL**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
@@ -196,7 +197,7 @@ begin
 						dest_index_in = 5'b00010; //Simulate dest index as $R2
 						reg1_data     = 16'd4;    //R1 data is 8 in decimal
 						reg2_data     = 16'd8;    //R2 data is 0
-		        			npc           = 16'd0;    //NPC set to 0
+		        			npc           = 14'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 
 						$display("\nOpcode: JUMPL\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
@@ -211,7 +212,7 @@ begin
 						dest_index_in = 5'b00010; //Simulate dest index as $R2
 						reg1_data     = 16'd8;    //R1 data is 8 in decimal
 						reg2_data     = 16'd4;    //R2 data is 0
-		        			npc           = 16'd0;    //NPC set to 0
+		        			npc           = 14'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 
 						$display("\n**CMP -> JUMPG**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
@@ -223,7 +224,7 @@ begin
 						dest_index_in = 5'b00010; //Simulate dest index as $R2
 						reg1_data     = 16'd8;    //R1 data is 8 in decimal
 						reg2_data     = 16'd0;    //R2 data is 0
-		        			npc           = 16'd0;    //NPC set to 0
+		        			npc           = 14'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 			
 						//Console Validation for JUMPG
@@ -239,7 +240,7 @@ begin
 						dest_index_in = 5'b00010; //Simulate dest index as $R2
 						reg1_data     = 16'd7;    //R1 data is 8 in decimal
 						reg2_data     = 16'd7;    //R2 data is 0
-		        			npc           = 16'd0;    //NPC set to 0
+		        			npc           = 14'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 
 						$display("\n**CMP -> JUMPE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
@@ -251,7 +252,7 @@ begin
 						dest_index_in = 5'b00010; //Simulate dest index as $R2
 						reg1_data     = 16'd8;    //R1 data is 8 in decimal
 						reg2_data     = 16'd0;    //R2 data is 0
-		        			npc           = 16'd0;    //NPC set to 0
+		        			npc           = 14'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 				
 						//Console Validation for JUMPE
@@ -267,7 +268,7 @@ begin
 						dest_index_in = 5'b00010; //Simulate dest index as $R2
 						reg1_data     = 16'd8;    //R1 data is 8 in decimal
 						reg2_data     = 16'd4;    //R2 data is 0
-		        			npc           = 16'd0;    //NPC set to 0
+		        			npc           = 14'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 
 						$display("\n**CMP -> JUMPNE**\nreg1_data: ", reg1_data, "\nreg2_data: ", reg2_data, "\nimmediate: ", immediate, "\ntarget: ", target, "\nZF: ", ZF, "\nLF: ", LF, "\nGF: ", GF);
@@ -279,7 +280,7 @@ begin
 						dest_index_in = 5'b00010; //Simulate dest index as $R2
 						reg1_data     = 16'd8;    //R1 data is 8 in decimal
 						reg2_data     = 16'd0;    //R2 data is 0
-		        			npc           = 16'd0;    //NPC set to 0
+		        			npc           = 14'd0;    //NPC set to 0
 		        			immediate     = 7'd1;     //Immediate value set to one
 				
 						//Console Validation for JUMPNE
@@ -294,7 +295,7 @@ begin
 					dest_index_in = 5'b01000; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
 					reg2_data     = 16'd0;    //R2 data is 0
-		        		npc           = 16'd0;    //NPC set to 0
+		        		npc           = 14'd0;    //NPC set to 0
 		        		immediate     = 7'd1;     //Immediate value set to one
 				
 					//Console Validation for LOAD
@@ -308,7 +309,7 @@ begin
 					dest_index_in = 5'b00011; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
 					reg2_data     = 16'd0;    //R2 data is 0
-		        		npc           = 16'd0;    //NPC set to 0
+		        		npc           = 14'd0;    //NPC set to 0
 		        		immediate     = 7'd31;     //Immediate value set to one
 			
 					//Console Validation for LOADI
@@ -322,7 +323,7 @@ begin
 					dest_index_in = 5'b00011; //Simulate dest index as $R2
 					reg1_data     = 16'd16;    //R1 data is 8 in decimal
 					reg2_data     = 16'd0;    //R2 data is 0
-		        		npc           = 16'd0;    //NPC set to 0
+		        		npc           = 14'd0;    //NPC set to 0
 		        		immediate     = 7'd31;     //Immediate value set to one
 				
 					//Console Validation for STORE
@@ -336,7 +337,7 @@ begin
 					dest_index_in = 5'b00011; //Simulate dest index as $R2
 					reg1_data     = 16'd8;    //R1 data is 8 in decimal
 					reg2_data     = 16'd11;    //R2 data is 0
-		        		npc           = 16'd0;    //NPC set to 0
+		        		npc           = 14'd0;    //NPC set to 0
 		        		immediate     = 7'd31;     //Immediate value set to one
 				
 					//Console Validation for STORE

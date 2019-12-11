@@ -7,8 +7,8 @@ module Core_TB;
 	wire [15:0] data_from_main_memory;
 	
 	// Outputs
-	wire [15:0] address_to_instruction_memory;
-	wire [15:0] address_to_main_memory;
+	wire [13:0] address_to_instruction_memory;
+	wire [7:0] address_to_main_memory;
 	wire [15:0] data_to_main_memory;
 	wire		data_to_main_memory_write_en;
 

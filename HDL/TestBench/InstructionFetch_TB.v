@@ -2,14 +2,14 @@ module InstructionFetch_TB;
 
 	// Inputs
 	reg 	 	clk;
-	reg [15:0] 	target_bp;
+	reg [13:0] 	target_bp;
 	reg 		target_en_bp;
 	wire [15:0] data_from_memory;
 	
 	// Outputs
-	wire [15:0] address_to_memory;
-	wire [15:0] next_program_counter_if_to_bp;
-	wire [15:0] next_program_counter_if;
+	wire [13:0] address_to_memory;
+	wire [13:0] next_program_counter_if_to_bp;
+	wire [13:0] next_program_counter_if;
 	wire [15:0] instruction_if;
 
 	reg [15:0] instruction_memory [0:41];
